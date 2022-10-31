@@ -1,11 +1,41 @@
 package model;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Datasource {
-    public static final String DB_NAME = "music.db";
+    public static final String DB_NAME = "ommg.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:" + DB_NAME;
+
+    public static final String TABLE_MENU = "menu";
+    public static final String TABLE_RESTAURANT_MENU = "restaurant_menu";
+    public static final String TABLE_RESTAURANT = "restaurant";
+    public static final String TABLE_USER = "user";
+    public static final String TABLE_USER_RAP = "user_rap";
+
+    public static final String COLUMN_MENU_ID = "menu_id";
+    public static final String COLUMN_FOOD_NAME = "food_name";
+    public static final String COLUMN_FOOD_CATEGORY = "food_category";
+    public static final String COLUMN_RESTAURANT_ID = "restaurant_id";
+    public static final String COLUMN_OWNER_ID = "owner_id";
+    public static final String COLUMN_RESTAURANT_NAME = "restaurant_name";
+    public static final String COLUMN_LATITUDE = "latitude";
+    public static final String COLUMN_HARDNESS = "hardness";
+    public static final String COLUMN_RESTAURANT_CATEGORY = "restaurant_category";
+    public static final String COLUMN_SIGNATURE_FOOD = "signature_food";
+    public static final String COLUMN_USER = "user";
+    public static final String COLUMN_USER_ID = "user_id";
+    public static final String COLUMN_LOGIN_ID = "login_id";
+    public static final String COLUMN_LATITUDE_USER = "latitude_user";
+    public static final String COLUMN_HARDNESS_USER = "hardness_user";
+    public static final String COLUMN_USER_RAP = "user_rap";
+    public static final String COLUMN_EAT_DATE = "eat_date";
+    public static final String COLUMN_EAT_TIME = "eat_time";
+    public static final String COLUMN_GRADE = "grade";
 /*
 
     //매뉴 테이블 : menu
@@ -40,8 +70,6 @@ public class Datasource {
     평점 : grade
 */
 
-
-
     /*
     public boolean open() {
         try {
@@ -65,4 +93,19 @@ public class Datasource {
         }
     }
     */
+
+
+    /*
+    구현 해야하는 쿼리문
+        선택한 restaurant_category 따라 음식점 선택하기
+
+        선택한 food_category에 따라 음식점 선택하기
+
+        선택한 거리에 따라 음식 선택하기
+
+        많이 찾는 음식점 선택하기
+
+        평점 좋은 음식점 선택하기
+*/
+
 }
