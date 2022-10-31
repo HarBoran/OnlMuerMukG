@@ -4,12 +4,12 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        Datasource datasource = new Datasource();
-
-        if(!datasource.open()) {
-            System.out.println("Can't open datasource");
-            return;
-        }
+//        Datasource datasource = new Datasource();
+//
+//        if(!datasource.open()) {
+//            System.out.println("Can't open datasource");
+//            return;
+//        }
 
 
         // ★ 프레임 생성
@@ -51,6 +51,6 @@ public class Main {
         // 프레임이 보이도록 설정
         frm.setVisible(true);
 
-        datasource.close();
+//        datasource.close();
     }
 }
