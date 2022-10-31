@@ -33,7 +33,6 @@ public class Datasource {
     public static final String COLUMN_GRADE = "grade"; //평점
 
     private Connection conn;
-    int restaurantId;
 
     public boolean open() {
         try {
@@ -92,7 +91,7 @@ public class Datasource {
 //    WHERE COLUMN_RESTAURANT_ID = 123
 
 
-    public void queryOMMG() {
+    public ArrayList<Integer> queryOMMG() {
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT " + COLUMN_RESTAURANT_ID + " FROM ");
         sb.append(TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
@@ -112,22 +111,26 @@ public class Datasource {
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
-            while(results.next())
-             restaurantIds.add(results.getInt(COLUMN_RESTAURANT_ID));
+            while(results.next()) {
+                restaurantIds.add(results.getInt(COLUMN_RESTAURANT_ID));
+            }
+//            for(int i : restaurantIds){
+//                System.out.println(restaurantIds.get(i));
+//            }
+            return restaurantIds;
 
         } catch (SQLException e) {
             System.out.println("Query failed: " + e.getMessage());
-        }
-
-        for(int i : restaurantIds){
-            System.out.println(restaurantIds.get(i));
+            return null;
         }
     }
 
     public List<OMMG> OMMG(Integer id){
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AGV("+COLUMN_GRADE+")"+", "+COLUMN_LATITUDE+", "+COLUMN_HARDNESS+", "+COLUMN_LATITUDE_USER+", "+COLUMN_HARDNESS_USER);
+        sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AGV("+COLUMN_GRADE+")"+", ");
+        //6400 * 2 * 3.14 / 360 = 111.64444444...
+        sb.append("POWER(111.64*("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+"),2) + POWER(111.64*("+COLUMN_HARDNESS+"-"+COLUMN_HARDNESS_USER+"),2))");
         sb.append(" FROM "+TABLE_RESTAURANT + " LEFT JOIN " + TABLE_USER_RAP);
         sb.append(" ON "+TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
         sb.append(" "+TABLE_USER_RAP+" LEFT JOIN "+TABLE_USER);
@@ -139,21 +142,18 @@ public class Datasource {
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
-            ArrayList<OMMG> ommgs = new ArrayList<OMMG>();
+            List<OMMG> ommgs = new ArrayList<OMMG>();
 
             while (results.next()) {
                 OMMG ommg = new OMMG();
                 ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
                 ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
                 ommg.setAgvGrade(results.getFloat(3));
-                ommg.setLatitude(results.getInt(COLUMN_LATITUDE));
-                ommg.setHardness(results.getInt(COLUMN_HARDNESS));
-                ommg.setLatitudeUser(results.getInt(COLUMN_LATITUDE_USER));
-                ommg.setHardnessUser(results.getInt(COLUMN_HARDNESS_USER));
+                ommg.setDistance(Math.sqrt(results.getDouble(4)));
                 ommgs.add(ommg);
             }
-
             return ommgs;
+
         } catch (SQLException e) {
             System.out.println("Query failed: " + e.getMessage());
             return null;

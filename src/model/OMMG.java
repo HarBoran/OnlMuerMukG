@@ -5,10 +5,7 @@ public class OMMG {
     private String restaurantName;
     private String restaurantCategory;
     private float AgvGrade;
-    private int latitude;
-    private int hardness;
-    private int latitudeUser;
-    private int hardnessUser;
+    private double distance;
 
     public String getRestaurantName() {
         return restaurantName;
@@ -34,35 +31,13 @@ public class OMMG {
         AgvGrade = agvGrade;
     }
 
-    public int getLatitude() {
-        return latitude;
+    public double getDistance() {
+        return distance;
     }
 
-    public void setLatitude(int latitude) {
-        this.latitude = latitude;
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
-    public int getHardness() {
-        return hardness;
-    }
 
-    public void setHardness(int hardness) {
-        this.hardness = hardness;
-    }
-
-    public int getLatitudeUser() {
-        return latitudeUser;
-    }
-
-    public void setLatitudeUser(int latitudeUser) {
-        this.latitudeUser = latitudeUser;
-    }
-
-    public int getHardnessUser() {
-        return hardnessUser;
-    }
-
-    public void setHardnessUser(int hardnessUser) {
-        this.hardnessUser = hardnessUser;
-    }
 }
