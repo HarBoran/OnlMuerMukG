@@ -1,10 +1,10 @@
 import model.Datasource;
 
-import javax.swing.*;
-public class Main {
-    // 확인용
-    public static void main(String[] args) {
+import java.util.Scanner;
 
+public class Main {
+
+    public static void main(String[] args) {
 //        Datasource datasource = new Datasource();
 //
 //        if(!datasource.open()) {
@@ -53,5 +53,7 @@ public class Main {
 //        frm.setVisible(true);
 
 //        datasource.close();
+
+
     }
 }
