@@ -102,7 +102,7 @@ public class Datasource {
         PrintFrame pf = new PrintFrame();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + COLUMN_LATITUDE +", " + COLUMN_HARDNESS +" FROM ");
+        sb.append("SELECT DISTINCT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + COLUMN_LATITUDE +", " + COLUMN_HARDNESS +" FROM ");
         sb.append(TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
         sb.append(" ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_RESTAURANT_MENU + "." + COLUMN_RESTAURANT_ID);
         sb.append(" LEFT JOIN " + TABLE_MENU);
