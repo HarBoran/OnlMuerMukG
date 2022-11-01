@@ -42,7 +42,7 @@ public class administrator_data {
     public static void restaurant_Setting(String restaurant_Name, Connection con) {
         StringBuilder SELECT = new StringBuilder("SELECT ").append(data.COLUMN_RESTAURANT_ID)
                 .append(" from ").append(data.TABLE_RESTAURANT)
-                .append(" Where ").append(data.COLUMN_RESTAURANT_NAME).append(" = ").append(restaurant_Name);
+                .append(" Where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(restaurant_Name).append("'");
 
         try (Statement st = con.createStatement();
              ResultSet results = st.executeQuery(String.valueOf(SELECT))) {
@@ -86,20 +86,39 @@ public class administrator_data {
 
     //선택한 음식점의 메뉴 추가
     public static void menu_Add(int restaurant_ID , Connection con) {
-        System.out.print("추가할 메뉴의 이름을 입력하세요. : ");
+        StringBuilder food_Name_Select = new StringBuilder("Select ");
+        ResultSet results;
+        int num = 0;
+        System.out.print("추가할 메뉴의 번호 혹은이름을 입력하세요. : ");
         String food_Name = scan.next();
 
-        StringBuilder food_Name_Select = new StringBuilder("Select ").append(data.COLUMN_MENU_ID)
-                .append(" frome ").append(data.TABLE_MENU)
-                .append(" where ").append(data.COLUMN_FOOD_NAME).append(" = ").append(food_Name);
+        try {
+            Integer.parseInt(food_Name);
+            num = Integer.valueOf(food_Name);
+        } catch (Exception e) {
+            food_Name_Select.append(data.COLUMN_MENU_ID)
+                    .append(" from ").append(data.TABLE_MENU)
+                    .append(" where ").append(data.COLUMN_FOOD_NAME).append(" = '").append(food_Name).append("'");
+
+            try {
+                Statement st = con.createStatement();
+                results = st.executeQuery(String.valueOf(food_Name_Select));
+
+                num = results.getInt(data.COLUMN_MENU_ID);
+            } catch (SQLException ex) {
+                System.out.println(data.ERROR + ex.getMessage());
+                e.printStackTrace();
+            }
+
+        }
+        StringBuilder INSERT = new StringBuilder("INSERT INTO ").append(data.TABLE_RESTAURANT_MENU)
+                .append(" ( ").append(data.COLUMN_RESTAURANT_ID).append(",").append(data.COLUMN_MENU_ID)
+                .append(") Values (").append(restaurant_ID).append(" , ").append(num).append(")");
         try {
             Statement st = con.createStatement();
-            ResultSet results = st.executeQuery(String.valueOf(food_Name_Select));
+            st.execute(String.valueOf(INSERT));
 
-            StringBuilder INSERT = new StringBuilder("INSERT INTO ").append(data.TABLE_RESTAURANT_MENU)
-                    .append(" ( ").append(data.COLUMN_RESTAURANT_ID).append(",").append(data.COLUMN_MENU_ID)
-                    .append(") Values (").append(restaurant_ID).append(" , ").append(results.getInt(1));
-        }catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
 
@@ -108,20 +127,41 @@ public class administrator_data {
 
     //선택한 음식점의 메뉴 제거
     public static void menu_Delete(int restaurant_ID , Connection con) {
+        StringBuilder food_Name_Select = new StringBuilder("Select ");
+        int num = 0;
+        ResultSet results;
+
         System.out.print("제거할 메뉴의 이름을 입력하세요. : ");
         String food_Name = scan.next();
 
-        StringBuilder food_Name_Select = new StringBuilder("Select ").append(data.COLUMN_MENU_ID)
-                .append(" frome ").append(data.TABLE_MENU)
-                .append(" where ").append(data.COLUMN_FOOD_NAME).append(" = ").append(food_Name);
+
+        try {
+            Integer.parseInt(food_Name);
+            num = Integer.valueOf(food_Name);
+
+        } catch (Exception e) {
+            food_Name_Select.append(data.COLUMN_MENU_ID)
+                    .append(" from ").append(data.TABLE_MENU)
+                    .append(" where ").append(data.COLUMN_FOOD_NAME).append(" = '").append(food_Name).append("'");
+
+            try {
+                Statement st = con.createStatement();
+                results = st.executeQuery(String.valueOf(food_Name_Select));
+                num = results.getInt(data.COLUMN_MENU_ID);
+            } catch (SQLException ex) {
+                System.out.println(data.ERROR + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+
         try {
             Statement st = con.createStatement();
-            ResultSet results = st.executeQuery(String.valueOf(food_Name_Select));
 
-            StringBuilder INSERT = new StringBuilder("Delet from ").append(data.TABLE_RESTAURANT_MENU).append(" where ")
-                    .append(data.COLUMN_MENU_ID).append(" = ").append(results.getInt(1))
+            StringBuilder INSERT = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT_MENU).append(" where ")
+                    .append(data.COLUMN_MENU_ID).append(" = ").append(num)
                     .append(" and ").append(data.COLUMN_RESTAURANT_ID).append(" = ").append(restaurant_ID);
-        }catch (SQLException e){
+            st.execute(String.valueOf(INSERT));
+        } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
         }
@@ -138,10 +178,10 @@ public class administrator_data {
                     .append(" Where ").append(data.COLUMN_RESTAURANT_ID).append(" = ")
                     .append(" ( select ").append(data.COLUMN_RESTAURANT_ID)
                     .append(" from ").append(data.TABLE_RESTAURANT)
-                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME).append(" = ").append(name).append(")");
+                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(name).append("')");
 
             StringBuilder DELETE_RESTAURANT = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT)
-                    .append(" Where ").append(data.COLUMN_MENU_ID).append(" = ").append(name);
+                    .append(" Where ").append(data.COLUMN_MENU_ID).append(" = '").append(name).append("'");
 
             try {
                 Statement st = con.createStatement();
@@ -231,19 +271,19 @@ public class administrator_data {
     public static void food_Add(Connection con) {
         System.out.flush();
         System.out.print("추가할 음식을 적어주세요. : ");
-        String foodName = scan.next();
+        String food_Name = scan.next();
 
         System.out.print("음식의 카테고리를 적어주세요. : ");
-        String foodCategory = scan.next();
+        String food_Category = scan.next();
 
         StringBuilder INSERT = new StringBuilder("Insert into ")
                 .append(data.TABLE_MENU).append(" ( ").append(data.COLUMN_FOOD_NAME).append(" , ")
                 .append(data.COLUMN_FOOD_CATEGORY).append(" ) ").append(" Values ")
-                .append(" ( ").append(foodName).append(",").append(foodCategory).append(" )");
+                .append(" ( '").append(food_Name).append("','").append(food_Category).append("' )");
 
         try {
             Statement st = con.createStatement();
-            st.executeQuery(String.valueOf(INSERT));
+            st.execute(String.valueOf(INSERT));
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
@@ -260,11 +300,11 @@ public class administrator_data {
         StringBuilder DELETE = new StringBuilder("Delete from ").append(data.TABLE_MENU).append(" Where ");
         try {
             Integer.parseInt(foodName);
-            DELETE.append(data.COLUMN_MENU_ID).append(" = ").append(foodName);
+            DELETE.append(data.COLUMN_MENU_ID).append(" = '").append(foodName).append("'");
 
 
         } catch (Exception e) {
-            DELETE.append(data.COLUMN_FOOD_NAME).append(" = ").append(foodName);
+            DELETE.append(data.COLUMN_FOOD_NAME).append(" = '").append(foodName).append("'");
         }
 
         try {
