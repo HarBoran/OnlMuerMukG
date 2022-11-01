@@ -38,6 +38,9 @@ public class Main {
                 System.out.println(ommg.getRestaurantName() + ommg.getRestaurantCategory() + ommg.getAgvGrade() +" 식당 "+ommg.getLatitude()+ommg.getHardness()+ " 유저 "+ommg.getLatitude_user()+ommg.getHardness_user());
             }
 
+            PrintFrame ff = new PrintFrame();
+
+
         datasource.close();
     }
 }

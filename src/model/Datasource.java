@@ -56,57 +56,17 @@ public class Datasource {
         }
     }
 
-
-
-    /*
-        구현 해야하는 쿼리문
-        restaurant_category 따라 음식점 선택하기
-        AND
-        선택한 food_category에 따라 음식점 선택하기
-        AND
-        선택한 거리에 따라 음식 선택하기
-        AND
-        많이 찾는 음식점 선택하기
-        AND
-        평점 좋은 음식점 선택하기
-    */
-
-
-    //SELECT COLUMN_RESTAURANT_ID
-    //FROM TABLE_RESTAURANT LEFT JOIN TABLE_RESTAURANT_MENU
-    //ON TABLE_RESTAURANT.COLUMN_RESTAURANT_ID = TABLE_RESTAURANT_MENU.COLUMN_RESTAURANT_ID
-    //TABLE_RESTAURANT_MENU LEFT JOIN TABLE_MENU
-    //ON TABLE_RESTAURANT_MENU.COLUMN_MENU_ID = TABLE_MENU.COLUMN_MENU_ID
-    //WHERE TABLE_MENU.COLUMN_FOOD_CATEGORY = 1 or COLUMN_RESTAURANT_CATEGORY
-    //AND TABLE_RESTAURANT.COLUMN_RESTAURANT_CATEGORY = 1
-    //	or TABLE_RESTAURANT.COLUMN_RESTAURANT_CATEGORY = 3
-    //    or TABLE_RESTAURANT.COLUMN_RESTAURANT_CATEGORY = 5
-
-//    #COLUMN_RESTAURANT_ID가 선택됨
-//    SELECT COLUMN_RESTAURANT_NAME, COLUMN_RESTAURANT_CATEGORY, AGV(COLUMN_GRADE), COLUMN_LATITUDE, COLUMN_HARDNESS, COLUMN_LATITUDE_USER, COLUMN_HARDNESS_USER
-//    FROM TABLE_RESTAURANT LEFT JOIN TABLE_USER_RAP
-//    ON TABLE_RESTAURANT.COLUMN_RESTAURANT_ID = TABLE_USER_RAP.COLUMN_RESTAURANT_ID
-//    TABLE_USER_RAP LEFT JOIN TABLE_USER
-//    ON TABLE_USER_RAP.COLUMN_USER_ID = TABLE_USER.COLUMN_USER_ID
-//    WHERE COLUMN_RESTAURANT_ID = 123
-
-    String[] rc = {"전체", "한식", "일식", "양식", "중식", "기타"};
-    String[] ca = {"전체", "쌀밥", "면요리", "국탕", "고기", "채식", "디저트", "기타"};
-    double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
-    // 많이찾는, 평점이 좋은
-
-
-
-
     public ArrayList<Integer> queryOMMG() {
         PrintFrame pf = new PrintFrame();
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT DISTINCT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + COLUMN_LATITUDE +", " + COLUMN_HARDNESS +" FROM ");
+        sb.append("SELECT DISTINCT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + "111.64444444*ABS(("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+")-("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+") + ("+COLUMN_HARDNESS+"-"+COLUMN_HARDNESS_USER+"))" + "AS DistanceSquared" + " FROM ");
         sb.append(TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
         sb.append(" ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_RESTAURANT_MENU + "." + COLUMN_RESTAURANT_ID);
-        sb.append(" LEFT JOIN " + TABLE_MENU);
-        sb.append(" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
+        sb.append(" LEFT JOIN " + TABLE_MENU+" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
+        sb.append(" LEFT JOIN " + TABLE_USER_RAP + " ON " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
+        sb.append(" LEFT JOIN " + TABLE_USER + " ON " + TABLE_USER_RAP+"."+COLUMN_USER_ID+" = "+TABLE_USER+"."+COLUMN_USER_ID);
+
         if(pf.b11=true){
             if(!pf.b12 && !pf.b13 && !pf.b14 && !pf.b15 && !pf.b16) {
             }else{
@@ -139,6 +99,10 @@ public class Datasource {
 
 //        "POWER(111.64*("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+"),2) + POWER(111.64*("+COLUMN_HARDNESS+
 //        "-"+COLUMN_HARDNESS_USER+"),2)");
+
+        // double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
+        //6400 * 2 * 3.14 / 360 = 111.64444444...
+
         System.out.println(sb.toString());
 
         ArrayList<Integer> restaurantIds = new ArrayList();
@@ -161,7 +125,6 @@ public class Datasource {
 
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AVG("+COLUMN_GRADE+")"+", "+COLUMN_LATITUDE+", "+COLUMN_HARDNESS+", "+COLUMN_LATITUDE_USER+", "+COLUMN_HARDNESS_USER);
-        //6400 * 2 * 3.14 / 360 = 111.64444444...
         sb.append(" FROM "+TABLE_RESTAURANT + " LEFT JOIN " + TABLE_USER_RAP);
         sb.append(" ON "+TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
         sb.append(" LEFT JOIN "+TABLE_USER);

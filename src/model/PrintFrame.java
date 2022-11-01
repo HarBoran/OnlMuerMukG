@@ -1,10 +1,10 @@
 package model;
 
-import javax.lang.model.type.NullType;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class PrintFrame {
     boolean b11 = true;
@@ -39,6 +39,7 @@ public class PrintFrame {
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
     public void JFrame() {
+
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
         frm.setSize(430, 600);
@@ -72,7 +73,7 @@ public class PrintFrame {
         JButton btn41 = new JButton("많이 찾는");
         JButton btn42 = new JButton("평점 좋은");
         JButton btn51 = new JButton("음식점 추천");
-        JLabel txt1=new JLabel("0");
+        JLabel txt1=new JLabel();
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
         btn11.setBounds(30, 120, 90, 30);
@@ -105,7 +106,7 @@ public class PrintFrame {
         btn42.setBounds(120, 360, 90, 30);
         btn51.setBounds(20, 420, 360, 100);
         btn51.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
-        txt1.setBounds(240,10,30,30);
+        txt1.setBounds(30,45,400,30);
 
         ActionListener btn11_action = new ActionListener() {
             @Override
@@ -349,16 +350,11 @@ public class PrintFrame {
         ActionListener btn51_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
-                    if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
-                        return;
-                    button.setBackground(null);
-                    b28 = false;
-                }else {
-                    button.setBackground(new Color(0, 162, 232));
-                    b28 = true;
-                }
+                JButton button = (JButton) e.getSource();
+                if (button.getText().equals("음식점 추천"))
+                    button.setText("다시 하기");
+                button.setBackground(new Color(0, 81, 116));
+                txt1.setText("레스트랑 목록 출력하기");
             }
         };
         btn51.addActionListener(btn51_action);
