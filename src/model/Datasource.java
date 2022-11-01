@@ -96,19 +96,49 @@ public class Datasource {
     // 많이찾는, 평점이 좋은
 
 
+
+
     public ArrayList<Integer> queryOMMG() {
+        PrintFrame pf = new PrintFrame();
+
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT " + COLUMN_RESTAURANT_ID + " FROM ");
+        sb.append("SELECT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + COLUMN_LATITUDE +", " + COLUMN_HARDNESS +" FROM ");
         sb.append(TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
         sb.append(" ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_RESTAURANT_MENU + "." + COLUMN_RESTAURANT_ID);
-        sb.append(" " + TABLE_RESTAURANT_MENU + " LEFT JOIN " + TABLE_MENU);
+        sb.append(" LEFT JOIN " + TABLE_MENU);
         sb.append(" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
-        sb.append(" WHERE " + TABLE_MENU + "." + COLUMN_FOOD_CATEGORY + " = " + "1");
-        sb.append(" or " + COLUMN_RESTAURANT_CATEGORY + " = " + "1");
-        sb.append(" AND " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_CATEGORY + " = " + "1");
-        sb.append(" or " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_CATEGORY + " = " + "3");
-        sb.append(" or " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_CATEGORY + " = " + "5");
+        if(pf.b11=true){
+            if(!pf.b12 && !pf.b13 && !pf.b14 && !pf.b15 && !pf.b16) {
+            }else{
+                sb.append(" where");
+            }
+        } else if (pf.b12=true) {
+            sb.append(" "+COLUMN_RESTAURANT_CATEGORY +  " = " + "\"한식\"");
+            if(!pf.b13 && !pf.b14 && !pf.b15 && !pf.b16) {
+            }else{
+                sb.append(" or");
+            }
+        } else if (pf.b13=true) {
+            sb.append(" "+COLUMN_RESTAURANT_CATEGORY +  " = " + "\"일식\"");
+            if(!pf.b14 && !pf.b15 && !pf.b16) {
+            }else{
+                sb.append(" or");
+            }
+        } else if (pf.b14=true) {
+            sb.append(" "+COLUMN_RESTAURANT_CATEGORY +  " = " + "\"중식\"");
+            if(!pf.b15 && !pf.b16) {
+            }else{
+                sb.append(" or");
+            }
+        } else if (pf.b15=true) {
+            sb.append(" "+COLUMN_RESTAURANT_CATEGORY +  " = " + "\"기타\"");
+        }
 
+
+//        sb.append(" AND " + COLUMN_FOOD_CATEGORY + " = " + "\"국/탕\"");
+
+//        "POWER(111.64*("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+"),2) + POWER(111.64*("+COLUMN_HARDNESS+
+//        "-"+COLUMN_HARDNESS_USER+"),2)");
         System.out.println(sb.toString());
 
         ArrayList<Integer> restaurantIds = new ArrayList();
@@ -119,9 +149,6 @@ public class Datasource {
             while(results.next()) {
                 restaurantIds.add(results.getInt(COLUMN_RESTAURANT_ID));
             }
-//            for(int i : restaurantIds){
-//                System.out.println(restaurantIds.get(i));
-//            }
             return restaurantIds;
 
         } catch (SQLException e) {
@@ -133,14 +160,13 @@ public class Datasource {
     public List<Output> Output(Integer id){
 
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AGV("+COLUMN_GRADE+")"+", ");
+        sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AVG("+COLUMN_GRADE+")"+", "+COLUMN_LATITUDE+", "+COLUMN_HARDNESS+", "+COLUMN_LATITUDE_USER+", "+COLUMN_HARDNESS_USER);
         //6400 * 2 * 3.14 / 360 = 111.64444444...
-        sb.append("POWER(111.64*("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+"),2) + POWER(111.64*("+COLUMN_HARDNESS+"-"+COLUMN_HARDNESS_USER+"),2))");
         sb.append(" FROM "+TABLE_RESTAURANT + " LEFT JOIN " + TABLE_USER_RAP);
         sb.append(" ON "+TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
-        sb.append(" "+TABLE_USER_RAP+" LEFT JOIN "+TABLE_USER);
+        sb.append(" LEFT JOIN "+TABLE_USER);
         sb.append(" ON " + TABLE_USER_RAP+"."+COLUMN_USER_ID+" = "+TABLE_USER+"."+COLUMN_USER_ID);
-        sb.append(" WHERE "+ COLUMN_RESTAURANT_ID+" = " + id);
+        sb.append(" WHERE "+ TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = " + id);
 
         System.out.println(sb.toString());
 
@@ -154,7 +180,10 @@ public class Datasource {
                 ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
                 ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
                 ommg.setAgvGrade(results.getFloat(3));
-                ommg.setDistance(Math.sqrt(results.getDouble(4)));
+                ommg.setLatitude(results.getDouble(COLUMN_LATITUDE));
+                ommg.setHardness(results.getDouble(COLUMN_HARDNESS));
+                ommg.setLatitude_user(results.getDouble(COLUMN_LATITUDE_USER));
+                ommg.setHardness_user(results.getDouble(COLUMN_HARDNESS_USER));
                 ommgs.add(ommg);
             }
             return ommgs;

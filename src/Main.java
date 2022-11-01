@@ -19,33 +19,24 @@ public class Main {
         PrintFrame pf = new PrintFrame();
         pf.JFrame();
 
-
-
-        datasource.queryOMMG();
         ArrayList<Integer> restaurantIds = datasource.queryOMMG();;
-
-        if(restaurantIds==null){
-            System.out.println("Can't find a restaurantIds");
-            return;
-        }
-
-        for (int restaurantId : restaurantIds){
-            System.out.println(restaurantId);
-            System.out.println(restaurantIds.get(restaurantId));
-        }
+            if(restaurantIds==null){
+                System.out.println("Can't find a restaurantIds");
+                return;
+            }
+            for(int i= 0; i < restaurantIds.size(); i++)
+                System.out.println(restaurantIds.get(i));
 
 
-        datasource.Output(123);
-        List<Output> ommgs = datasource.Output(123);
+        List<Output> ommgs = datasource.Output(1);
+            if(ommgs==null){
+                System.out.println("Can't find an ommgs");
+                return;
+            }
 
-        if(ommgs==null){
-            System.out.println("Can't find an ommgs");
-            return;
-        }
-
-        for (Output ommg : ommgs){
-            System.out.println(ommg.getRestaurantName() + ommg.getRestaurantCategory() + ommg.getAgvGrade() + ommg.getDistance());
-        }
+            for (Output ommg : ommgs){
+                System.out.println(ommg.getRestaurantName() + ommg.getRestaurantCategory() + ommg.getAgvGrade() +" 식당 "+ommg.getLatitude()+ommg.getHardness()+ " 유저 "+ommg.getLatitude_user()+ommg.getHardness_user());
+            }
 
         datasource.close();
     }
