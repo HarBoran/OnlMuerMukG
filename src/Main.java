@@ -1,6 +1,6 @@
 import model.Datasource;
 import model.PrintFrame;
-import model.OMMG;
+import model.Output;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Main {
         }
 
         PrintFrame pf = new PrintFrame();
-        //pf.JFrame();
+        pf.JFrame();
 
 
 
@@ -35,15 +35,15 @@ public class Main {
         }
 
 
-        datasource.OMMG(123);
-        List<OMMG> ommgs = datasource.OMMG(123);
+        datasource.Output(123);
+        List<Output> ommgs = datasource.Output(123);
 
         if(ommgs==null){
             System.out.println("Can't find an ommgs");
             return;
         }
 
-        for (OMMG ommg : ommgs){
+        for (Output ommg : ommgs){
             System.out.println(ommg.getRestaurantName() + ommg.getRestaurantCategory() + ommg.getAgvGrade() + ommg.getDistance());
         }
 

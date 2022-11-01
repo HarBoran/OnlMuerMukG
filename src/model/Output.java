@@ -1,6 +1,6 @@
 package model;
 
-public class OMMG {
+public class Output {
 
     private String restaurantName;
     private String restaurantCategory;

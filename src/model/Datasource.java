@@ -90,6 +90,11 @@ public class Datasource {
 //    ON TABLE_USER_RAP.COLUMN_USER_ID = TABLE_USER.COLUMN_USER_ID
 //    WHERE COLUMN_RESTAURANT_ID = 123
 
+    String[] rc = {"전체", "한식", "일식", "양식", "중식", "기타"};
+    String[] ca = {"전체", "쌀밥", "면요리", "국탕", "고기", "채식", "디저트", "기타"};
+    double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
+    // 많이찾는, 평점이 좋은
+
 
     public ArrayList<Integer> queryOMMG() {
         StringBuilder sb = new StringBuilder();
@@ -125,7 +130,7 @@ public class Datasource {
         }
     }
 
-    public List<OMMG> OMMG(Integer id){
+    public List<Output> Output(Integer id){
 
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT "+ COLUMN_RESTAURANT_NAME+", "+COLUMN_RESTAURANT_CATEGORY+", "+"AGV("+COLUMN_GRADE+")"+", ");
@@ -142,10 +147,10 @@ public class Datasource {
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
-            List<OMMG> ommgs = new ArrayList<OMMG>();
+            List<Output> ommgs = new ArrayList<Output>();
 
             while (results.next()) {
-                OMMG ommg = new OMMG();
+                Output ommg = new Output();
                 ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
                 ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
                 ommg.setAgvGrade(results.getFloat(3));
