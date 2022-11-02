@@ -4,8 +4,6 @@ import model.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
-
 
 public class Main {
 
@@ -33,19 +31,25 @@ public class Main {
                 return;
             }
 
+        //평볌한 반복문
 //      for(int i= 0; i < restaurantIds.size(); i++)
 //          System.out.println(restaurantIds.get(i));
-        for (Integer restaurantId : restaurantIds)
+
+        //향샹된 반복문
+        for (Integer restaurantId : restaurantIds) {
             System.out.println(restaurantId);
+        }
+
 
 
 //##############################################################
 
 
-        //queryOMMG에서 저장한 인덱스를 파라미터 값으로 넣어 레스토랑의 상세 정보를 가져옴
+
+//       queryOMMG에서 저장한 인덱스를 파라미터 값으로 넣어 레스토랑의 상세 정보를 가져옴
         for (Integer restaurantId : restaurantIds) {
 
-            List<Output> ommgs = datasource.Output(restaurantIds.get(restaurantId-1));
+               List<Output> ommgs= datasource.Output(restaurantId);
 
                 if (ommgs == null) {
                     System.out.println("Can't find an ommgs");
@@ -57,9 +61,9 @@ public class Main {
 
                     PrintFrame ff = new PrintFrame();
 
-
                 }
         }
+
 
 
 //##############################################################

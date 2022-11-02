@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Iterator;
 
@@ -26,6 +27,7 @@ public class Datasource {
     public static final String COLUMN_HARDNESS = "hardness";//경도 좌표
     public static final String COLUMN_RESTAURANT_CATEGORY = "restaurant_category"; //카테고리
     public static final String COLUMN_SIGNATURE_FOOD = "signature_food"; //대표음식
+
     public static final String COLUMN_USER_ID = "user_id"; //유저 인덱스
     public static final String COLUMN_LOGIN_ID = "login_id"; //로그인 아이디
     public static final String COLUMN_LATITUDE_USER = "latitude_user"; //위도 좌표
@@ -33,6 +35,7 @@ public class Datasource {
     public static final String COLUMN_EAT_DATE = "eat_date"; //이용 날짜
     public static final String COLUMN_EAT_TIME = "eat_time"; //도착 시간
     public static final String COLUMN_GRADE = "grade"; //평점
+    public static final String COLUMN_COLUMN_GRADE_ID = "grade_id"; //평점 인덱스
 
     private Connection conn;
 
@@ -60,6 +63,7 @@ public class Datasource {
 
     public ArrayList<Integer> queryOMMG() {
 
+//      6400 * 2 * 3.14 / 360 = 111.64444444...
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT DISTINCT " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID + ", " + "111.64*ABS(("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+")-("+COLUMN_LATITUDE+"-"+COLUMN_LATITUDE_USER+") + ("+COLUMN_HARDNESS+"-"+COLUMN_HARDNESS_USER+"))" + " AS DistanceSquared");
         sb.append(" FROM " + TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
@@ -70,11 +74,11 @@ public class Datasource {
 
         PrintFrame pf = new PrintFrame();
 
-        pf.b11 =false; //전채
+        pf.b11 =true; //전채
         pf.b12 =false; //한식
         pf.b13 =false; //일식
-        pf.b14 =true; //양식
-        pf.b15 =false; //중식
+        pf.b14 =false; //양식
+        pf.b15 =true; //중식
         pf.b16 =false; //기타
 
         if(!pf.b11) {
@@ -122,12 +126,12 @@ public class Datasource {
             sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
 
-        pf.b21 = false; //전체
-        pf.b22 = false; //쌀/밥
+        pf.b21 = true; //전체
+        pf.b22 = true; //쌀/밥
         pf.b23 = false; //면요리
         pf.b24 = false; //국/탕
-        pf.b25 = true; //고기
-        pf.b26 = false; //채식
+        pf.b25 = false; //고기
+        pf.b26 = true; //채식
         pf.b27 = false; //디저트
         pf.b28 = false; //기타
 
@@ -191,25 +195,28 @@ public class Datasource {
                 sb.append(COLUMN_FOOD_CATEGORY + " = " + "\"기타\"");
             }
         } else {
-            sb.append(" AND " + COLUMN_RESTAURANT_CATEGORY + " IN (\"쌀/밥\" , \"면요리\" , \"국/탕\" , \"고기\" , \"채식\", \"디저트\", \"기타\")");
-
+            sb.append(" AND " + COLUMN_FOOD_CATEGORY + " IN (\"쌀/밥\" , \"면요리\" , \"국/탕\" , \"고기\" , \"채식\", \"디저트\", \"기타\")");
         }
 
-//        sb.append(" WHERE " + "DistanceSquared" + " > " + 0);
+        if(pf.b31)
+            sb.append(" AND " + "DistanceSquared" + " < " + 0.09); //300M
+        else if(pf.b32)
+            sb.append(" AND " + "DistanceSquared" + " < " + 0.25); //500M
+        else if(pf.b33)
+            sb.append(" AND " + "DistanceSquared" + " < " + 1); // 1KM
+        else if(pf.b34)
+            sb.append(" AND " + "DistanceSquared" + " < " + 25); //5KM
+        else if(pf.b35)
+            sb.append(" AND " + "DistanceSquared" + " < " + 100); //100KM
+        else if(pf.b36)
+            return null;
+        else
+            System.out.println("WHERE이 잘못 입력 되었습니다.");
 
-        //        if(!(pf.b11 && pf.b22)){
-//            AND
-//        }else {
-//          WHERE
-//        }
+//        System.out.println(sb.toString());
 
-        // double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
-        //6400 * 2 * 3.14 / 360 = 111.64444444...
-
-        System.out.println(sb.toString());
 
         ArrayList<Integer> restaurantIds = new ArrayList();
-
 
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
@@ -251,17 +258,6 @@ public class Datasource {
                 ommg.setDistance(Math.sqrt(results.getFloat(4)));
                 ommgs.add(ommg);
             }
-
-//            Iterator<Output> iterator = ommgs.iterator();
-//
-//            while (iterator.hasNext()) {
-//                Output ommg = new Output();
-//                ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
-//                ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
-//                ommg.setAgvGrade(results.getFloat(3));
-//                ommg.setDistance(Math.sqrt(results.getFloat(4)));
-//                ommgs.add(ommg);
-//            }
 
             return ommgs;
 

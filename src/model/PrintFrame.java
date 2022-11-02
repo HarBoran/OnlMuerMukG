@@ -26,13 +26,8 @@ public class PrintFrame {
     boolean b33;
     boolean b34;
     boolean b35;
-    boolean b36;
-    boolean b37;
-    boolean b38 = true;
+    boolean b36= true;
     boolean b41;
-    boolean b42;
-    boolean b43;
-    boolean b51;
 
 //    부모 프레임 생성 및 설정
 //   > 자식 컴포넌트 생성 및 설정
@@ -42,7 +37,7 @@ public class PrintFrame {
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
-        frm.setSize(430, 600);
+        frm.setSize(340, 555);
         frm.setLocationRelativeTo(null); //화면 가운데 배치
         frm.setResizable(false); //크기 변경 불가능
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //윈도우의 x를 누르면 종료
@@ -62,17 +57,13 @@ public class PrintFrame {
         JButton btn26 = new JButton("채식");
         JButton btn27 = new JButton("디저트");
         JButton btn28 = new JButton("기타");
-        JButton btn31 = new JButton("최소");
-        JButton btn32 = new JButton("100M");
-        JButton btn33 = new JButton("300M");
-        JButton btn34 = new JButton("500M");
-        JButton btn35 = new JButton("1KM");
-        JButton btn36 = new JButton("5KM");
-        JButton btn37 = new JButton("10KM");
-        JButton btn38 = new JButton("최대");
-        JButton btn41 = new JButton("많이 찾는");
-        JButton btn42 = new JButton("평점 좋은");
-        JButton btn51 = new JButton("음식점 추천");
+        JButton btn31 = new JButton("300M");
+        JButton btn32 = new JButton("500M");
+        JButton btn33 = new JButton("1KM");
+        JButton btn34 = new JButton("5KM");
+        JButton btn35 = new JButton("10KM");
+        JButton btn36 = new JButton("최대");
+        JButton btn41 = new JButton("음식점 추천");
         JLabel txt1=new JLabel();
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
@@ -87,26 +78,21 @@ public class PrintFrame {
         btn21.setBackground(new Color(0,162,232));
         btn22.setBounds(120, 200, 90, 30);
         btn23.setBounds(210, 200, 90, 30);
-        btn24.setBounds(300, 200, 90, 30);
-        btn25.setBounds(30, 230, 90, 30);
-        btn26.setBounds(120, 230, 90, 30);
-        btn27.setBounds(210, 230, 90, 30);
-        btn28.setBounds(300, 230, 90, 30);
-        btn31.setBounds(30, 280, 90, 30);
-        btn31.setBackground(new Color(0,162,232));
-        btn32.setBounds(120, 280, 90, 30);
-        btn33.setBounds(210, 280, 90, 30);
-        btn34.setBounds(300, 280, 90, 30);
-        btn35.setBounds(30, 310, 90, 30);
-        btn36.setBounds(120, 310, 90, 30);
-        btn37.setBounds(210, 310, 90, 30);
-        btn38.setBounds(300, 310, 90, 30);
-        btn38.setBackground(new Color(0,162,232));
-        btn41.setBounds(30, 360, 90, 30);
-        btn42.setBounds(120, 360, 90, 30);
-        btn51.setBounds(20, 420, 360, 100);
-        btn51.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
-        txt1.setBounds(30,45,400,30);
+        btn24.setBounds(30, 230, 90, 30);
+        btn25.setBounds(120, 230, 90, 30);
+        btn26.setBounds(210, 230, 90, 30);
+        btn27.setBounds(30, 260, 90, 30);
+        btn28.setBounds(120, 260, 90, 30);
+        btn31.setBounds(30, 310, 90, 30);
+        btn32.setBounds(120, 310, 90, 30);
+        btn33.setBounds(210, 310, 90, 30);
+        btn34.setBounds(30, 340, 90, 30);
+        btn35.setBounds(120, 340, 90, 30);
+        btn36.setBounds(210, 340, 90, 30);
+        btn36.setBackground(new Color(0,162,232));
+        btn41.setBounds(40, 400, 250, 100);
+        btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
+        txt1.setBounds(30,30,400,30);
 
         ActionListener btn11_action = new ActionListener() {
             @Override
@@ -418,9 +404,164 @@ public class PrintFrame {
         };
         btn28.addActionListener(btn28_action);
 
+        ActionListener btn31_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b32 && !b33 && !b34 && !b35 && !b36)
+                        return;
+                    button.setBackground(null);
+                    b31 = false;
+                }else {
+                    b31 = true;
+                    b32 = false;
+                    b33 = false;
+                    b34 = false;
+                    b35 = false;
+                    b36 = false;
+                    button.setBackground(new Color(0, 162, 232));
+                    btn32.setBackground(null);
+                    btn33.setBackground(null);
+                    btn34.setBackground(null);
+                    btn35.setBackground(null);
+                    btn36.setBackground(null);
+                }
+            }
+        };
+        btn31.addActionListener(btn31_action);
+        ActionListener btn32_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b31 && !b33 && !b34 && !b35 && !b36)
+                        return;
+                    button.setBackground(null);
+                    b32 = false;
+                }else {
+                    b31 = false;
+                    b32 = true;
+                    b33 = false;
+                    b34 = false;
+                    b35 = false;
+                    b36 = false;
+                    btn31.setBackground(null);
+                    button.setBackground(new Color(0, 162, 232));
+                    btn33.setBackground(null);
+                    btn34.setBackground(null);
+                    btn35.setBackground(null);
+                    btn36.setBackground(null);
+                }
+            }
+        };
+        btn32.addActionListener(btn32_action);
+        ActionListener btn33_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b31 && !b32 && !b34 && !b35 && !b36)
+                        return;
+                    button.setBackground(null);
+                    b33 = false;
+                }else {
+                    b31 = false;
+                    b32 = false;
+                    b33 = true;
+                    b34 = false;
+                    b35 = false;
+                    b36 = false;
+                    btn31.setBackground(null);
+                    btn32.setBackground(null);
+                    button.setBackground(new Color(0, 162, 232));
+                    btn34.setBackground(null);
+                    btn35.setBackground(null);
+                    btn36.setBackground(null);
+                }
+            }
+        };
+        btn33.addActionListener(btn33_action);
+        ActionListener btn34_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b31 && !b32 && !b33 && !b35 && !b36)
+                        return;
+                    button.setBackground(null);
+                    b34 = false;
+                }else {
+                    b31 = false;
+                    b32 = false;
+                    b33 = false;
+                    b34 = true;
+                    b35 = false;
+                    b36 = false;
+                    btn31.setBackground(null);
+                    btn32.setBackground(null);
+                    btn33.setBackground(null);
+                    button.setBackground(new Color(0, 162, 232));
+                    btn35.setBackground(null);
+                    btn36.setBackground(null);
+                }
+            }
+        };
+        btn34.addActionListener(btn34_action);
+        ActionListener btn35_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b31 && !b32 && !b33 && !b34 && !b36)
+                        return;
+                    button.setBackground(null);
+                    b35 = false;
+                }else {
+                    b31 = false;
+                    b32 = false;
+                    b33 = false;
+                    b34 = false;
+                    b35 = true;
+                    b36 = false;
+                    btn31.setBackground(null);
+                    btn32.setBackground(null);
+                    btn33.setBackground(null);
+                    btn34.setBackground(null);
+                    button.setBackground(new Color(0, 162, 232));
+                    btn36.setBackground(null);
+                }
+            }
+        };
+        btn35.addActionListener(btn35_action);
+        ActionListener btn36_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton)e.getSource();
+                if(button.getBackground().equals(new Color(0,162,232))){
+                    if(!b31 && !b32 && !b33 && !b34 && !b35)
+                        return;
+                    button.setBackground(null);
+                    b36 = false;
+                }else {
+                    b31 = false;
+                    b32 = false;
+                    b33 = false;
+                    b34 = false;
+                    b35 = false;
+                    b36 = true;
+                    btn31.setBackground(null);
+                    btn32.setBackground(null);
+                    btn33.setBackground(null);
+                    btn34.setBackground(null);
+                    btn35.setBackground(null);
+                    button.setBackground(new Color(0, 162, 232));
+                }
+            }
+        };
+        btn36.addActionListener(btn36_action);
 
-        
-        ActionListener btn51_action = new ActionListener() {
+        ActionListener btn41_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
@@ -430,7 +571,7 @@ public class PrintFrame {
                 txt1.setText("레스트랑 목록 출력하기");
             }
         };
-        btn51.addActionListener(btn51_action);
+        btn41.addActionListener(btn41_action);
 
 
 
@@ -455,11 +596,7 @@ public class PrintFrame {
         frm.getContentPane().add(btn34);
         frm.getContentPane().add(btn35);
         frm.getContentPane().add(btn36);
-        frm.getContentPane().add(btn37);
-        frm.getContentPane().add(btn38);
         frm.getContentPane().add(btn41);
-        frm.getContentPane().add(btn42);
-        frm.getContentPane().add(btn51);
         frm.getContentPane().add(txt1);
 
         frm.setVisible(true); //부모 프레임이 보임
