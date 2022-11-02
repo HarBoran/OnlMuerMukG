@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class PrintFrame {
     boolean b11 = true;
@@ -567,7 +568,7 @@ public class PrintFrame {
                 if (button.getText().equals("음식점 추천"))
                     button.setText("다시 하기");
                 button.setBackground(new Color(0, 81, 116));
-                txt1.setText("레스트랑 정보 출력하기");
+                txt1.setText("레스트랑 목록 출력하기");
             }
         };
         btn41.addActionListener(btn41_action);
