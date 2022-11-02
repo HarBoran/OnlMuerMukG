@@ -419,8 +419,7 @@ public class PrintFrame {
         btn28.addActionListener(btn28_action);
 
 
-
-
+        
         ActionListener btn51_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
