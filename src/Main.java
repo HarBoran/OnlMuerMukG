@@ -4,6 +4,7 @@ import model.PrintFrame;
 import model.Output;
 import java.util.ArrayList;
 import javax.swing.*;
+import java.util.List;
 import java.util.Scanner;
 public class Main {
 
@@ -32,7 +33,7 @@ public class Main {
             System.out.print("사용할 ID를 입력하세요. : ");
             String user_id = "Admin";
             if (user_id.equals("Admin")) {
-                administrator.administrator_Main(data.getCon());
+             //   administrator.administrator_Main(datasource.getCon());
             }
         if(restaurantIds == null){
                 System.out.println("Can't find a restaurantIds");

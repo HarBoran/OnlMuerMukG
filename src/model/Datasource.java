@@ -35,7 +35,8 @@ public class Datasource {
     public static final String COLUMN_EAT_DATE = "eat_date"; //이용 날짜
     public static final String COLUMN_EAT_TIME = "eat_time"; //도착 시간
     public static final String COLUMN_GRADE = "grade"; //평점
-    public static final String COLUMN_COLUMN_GRADE_ID = "grade_id"; //평점 인덱스
+    public static final String COLUMN_GRADE_ID = "grade_id"; //평점 인덱스
+    public static final String ERROR = "오류발생";
 
     private Connection conn;
 
