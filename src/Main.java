@@ -3,6 +3,7 @@ import model.PrintFrame;
 import model.Output;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Main {
 
@@ -22,7 +23,6 @@ public class Main {
         pf.JFrame();
 
 
-
 //##############################################################
 
         ArrayList<Output> outputs= datasource.Output();
@@ -34,9 +34,7 @@ public class Main {
 
             for (Output output : outputs) {
                 System.out.println(output.getRestaurantName() +" "+ output.getRestaurantCategory() +" "+ output.getAgvGrade() +" "+ output.getDistance());
-
             }
-
 
 //##############################################################
 

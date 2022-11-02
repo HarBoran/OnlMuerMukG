@@ -1,9 +1,12 @@
 package model;
 
+import javax.lang.model.util.Elements;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PrintFrame {
     boolean b11 = true;
@@ -33,6 +36,25 @@ public class PrintFrame {
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
     public void JFrame() {
+
+        Datasource datasource = new Datasource();
+        datasource.open();
+        ArrayList<Output> outputs= datasource.Output();
+
+        String[] n = new String[20];
+        String[] c = new String[20];
+        Float[] a = new Float[20];
+        Double[] d = new Double[20];
+        int i =0;
+
+        for (Output output : outputs) {
+            n[i] = output.getRestaurantName();
+            c[i] = output.getRestaurantCategory();
+            a[i] = output.getAgvGrade();
+            d[i] = output.getDistance();
+            i++;
+        }
+
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -64,8 +86,18 @@ public class PrintFrame {
         JButton btn36 = new JButton("최대");
         JButton btn41 = new JButton("음식점 추천");
         JLabel txt1=new JLabel();
+        JLabel txt2=new JLabel();
+        JLabel txt3=new JLabel();
+        JLabel txt4=new JLabel();
+        JLabel txt5=new JLabel();
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
+        txt1.setBounds(20,10,400,20);
+        txt2.setBounds(20,30,400,20);
+        txt3.setBounds(20,50,400,20);
+        txt4.setBounds(20,70,400,20);
+        txt5.setBounds(20,90,400,20);
+
         btn11.setBounds(30, 120, 90, 30);
         btn11.setBackground(new Color(0,162,232));
         btn12.setBounds(120, 120, 90, 30);
@@ -91,7 +123,6 @@ public class PrintFrame {
         btn36.setBackground(new Color(0,162,232));
         btn41.setBounds(40, 400, 250, 100);
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
-        txt1.setBounds(30,30,400,30);
 
         ActionListener btn11_action = new ActionListener() {
             @Override
@@ -560,14 +591,21 @@ public class PrintFrame {
         };
         btn36.addActionListener(btn36_action);
 
+
+
+
         ActionListener btn41_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 if (button.getText().equals("음식점 추천"))
-                    button.setText("다시 하기");
+//                    button.setText("다시 하기");
                 button.setBackground(new Color(0, 81, 116));
-                txt1.setText("레스트랑 정보 출력하기");
+                txt1.setText(n[0] + c[0] + a[0] +d[0]);
+                txt2.setText(n[1] + c[1] + a[1] +d[1]);
+                txt3.setText(n[2] + c[2] + a[2] +d[2]);
+                txt4.setText(n[3] + c[3] + a[3] +d[3]);
+                txt5.setText(n[4] + c[4] + a[4] +d[4]);
             }
         };
         btn41.addActionListener(btn41_action);
@@ -575,6 +613,12 @@ public class PrintFrame {
 
 
         //부모 프레임에다가 자식 컴포넌트 추가
+        frm.getContentPane().add(txt1);
+        frm.getContentPane().add(txt2);
+        frm.getContentPane().add(txt3);
+        frm.getContentPane().add(txt4);
+        frm.getContentPane().add(txt5);
+
         frm.getContentPane().add(btn11);
         frm.getContentPane().add(btn12);
         frm.getContentPane().add(btn13);
@@ -596,7 +640,6 @@ public class PrintFrame {
         frm.getContentPane().add(btn35);
         frm.getContentPane().add(btn36);
         frm.getContentPane().add(btn41);
-        frm.getContentPane().add(txt1);
 
         frm.setVisible(true); //부모 프레임이 보임
     }

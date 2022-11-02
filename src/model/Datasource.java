@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Datasource {
     public static final String DB_NAME = "ommg.db";
@@ -195,6 +196,10 @@ public class Datasource {
 
         System.out.println(sb.toString());
 
+        //쿼리끝
+//#####################################################
+
+
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
@@ -208,6 +213,7 @@ public class Datasource {
                 ommg.setDistance(Math.sqrt(results.getFloat(4))); // 거리 제곱에 루트 처리
                 ommgs.add(ommg);
             }
+
             return ommgs;
 
         } catch (SQLException e) {
