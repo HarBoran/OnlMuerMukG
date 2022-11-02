@@ -1,9 +1,13 @@
 package model;
 
+import model.ArrayList_Collect.OMMG_MENU;
+
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class owner {
@@ -17,7 +21,7 @@ public class owner {
         StringBuilder restaurant_name_str = new StringBuilder("Select ").append(data.COLUMN_RESTAURANT_NAME)
                 .append(" , ").append(data.COLUMN_RESTAURANT_ID)
                 .append(" from ").append(data.TABLE_RESTAURANT)
-                .append(" Where ").append(data.COLUMN_OWNER_ID).append(" = ").append(owner_name);
+                .append(" Where ").append(data.COLUMN_OWNER_ID).append(" = '").append(owner_name).append("'");
 
         try {
             Statement st = con.createStatement();
@@ -33,7 +37,7 @@ public class owner {
                 int select = scan.nextInt();
                 switch (select){
                     case 1:
-                        test.select_MENU_table(con);
+                        owner_MENU_table(restaurant_id,con);
                         break;
                     case 2:
                         adt.menu_Add(restaurant_id,con);
@@ -50,8 +54,44 @@ public class owner {
             e.printStackTrace();
 
         }
-
-
     }
+    public static void owner_MENU_table(int restaurant_id,Connection con){
+        StringBuilder RESTRAUNT_MENU = new StringBuilder("Select ")
+                .append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID)
+                .append(" as ").append(data.COLUMN_MENU_ID).append(",")
+                .append(data.COLUMN_FOOD_NAME).append(",")
+                .append(data.COLUMN_FOOD_CATEGORY)
+                .append(" from ").append(data.TABLE_MENU)
+                .append(" join ").append(data.TABLE_RESTAURANT_MENU)
+                .append(" on ").append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID)
+                .append(" = ").append(data.TABLE_RESTAURANT_MENU).append(".").append(data.COLUMN_MENU_ID)
+                .append(" where ").append(data.COLUMN_RESTAURANT_ID)
+                .append(" = ").append(restaurant_id).append(" order by ")
+                .append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID);
 
+        try (Statement st = con.createStatement();
+        ResultSet results = st.executeQuery(String.valueOf(RESTRAUNT_MENU))){
+            ArrayList<OMMG_MENU> ouAr = new ArrayList<>();
+            while (results.next()) {
+                OMMG_MENU ou = new OMMG_MENU();
+                ou.setMenu_id(results.getInt(data.COLUMN_MENU_ID));
+                ou.setFood_name(results.getString(data.COLUMN_FOOD_NAME));
+                ou.setFood_category(results.getString(data.COLUMN_FOOD_CATEGORY));
+                ouAr.add(ou);
+            }
+            if(ouAr == null){
+                System.out.println("Can't find an artist");
+                return;
+            }
+            for (OMMG_MENU a : ouAr)
+                System.out.println(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
+                        + "  \t| "+ data.COLUMN_FOOD_NAME + " : " + a.getFood_name()
+                        + "  \t| "+ data.COLUMN_FOOD_CATEGORY + " : " + a.getFood_category());
+
+        }catch (SQLException e){
+            System.out.println(data.ERROR + e.getMessage());
+            e.printStackTrace();
+
+        }
+    }
 }

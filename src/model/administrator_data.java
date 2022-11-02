@@ -132,6 +132,7 @@ public class administrator_data {
         StringBuilder food_Name_Select = new StringBuilder("Select ");
         ResultSet results;
         int num = 0;
+        test_Table.select_MENU_table(con);
         System.out.print("추가할 메뉴의 번호 혹은이름을 입력하세요. : ");
         String food_Name = scan.next();
 

@@ -231,6 +231,10 @@ public class Datasource {
         }
     }
 
+    public Connection getConn() {
+        return conn;
+    }
+
     public List<Output> Output(Integer id){
 
         StringBuilder sb = new StringBuilder();

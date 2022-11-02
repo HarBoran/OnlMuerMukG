@@ -1,83 +1,35 @@
 import model.Datasource;
 import model.administrator;
-import model.PrintFrame;
-import model.Output;
-import java.util.ArrayList;
+import model.login;
+import model.sign_Up;
+
 import javax.swing.*;
-import java.util.List;
+import java.sql.Connection;
 import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
+        Datasource data = new Datasource();
         Scanner scan = new Scanner(System.in);
-
-
-        Datasource datasource = new Datasource();
-
-        if(!datasource.open()) {
-            System.out.println("Can't open datasource");
-            return;
-        }
-
-        PrintFrame pf = new PrintFrame();
-        pf.JFrame();
-
-
-//##############################################################
-
-
-        // 프론트에서 받은 조건 대로 WHERE 조건을 설정해 래스트로랑 인덱스를 가지고와 저장함
-        ArrayList<Integer> restaurantIds = datasource.queryOMMG();
-
-            System.out.print("사용할 ID를 입력하세요. : ");
-            String user_id = "Admin";
-            if (user_id.equals("Admin")) {
-             //   administrator.administrator_Main(datasource.getCon());
-            }
-        if(restaurantIds == null){
-                System.out.println("Can't find a restaurantIds");
-                return;
-            }
-
-        //평볌한 반복문
-//      for(int i= 0; i < restaurantIds.size(); i++)
-//          System.out.println(restaurantIds.get(i));
-
-        //향샹된 반복문
-        for (Integer restaurantId : restaurantIds) {
-            System.out.println(restaurantId);
-        }
-
-
-
-//##############################################################
-
-
-
-//       queryOMMG에서 저장한 인덱스를 파라미터 값으로 넣어 레스토랑의 상세 정보를 가져옴
-        for (Integer restaurantId : restaurantIds) {
-
-               List<Output> ommgs= datasource.Output(restaurantId);
-
-                if (ommgs == null) {
-                    System.out.println("Can't find an ommgs");
-                    return;
+        if(data.open()) {
+            while (true) {
+                System.out.println("오늘 뭐 먹지?");
+                System.out.println("1.로그인");
+                System.out.println("2.회원가입");
+                System.out.println("3.프로그램 종료");
+                System.out.print("입력 : ");
+                switch (scan.nextInt()) {
+                    case 1:
+                        login.LOGIN(data.getConn());
+                        break;
+                    case 2:
+                        sign_Up.SIGN_UP_SELECT(data.getConn());
+                        break;
+                    case 3:
+                        System.out.println("이용해주셔서 감사합니다.");
+                        return;
                 }
-
-                for (Output ommg : ommgs) {
-                    System.out.println(ommg.getRestaurantName() +" "+ ommg.getRestaurantCategory() +" "+ ommg.getAgvGrade() +" "+ ommg.getDistance());
-
-                    PrintFrame ff = new PrintFrame();
-
-                }
+            }
         }
-
-
-
-//##############################################################
-
-
-        datasource.close();
     }
 }
