@@ -21,7 +21,7 @@ public class PrintFrame {
     boolean b26;
     boolean b27;
     boolean b28;
-    boolean b31 = true;
+    boolean b31;
     boolean b32;
     boolean b33;
     boolean b34;
