@@ -1,10 +1,10 @@
 package model;
 
-public class OMMG {
+public class Output {
 
     private String restaurantName;
     private String restaurantCategory;
-    private float AgvGrade;
+    private float agvGrade;
     private double distance;
 
     public String getRestaurantName() {
@@ -24,11 +24,11 @@ public class OMMG {
     }
 
     public float getAgvGrade() {
-        return AgvGrade;
+        return agvGrade;
     }
 
     public void setAgvGrade(float agvGrade) {
-        AgvGrade = agvGrade;
+        this.agvGrade = agvGrade;
     }
 
     public double getDistance() {
@@ -38,6 +38,5 @@ public class OMMG {
     public void setDistance(double distance) {
         this.distance = distance;
     }
-
 
 }
