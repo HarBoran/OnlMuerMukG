@@ -1,9 +1,13 @@
 package model;
 
+import model.ArrayList_Collect.OMMG_MENU;
+import model.ArrayList_Collect.OMMG_OWNER_MENU;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class administrator_data {
@@ -16,28 +20,67 @@ public class administrator_data {
             System.out.flush();
             System.out.println(restaurant_Name + " 음식점 관리 모드입니다");
             System.out.println("사용할 기능을 선택해주세요.");
-            System.out.println("1. 메뉴 추가");
-            System.out.println("2. 메뉴 삭제");
-            System.out.println("3. 폐점 신청");
-            System.out.println("4. 이전으로 돌아가기");
+            System.out.println("1. 메뉴 보기");
+            System.out.println("2. 메뉴 추가");
+            System.out.println("3. 메뉴 삭제");
+            System.out.println("4. 폐점 신청");
+            System.out.println("5. 이전으로 돌아가기");
+            System.out.print("입력 : ");
             int num = scan.nextInt();
 
             switch (num) {
                 case 1:
-                    menu_Add(restaurant_ID, con);
+                    select_this_restaurant_menu(restaurant_ID,con);
                     break;
                 case 2:
-                    menu_Delete(restaurant_ID, con);
+                    menu_Add(restaurant_ID, con);
                     break;
                 case 3:
-                    restaurant_Delete(restaurant_Name, con);
+                    menu_Delete(restaurant_ID, con);
                     break;
                 case 4:
+                    restaurant_Delete(restaurant_Name, con);
+                    return;
+                case 5:
                     return;
             }
         }
     }
 
+    public static void select_this_restaurant_menu
+            (int restaurant_ID, Connection con){
+        StringBuilder SELECT = new StringBuilder("SELECT ")
+                .append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID)
+                .append(",").append(data.COLUMN_FOOD_NAME)
+                .append(" from ").append(data.TABLE_MENU)
+                .append(" join ").append(data.TABLE_RESTAURANT_MENU)
+                .append(" on ").append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID).append(" = ")
+                .append(data.TABLE_RESTAURANT_MENU).append(".").append(data.COLUMN_MENU_ID)
+                .append(" where ").append(data.COLUMN_RESTAURANT_ID).append(" = ").append(restaurant_ID)
+                .append(" order by ").append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID);
+
+        try (Statement st = con.createStatement();
+             ResultSet results = st.executeQuery(String.valueOf(SELECT))) {
+            ArrayList<OMMG_OWNER_MENU> ouAr = new ArrayList<>();
+            while (results.next()) {
+                OMMG_OWNER_MENU ou = new OMMG_OWNER_MENU();
+                ou.setMenu_id(results.getInt(data.COLUMN_MENU_ID));
+                ou.setFood_name(results.getString(data.COLUMN_FOOD_NAME));
+                ouAr.add(ou);
+            }
+            if(ouAr == null){
+                System.out.println("Can't find an artist");
+                return;
+            }
+            for (OMMG_OWNER_MENU a : ouAr)
+                System.out.println(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
+                        + "  \t| "+ data.COLUMN_FOOD_NAME + " : " + a.getFood_name());
+
+        } catch (SQLException e) {
+            System.out.println(data.ERROR + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     //관리할 음식점을 문자열로 받을경우 정수값과 함께 반환
     public static void restaurant_Setting(String restaurant_Name, Connection con) {
         StringBuilder SELECT = new StringBuilder("SELECT ").append(data.COLUMN_RESTAURANT_ID)
@@ -46,7 +89,7 @@ public class administrator_data {
 
         try (Statement st = con.createStatement();
              ResultSet results = st.executeQuery(String.valueOf(SELECT))) {
-            restaurant_Setting(restaurant_Name,results.getInt(1),con);
+            restaurant_Setting(restaurant_Name,results.getInt(data.COLUMN_RESTAURANT_ID),con);
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
@@ -171,7 +214,7 @@ public class administrator_data {
     //음식점 폐점
     public static void restaurant_Delete(String name, Connection con) {
         System.out.flush();
-        System.out.println("정말 이 음식점을 삭제하시겠습니까? (yes/no) : ");
+        System.out.print("정말 이 음식점을 삭제하시겠습니까? (yes/no) : ");
         String select = scan.next();
         if (select.equals("yes")) {
             StringBuilder DELETE_RESTAURANT_MENU = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT_MENU)
@@ -181,12 +224,12 @@ public class administrator_data {
                     .append(" where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(name).append("')");
 
             StringBuilder DELETE_RESTAURANT = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT)
-                    .append(" Where ").append(data.COLUMN_MENU_ID).append(" = '").append(name).append("'");
+                    .append(" Where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(name).append("'");
 
             try {
                 Statement st = con.createStatement();
-                st.executeQuery(String.valueOf(DELETE_RESTAURANT_MENU));
-                st.executeQuery(String.valueOf(DELETE_RESTAURANT));
+                st.execute(String.valueOf(DELETE_RESTAURANT_MENU));
+                st.execute(String.valueOf(DELETE_RESTAURANT));
 
             } catch (SQLException e) {
                 System.out.println(data.ERROR + e.getMessage());
@@ -204,18 +247,18 @@ public class administrator_data {
         String str;
         try {
             Integer.parseInt(user_name);
-            System.out.println(user_name + "번 유저를 정말 삭제하시겠습니까? yes/no :");
+            System.out.print(user_name + "번 유저를 정말 삭제하시겠습니까? yes/no :");
             str = scan.next();
 
             if(str.equals("yes")) {
                 StringBuilder user_name_output = new StringBuilder("Select ").append(data.COLUMN_LOGIN_ID)
                         .append(" from ").append(data.TABLE_USER)
-                        .append(" Where").append(data.COLUMN_USER_ID).append(" = ").append(user_name);
+                        .append(" Where ").append(data.COLUMN_USER_ID).append(" = '").append(user_name).append("'");
                 try {
                     Statement st = con.createStatement();
                     ResultSet results = st.executeQuery(String.valueOf(user_name_output));
+                    user_Delete(results.getString(data.COLUMN_LOGIN_ID), con);
 
-                    user_Delete(results.getString(1), con);
                 } catch (SQLException e) {
                     System.out.println(data.ERROR + e.getMessage());
                     e.printStackTrace();
@@ -235,24 +278,30 @@ public class administrator_data {
     public static void user_Delete(String user_name,Connection con) {
         StringBuilder owner_scan = new StringBuilder("Select ").append(data.COLUMN_RESTAURANT_NAME)
                         .append(" from ").append(data.TABLE_RESTAURANT)
-                        .append(" where ").append(data.COLUMN_OWNER_ID).append(" = ").append(user_name);
+                        .append(" where ").append(data.COLUMN_OWNER_ID).append(" = '").append(user_name).append("'");
 
-        StringBuilder delete = new StringBuilder("delet from").append(data.TABLE_USER)
-                        .append(" where ").append(data.COLUMN_LOGIN_ID).append(" = ").append(user_name);
+        StringBuilder delete = new StringBuilder("delete from ").append(data.TABLE_USER)
+                        .append(" where ").append(data.COLUMN_LOGIN_ID).append(" = '").append(user_name).append("'");
 
-        try {
-            Statement st = con.createStatement();
-            ResultSet results = st.executeQuery(String.valueOf(owner_scan));
-            if(results.getString(1) != null)
-                restaurant_Delete(results.getString(1),con);
+        StringBuilder delete_rap = new StringBuilder("delete from ").append(data.TABLE_USER_RAP)
+                .append(" where ").append(data.COLUMN_USER_ID)
+                .append(" = (SELECT ").append(data.COLUMN_USER_ID)
+                .append(" from ").append(data.TABLE_USER)
+                .append(" where ").append(data.COLUMN_LOGIN_ID).append(" = '").append(user_name).append("')");
 
-            st.executeQuery(String.valueOf(delete));
+        try (Statement st = con.createStatement();
+             ResultSet results = st.executeQuery(String.valueOf(owner_scan))){
+
+            if(results.next())
+                restaurant_Delete(results.getString(data.COLUMN_RESTAURANT_NAME),con);
+
+            st.execute(String.valueOf(delete_rap));
+            st.execute(String.valueOf(delete));
 
         }catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
         }
-
     }
 
     //사용기록 삭제
@@ -261,8 +310,15 @@ public class administrator_data {
         int grade_select = scan.nextInt();
 
         StringBuilder grade_id_delete = new StringBuilder("Delete from ").append(data.TABLE_USER_RAP)
-                .append(" where ").append(data.COLUMN_USER_RAP).append(" = ").append(grade_select);
+                .append(" where ").append(data.COLUMN_GRADE_ID).append(" = ").append(grade_select);
 
+        try {
+            Statement st = con.createStatement();
+            st.execute(String.valueOf(grade_id_delete));
+        }catch (SQLException e) {
+        System.out.println(data.ERROR + e.getMessage());
+        e.printStackTrace();
+    }
     }
 
     //음식점 테이블 관리//
@@ -309,11 +365,11 @@ public class administrator_data {
 
         try {
             Statement st = con.createStatement();
-            if (st.executeQuery(String.valueOf(DELETE)) == null) {
+            if (st.executeQuery(String.valueOf(DELETE)).next()) {
                 System.out.println("해당음식은 존재하지 않습니다.");
                 Thread.sleep(3000);
             }
-            st.executeQuery(String.valueOf(DELETE));
+            st.execute(String.valueOf(DELETE));
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());

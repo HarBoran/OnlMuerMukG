@@ -74,6 +74,7 @@ public class Datasource {
     public static final String COLUMN_EAT_DATE = "eat_date";
     public static final String COLUMN_EAT_TIME = "eat_time";
     public static final String COLUMN_GRADE = "grade";
+    public static final String COLUMN_GRADE_ID = "grade_id";
 
     private static Connection con;
     public static final String ERROR = "오류 발생";
