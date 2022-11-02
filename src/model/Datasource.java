@@ -67,29 +67,19 @@ public class Datasource {
         sb.append(" LEFT JOIN " + TABLE_MENU+" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
         sb.append(" LEFT JOIN " + TABLE_USER_RAP + " ON " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
         sb.append(" LEFT JOIN " + TABLE_USER + " ON " + TABLE_USER_RAP+"."+COLUMN_USER_ID+" = "+TABLE_USER+"."+COLUMN_USER_ID);
-        sb.append(" WHERE " + "DistanceSquared" + " > " + 0);
-
-        //        if(!(pf.b11 && pf.b22)){
-//            AND
-//        }else {
-//          WHERE
-//        }
-
-        // double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
-        //6400 * 2 * 3.14 / 360 = 111.64444444...
 
         PrintFrame pf = new PrintFrame();
 
         pf.b11 =false; //전채
         pf.b12 =false; //한식
         pf.b13 =false; //일식
-        pf.b14 =false; //양식
+        pf.b14 =true; //양식
         pf.b15 =false; //중식
         pf.b16 =false; //기타
 
         if(!pf.b11) {
             if (pf.b12) {
-                sb.append(" AND ");
+                sb.append(" WHERE ");
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"한식\"");
                 if (!(!pf.b13 && !pf.b14 && !pf.b15 && !pf.b16)) {
                     sb.append(" OR ");
@@ -97,7 +87,7 @@ public class Datasource {
             }
             if (pf.b13) {
                 if (!pf.b12) {
-                    sb.append(" AND ");
+                    sb.append(" WHERE ");
                 }
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"일식\"");
                 if (!(!pf.b14 && !pf.b15 && !pf.b16)) {
@@ -106,7 +96,7 @@ public class Datasource {
             }
             if (pf.b14) {
                 if (!pf.b12 && !pf.b13) {
-                    sb.append(" AND ");
+                    sb.append(" WHERE ");
                 }
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"양식\"");
                 if (!(!pf.b15 && !pf.b16)) {
@@ -115,7 +105,7 @@ public class Datasource {
             }
             if (pf.b15) {
                 if (!pf.b12 && !pf.b13 && !pf.b14) {
-                    sb.append(" AND ");
+                    sb.append(" WHERE ");
                 }
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"중식\"");
                 if (!(!pf.b16)) {
@@ -124,20 +114,22 @@ public class Datasource {
             }
             if (pf.b16) {
                 if (!pf.b12 && !pf.b13 && !pf.b14 && !pf.b15) {
-                    sb.append(" AND ");
+                    sb.append(" WHERE ");
                 }
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"기타\"");
             }
+        }else {
+            sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
 
-        pf.b21 = false;
-        pf.b22 = true;
-        pf.b23 = true;
-        pf.b24 = true;
-        pf.b25 = true;
-        pf.b26 = true;
-        pf.b27 = true;
-        pf.b28 = false;
+        pf.b21 = false; //전체
+        pf.b22 = false; //쌀/밥
+        pf.b23 = false; //면요리
+        pf.b24 = false; //국/탕
+        pf.b25 = true; //고기
+        pf.b26 = false; //채식
+        pf.b27 = false; //디저트
+        pf.b28 = false; //기타
 
         if (!pf.b21) {
             if (pf.b22) {
@@ -198,7 +190,21 @@ public class Datasource {
                 }
                 sb.append(COLUMN_FOOD_CATEGORY + " = " + "\"기타\"");
             }
+        } else {
+            sb.append(" AND " + COLUMN_RESTAURANT_CATEGORY + " IN (\"쌀/밥\" , \"면요리\" , \"국/탕\" , \"고기\" , \"채식\", \"디저트\", \"기타\")");
+
         }
+
+//        sb.append(" WHERE " + "DistanceSquared" + " > " + 0);
+
+        //        if(!(pf.b11 && pf.b22)){
+//            AND
+//        }else {
+//          WHERE
+//        }
+
+        // double[] dd ={0.01, 0.09, 0.25, 1, 25, 100};
+        //6400 * 2 * 3.14 / 360 = 111.64444444...
 
         System.out.println(sb.toString());
 

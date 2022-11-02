@@ -19,12 +19,15 @@ public class Main {
         }
 
         PrintFrame pf = new PrintFrame();
-//        pf.JFrame();
+        pf.JFrame();
+
+
+//##############################################################
+
 
         // 프론트에서 받은 조건 대로 WHERE 조건을 설정해 래스트로랑 인덱스를 가지고와 저장함
         ArrayList<Integer> restaurantIds = datasource.queryOMMG();
 
-        //확인용
         if(restaurantIds == null){
                 System.out.println("Can't find a restaurantIds");
                 return;
@@ -34,6 +37,9 @@ public class Main {
 //          System.out.println(restaurantIds.get(i));
         for (Integer restaurantId : restaurantIds)
             System.out.println(restaurantId);
+
+
+//##############################################################
 
 
         //queryOMMG에서 저장한 인덱스를 파라미터 값으로 넣어 레스토랑의 상세 정보를 가져옴
@@ -53,10 +59,12 @@ public class Main {
 
 
                 }
-
-
         }
 
+
+//##############################################################
+
+        
         datasource.close();
     }
 }

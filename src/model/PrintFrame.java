@@ -120,6 +120,16 @@ public class PrintFrame {
                 }else {
                     button.setBackground(new Color(0, 162, 232));
                     b11 = true;
+                    b12 = false;
+                    b13 = false;
+                    b14 = false;
+                    b15 = false;
+                    b16 = false;
+                    btn12.setBackground(null);
+                    btn13.setBackground(null);
+                    btn14.setBackground(null);
+                    btn15.setBackground(null);
+                    btn16.setBackground(null);
                 }
             }
         };
@@ -129,12 +139,15 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if (b11) {
+                    btn11.setBackground(null);
+                    b11 = false;
+                }
+                if(button.getBackground().equals(new Color(0,162,232))) {
                     if(!b11 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b12 = false;
-
                 }else {
                     button.setBackground(new Color(0, 162, 232));
                     b12 = true;
@@ -147,6 +160,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b11) {
+                    btn11.setBackground(null);
+                    b11 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b11 && !b12 && !b14 && !b15 && !b16)
                         return;
@@ -164,6 +181,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b11) {
+                    btn11.setBackground(null);
+                    b11 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b11 && !b12 && !b13 && !b15 && !b16)
                         return;
@@ -181,6 +202,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b11) {
+                    btn11.setBackground(null);
+                    b11 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b11 && !b12 && !b13 && !b14 && !b16)
                         return;
@@ -198,6 +223,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b11) {
+                    btn11.setBackground(null);
+                    b11 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b11 && !b12 && !b13 && !b14 && !b15)
                         return;
@@ -223,6 +252,20 @@ public class PrintFrame {
                 }else {
                     button.setBackground(new Color(0, 162, 232));
                     b21 = true;
+                    b22 = false;
+                    b23 = false;
+                    b24 = false;
+                    b25 = false;
+                    b26 = false;
+                    b27 = false;
+                    b28 = false;
+                    btn22.setBackground(null);
+                    btn23.setBackground(null);
+                    btn24.setBackground(null);
+                    btn25.setBackground(null);
+                    btn26.setBackground(null);
+                    btn27.setBackground(null);
+                    btn28.setBackground(null);
                 }
             }
         };
@@ -232,6 +275,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
@@ -249,6 +296,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
@@ -266,6 +317,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
                         return;
@@ -283,6 +338,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
                         return;
@@ -300,6 +359,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
                         return;
@@ -317,6 +380,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
                         return;
@@ -334,6 +401,10 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                if (b21) {
+                    btn21.setBackground(null);
+                    b21 = false;
+                }
                 if(button.getBackground().equals(new Color(0,162,232))){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
                         return;
@@ -346,6 +417,9 @@ public class PrintFrame {
             }
         };
         btn28.addActionListener(btn28_action);
+
+
+
 
         ActionListener btn51_action = new ActionListener() {
             @Override
