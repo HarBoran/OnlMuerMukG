@@ -15,6 +15,7 @@ public class login {
         String user_id = scan.next();
         if (user_id.equals("Admin")) {
             administrator.administrator_Main(con);
+
         } else {
             StringBuilder USER_CHECK = new StringBuilder("SELECT ").append(data.COLUMN_LOGIN_ID)
                     .append(" from ").append(data.TABLE_USER)
@@ -27,6 +28,7 @@ public class login {
                             .append(" from ").append(data.TABLE_RESTAURANT)
                             .append(" where ").append(data.COLUMN_OWNER_ID)
                             .append(" = '").append(user_id).append("'");
+
                     try {
                         ResultSet results = st.executeQuery(String.valueOf(OWNER_CHECK));
                         if (results.next()) {

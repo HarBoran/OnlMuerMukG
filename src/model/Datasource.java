@@ -1,8 +1,11 @@
 package model;
 
+import model.ArrayList_Collect.Output;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class Datasource {
     public static final String DB_NAME = "ommg.db";
@@ -70,11 +73,8 @@ public class Datasource {
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
 
-        Random rd = new Random();
-        pf.b11 = false;
-        pf.b13 = rd.nextBoolean();
-        pf.b14 = rd.nextBoolean();
-        
+
+
 //      6400 * 2 * 3.14 / 360 = 111.64444444...
         sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
         sb.append(" FROM " + TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
@@ -127,6 +127,59 @@ public class Datasource {
         }else {
             sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
+
+        /*
+        boolean b = true;
+
+        if(!pf.b11) {
+            if (pf.b12) {
+                sb.append(" WHERE ");
+                sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"한식\"");
+                b = false;
+                if (!(!pf.b13 && !pf.b14 && !pf.b15 && !pf.b16)) {
+                    sb.append(" OR ");
+                }
+            }
+            if (pf.b13) {
+                if (b) {
+                    sb.append(" WHERE ");
+                }
+                sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"일식\"");
+                b = false;
+                if (!(!pf.b14 && !pf.b15 && !pf.b16)) {
+                    sb.append(" OR ");
+                }
+            }
+            if (pf.b14) {
+                if (b) {
+                    sb.append(" WHERE ");
+                }
+                sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"양식\"");
+                b = false;
+                if (!(!pf.b15 && !pf.b16)) {
+                    sb.append(" OR ");
+                }
+            }
+            if (pf.b15) {
+                if (b) {
+                    sb.append(" WHERE ");
+                }
+                sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"중식\"");
+                b = false;
+                if (!(!pf.b16)) {
+                    sb.append(" OR ");
+                }
+            }
+            if (pf.b16) {
+                if (b) {
+                    sb.append(" WHERE ");
+                }
+                sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"기타\"");
+            }
+        }else {
+            sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
+        }
+        */
 
         if (!pf.b21) {
             if (pf.b22) {
@@ -207,7 +260,7 @@ public class Datasource {
 
         sb.append(" GROUP BY "+TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID);
 
-        System.out.println(sb.toString());
+//        System.out.println(sb.toString());
 
         //쿼리끝
 //#####################################################
@@ -226,6 +279,10 @@ public class Datasource {
                 ommg.setAgvGrade(results.getFloat(4));
                 ommg.setDistance(Math.sqrt(results.getFloat(5))); // 거리 제곱에 루트 처리
                 ommgs.add(ommg);
+//                Collections.shuffle(ommgs);
+//                if (ommgs.size() > 5){
+//                    ommgs.remove(1);
+//                }
             }
 
             return ommgs;

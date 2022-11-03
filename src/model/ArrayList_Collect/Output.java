@@ -1,4 +1,4 @@
-package model;
+package model.ArrayList_Collect;
 public class Output {
 
     private int restaurantID;

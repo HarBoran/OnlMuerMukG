@@ -1,33 +1,18 @@
 package model;
 
-import javax.swing.*;
+import model.ArrayList_Collect.Output;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.util.ArrayList;
+//AWT(Abstract Window Toolkit) //OS종속적
 
 public class PrintFrame {
-    boolean b11 = true;
-    boolean b12;
-    boolean b13;
-    boolean b14;
-    boolean b15;
-    boolean b16;
-    boolean b21 = true;
-    boolean b22;
-    boolean b23;
-    boolean b24;
-    boolean b25;
-    boolean b26;
-    boolean b27;
-    boolean b28;
-    boolean b31;
-    boolean b32;
-    boolean b33;
-    boolean b34;
-    boolean b35;
-    boolean b36= true;
-    boolean b41;
+    boolean b11 = true, b12, b13, b14, b15, b16;
+    boolean b21 = true, b22, b23, b24, b25, b26, b27, b28;
+    boolean b31, b32, b33, b34, b35, b36= true;
 
 //    부모 프레임 생성 및 설정
 //   > 자식 컴포넌트 생성 및 설정
@@ -35,24 +20,6 @@ public class PrintFrame {
 //   > 부모 프레임에 자식 컴포넌트 추가
 
     public void JFrame() {
-
-        Datasource datasource = new Datasource();
-        datasource.open();
-        ArrayList<Output> outputs= datasource.Output();
-
-        String[] name = new String[20];
-        String[] category = new String[20];
-        Float[] grade = new Float[20];
-        Double[] distance = new Double[20];
-        int i =0;
-
-        for (Output output : outputs) {
-            name[i] = output.getRestaurantName();
-            category[i] = output.getRestaurantCategory();
-            grade[i] = output.getAgvGrade();
-            distance[i] = output.getDistance();
-            i++;
-        }
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -83,10 +50,9 @@ public class PrintFrame {
         JButton btn35 = new JButton("10KM");
         JButton btn36 = new JButton("최대");
         JButton btn41 = new JButton("음식점 추천");
-        btn41.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 35));
         JLabel txt1=new JLabel();
         JLabel txt2=new JLabel();
-        JLabel txt3=new JLabel();
+        JLabel txt3=new JLabel("결과 창");
         JLabel txt4=new JLabel();
         JLabel txt5=new JLabel();
 
@@ -97,15 +63,17 @@ public class PrintFrame {
         txt4.setBounds(20,70,400,20);
         txt5.setBounds(20,90,400,20);
 
+        Color color = new Color(0,162,232);
+
         btn11.setBounds(30, 120, 90, 30);
-        btn11.setBackground(new Color(0,162,232));
+        btn11.setBackground(color);
         btn12.setBounds(120, 120, 90, 30);
         btn13.setBounds(210, 120, 90, 30);
         btn14.setBounds(30, 150, 90, 30);
         btn15.setBounds(120, 150, 90, 30);
         btn16.setBounds(210, 150, 90, 30);
         btn21.setBounds(30, 200, 90, 30);
-        btn21.setBackground(new Color(0,162,232));
+        btn21.setBackground(color);
         btn22.setBounds(120, 200, 90, 30);
         btn23.setBounds(210, 200, 90, 30);
         btn24.setBounds(30, 230, 90, 30);
@@ -119,21 +87,22 @@ public class PrintFrame {
         btn34.setBounds(30, 340, 90, 30);
         btn35.setBounds(120, 340, 90, 30);
         btn36.setBounds(210, 340, 90, 30);
-        btn36.setBackground(new Color(0,162,232));
+        btn36.setBackground(color);
         btn41.setBounds(40, 400, 250, 100);
+        btn41.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 35));
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
 
         ActionListener btn11_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b12 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b11 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b11 = true;
                     b12 = false;
                     b13 = false;
@@ -158,13 +127,13 @@ public class PrintFrame {
                     btn11.setBackground(null);
                     b11 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))) {
+                if(button.getBackground().equals(color)) {
                     if(!b11 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b12 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b12 = true;
                 }
             }
@@ -179,13 +148,13 @@ public class PrintFrame {
                     btn11.setBackground(null);
                     b11 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b13 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b13 = true;
                 }
             }
@@ -200,13 +169,13 @@ public class PrintFrame {
                     btn11.setBackground(null);
                     b11 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b14 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b14 = true;
                 }
             }
@@ -221,13 +190,13 @@ public class PrintFrame {
                     btn11.setBackground(null);
                     b11 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b14 && !b16)
                         return;
                     button.setBackground(null);
                     b15 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b15 = true;
                 }
             }
@@ -242,13 +211,13 @@ public class PrintFrame {
                     btn11.setBackground(null);
                     b11 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b14 && !b15)
                         return;
                     button.setBackground(null);
                     b16 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b16 = true;
                 }
             }
@@ -259,13 +228,13 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b22 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b21 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b21 = true;
                     b22 = false;
                     b23 = false;
@@ -294,13 +263,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b22 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b22 = true;
                 }
             }
@@ -315,13 +284,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b23 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b23 = true;
                 }
             }
@@ -336,13 +305,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b24 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b24 = true;
                 }
             }
@@ -357,13 +326,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b25 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b25 = true;
                 }
             }
@@ -378,13 +347,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b26 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b26 = true;
                 }
             }
@@ -399,13 +368,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
                         return;
                     button.setBackground(null);
                     b27 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b27 = true;
                 }
             }
@@ -420,13 +389,13 @@ public class PrintFrame {
                     btn21.setBackground(null);
                     b21 = false;
                 }
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
                         return;
                     button.setBackground(null);
                     b28 = false;
                 }else {
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     b28 = true;
                 }
             }
@@ -437,7 +406,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b32 && !b33 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
@@ -449,7 +418,7 @@ public class PrintFrame {
                     b34 = false;
                     b35 = false;
                     b36 = false;
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
                     btn34.setBackground(null);
@@ -463,7 +432,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b31 && !b33 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
@@ -476,7 +445,7 @@ public class PrintFrame {
                     b35 = false;
                     b36 = false;
                     btn31.setBackground(null);
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     btn33.setBackground(null);
                     btn34.setBackground(null);
                     btn35.setBackground(null);
@@ -489,7 +458,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
@@ -503,7 +472,7 @@ public class PrintFrame {
                     b36 = false;
                     btn31.setBackground(null);
                     btn32.setBackground(null);
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     btn34.setBackground(null);
                     btn35.setBackground(null);
                     btn36.setBackground(null);
@@ -515,7 +484,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b33 && !b35 && !b36)
                         return;
                     button.setBackground(null);
@@ -530,7 +499,7 @@ public class PrintFrame {
                     btn31.setBackground(null);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     btn35.setBackground(null);
                     btn36.setBackground(null);
                 }
@@ -541,7 +510,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b33 && !b34 && !b36)
                         return;
                     button.setBackground(null);
@@ -557,7 +526,7 @@ public class PrintFrame {
                     btn32.setBackground(null);
                     btn33.setBackground(null);
                     btn34.setBackground(null);
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                     btn36.setBackground(null);
                 }
             }
@@ -567,7 +536,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(new Color(0,162,232))){
+                if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b33 && !b34 && !b35)
                         return;
                     button.setBackground(null);
@@ -584,31 +553,34 @@ public class PrintFrame {
                     btn33.setBackground(null);
                     btn34.setBackground(null);
                     btn35.setBackground(null);
-                    button.setBackground(new Color(0, 162, 232));
+                    button.setBackground(color);
                 }
             }
         };
         btn36.addActionListener(btn36_action);
 
 //############################################################
-
+        //인터페이스 구현
         ActionListener btn41_action = new ActionListener() {
-            @Override
+            @Override // 어노테이션(Annotation)
             public void actionPerformed(ActionEvent e) {
+                //get.Source는 오브젝트 타입을 반환함
+                //형변환을 통하여 다양하게 사용할수 있음
                 JButton button = (JButton) e.getSource();
 //                if (button.getText().equals("음식점 추천"))
                     button.setText("다시 하기");
                 button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
-                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
-                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
-                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
-                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
+//                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
+//                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
+//                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
+//                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
 //                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
-
 
             }
         };
+        //구현화한 클래스의 객체를 집어넣음
         btn41.addActionListener(btn41_action);
+
 
         //부모 프레임에다가 자식 컴포넌트 추가
         frm.getContentPane().add(txt1);
