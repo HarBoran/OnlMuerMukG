@@ -33,9 +33,12 @@ public class Datasource {
     public static final String COLUMN_EAT_TIME = "eat_time"; //도착 시간
     public static final String COLUMN_GRADE = "grade"; //평점
     public static final String COLUMN_GRADE_ID = "grade_id"; //평점 인덱스
+    public static final String ERROR = "오류발생";
 
     private Connection conn;
-
+    public Connection getConn() {
+        return conn;
+    }
     public boolean open() {
         try {
             conn = DriverManager.getConnection(CONNECTION_STRING);
