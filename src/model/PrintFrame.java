@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적
 
@@ -19,7 +20,7 @@ public class PrintFrame {
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
 
-    public void JFrame() {
+    public void OutputFrame(Connection conn) {
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");

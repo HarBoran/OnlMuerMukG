@@ -1,79 +1,20 @@
 package model;
 
 import model.ArrayList_Collect.Output;
+import model.Datasource;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
 
-public class Datasource {
-    public static final String DB_NAME = "ommg.db";
-    public static final String CONNECTION_STRING = "jdbc:sqlite:" + DB_NAME;
+public class QueryStatement extends Datasource {
 
-    public static final String TABLE_MENU = "menu";
-    public static final String TABLE_RESTAURANT_MENU = "restaurant_menu";
-    public static final String TABLE_RESTAURANT = "restaurant";
-    public static final String TABLE_USER = "user";
-    public static final String TABLE_USER_RAP = "user_rap";
-
-    public static final String COLUMN_MENU_ID = "menu_id"; //매뉴인덱스
-    public static final String COLUMN_FOOD_NAME = "food_name"; //음식명
-    public static final String COLUMN_FOOD_CATEGORY = "food_category"; //음식카테고리
-    public static final String COLUMN_RESTAURANT_ID = "restaurant_id"; //가게인덱스
-    public static final String COLUMN_OWNER_ID = "owner_id"; //가게주인ID
-    public static final String COLUMN_RESTAURANT_NAME = "restaurant_name"; //가게명
-    public static final String COLUMN_LATITUDE = "latitude"; //위도 좌표
-    public static final String COLUMN_HARDNESS = "hardness";//경도 좌표
-    public static final String COLUMN_RESTAURANT_CATEGORY = "restaurant_category"; //카테고리
-    public static final String COLUMN_SIGNATURE_FOOD = "signature_food"; //대표음식
-
-    public static final String COLUMN_USER_ID = "user_id"; //유저 인덱스
-    public static final String COLUMN_LOGIN_ID = "login_id"; //로그인 아이디
-    public static final String COLUMN_LATITUDE_USER = "latitude_user"; //위도 좌표
-    public static final String COLUMN_HARDNESS_USER = "hardness_user";//경도 좌표
-    public static final String COLUMN_EAT_DATE = "eat_date"; //이용 날짜
-    public static final String COLUMN_EAT_TIME = "eat_time"; //도착 시간
-    public static final String COLUMN_GRADE = "grade"; //평점
-    public static final String COLUMN_GRADE_ID = "grade_id"; //평점 인덱스
-    public static final String ERROR = "오류발생";
-
-    private Connection conn;
-    public Connection getConn() {
-        return conn;
-    }
-
-    public boolean open() {
-        try {
-            conn = DriverManager.getConnection(CONNECTION_STRING);
-            System.out.println("It was connected");
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Couldn't connect to database: " + e.getMessage());
-            return false;
-        }
-    }
-
-    public void close() {
-        try {
-            if (conn != null) {
-                conn.close();
-                System.out.println("Connection closed.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Couldn't close connection: " + e.getMessage());
-        }
-    }
-
-    //쿼리시작
-//#################################################
-
-    public ArrayList<Output> Output(){
+    public ArrayList<Output> Output(Connection conn){
 
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
-
-
 
 //      6400 * 2 * 3.14 / 360 = 111.64444444...
         sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
@@ -266,7 +207,7 @@ public class Datasource {
 //#####################################################
 
 
-        try (Statement statement = getConn().createStatement();
+        try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
             ArrayList<Output> ommgs = new ArrayList<Output>();
