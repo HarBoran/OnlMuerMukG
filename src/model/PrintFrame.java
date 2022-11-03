@@ -123,6 +123,10 @@ public class PrintFrame {
         btn41.setBounds(40, 400, 250, 100);
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
 
+
+        b11 = false;
+        b12 = true;
+
         ActionListener btn11_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
