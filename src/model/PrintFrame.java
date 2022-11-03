@@ -54,7 +54,7 @@ public class PrintFrame {
             distance[i] = output.getDistance();
             i++;
         }
-        
+
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
         frm.setSize(340, 555);
