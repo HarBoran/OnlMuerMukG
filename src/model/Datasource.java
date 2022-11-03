@@ -66,7 +66,7 @@ public class Datasource {
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
 //      6400 * 2 * 3.14 / 360 = 111.64444444...
-        sb.append("SELECT " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
+        sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
         sb.append(" FROM " + TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
         sb.append(" ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_RESTAURANT_MENU + "." + COLUMN_RESTAURANT_ID);
         sb.append(" LEFT JOIN " + TABLE_MENU+" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
@@ -210,10 +210,11 @@ public class Datasource {
 
             while (results.next()) {
                 Output ommg = new Output();
+                ommg.setRestaurantID(results.getInt(COLUMN_RESTAURANT_ID));
                 ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
                 ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
-                ommg.setAgvGrade(results.getFloat(3));
-                ommg.setDistance(Math.sqrt(results.getFloat(4))); // 거리 제곱에 루트 처리
+                ommg.setAgvGrade(results.getFloat(4));
+                ommg.setDistance(Math.sqrt(results.getFloat(5))); // 거리 제곱에 루트 처리
                 ommgs.add(ommg);
             }
 

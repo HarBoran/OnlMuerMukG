@@ -37,7 +37,7 @@ public class Main {
             }
 
             for (Output output : outputs) {
-                System.out.println(output.getRestaurantName() +" "+ output.getRestaurantCategory() +" "+ output.getAgvGrade() +" "+ output.getDistance());
+                System.out.println(output.getRestaurantID() + " " + output.getRestaurantName() +" "+ output.getRestaurantCategory() +" "+ output.getAgvGrade() +" "+ output.getDistance());
             }
 
 //##############################################################
@@ -65,7 +65,7 @@ public class Main {
             }
         }
 
-        
+
 //##############################################################
 
             datasource.close();

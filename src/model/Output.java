@@ -1,10 +1,19 @@
 package model;
 public class Output {
 
+    private int restaurantID;
     private String restaurantName;
     private String restaurantCategory;
     private float agvGrade;
     private double distance;
+
+    public int getRestaurantID() {
+        return restaurantID;
+    }
+
+    public void setRestaurantID(int restaurantID) {
+        this.restaurantID = restaurantID;
+    }
 
     public String getRestaurantName() {
         return restaurantName;
