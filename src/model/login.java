@@ -33,6 +33,7 @@ public class login {
                             owner.owner_main(user_id,con);
                         }else{
                             //로비화면 불러오기
+                            User.USER_MAIN(user_id,con);
                         }
 
                     }catch(SQLException ex){
