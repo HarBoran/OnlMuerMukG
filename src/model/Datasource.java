@@ -2,7 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Random;
 
 public class Datasource {
     public static final String DB_NAME = "ommg.db";
@@ -39,6 +39,7 @@ public class Datasource {
     public Connection getConn() {
         return conn;
     }
+
     public boolean open() {
         try {
             conn = DriverManager.getConnection(CONNECTION_STRING);
@@ -61,10 +62,19 @@ public class Datasource {
         }
     }
 
+    //쿼리시작
+//#################################################
+
     public ArrayList<Output> Output(){
 
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
+
+        Random rd = new Random();
+        pf.b11 = false;
+        pf.b13 = rd.nextBoolean();
+        pf.b14 = rd.nextBoolean();
+        
 //      6400 * 2 * 3.14 / 360 = 111.64444444...
         sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
         sb.append(" FROM " + TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
@@ -195,7 +205,7 @@ public class Datasource {
             sb.append(" ");
         }
 
-        sb.append(" GROUP BY "+COLUMN_RESTAURANT_NAME);
+        sb.append(" GROUP BY "+TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID);
 
         System.out.println(sb.toString());
 

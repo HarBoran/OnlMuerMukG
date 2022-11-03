@@ -1,12 +1,10 @@
 package model;
 
-import javax.lang.model.util.Elements;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class PrintFrame {
     boolean b11 = true;
@@ -35,6 +33,7 @@ public class PrintFrame {
 //   > 자식 컴포넌트 생성 및 설정
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
+
     public void JFrame() {
 
         Datasource datasource = new Datasource();
@@ -84,6 +83,7 @@ public class PrintFrame {
         JButton btn35 = new JButton("10KM");
         JButton btn36 = new JButton("최대");
         JButton btn41 = new JButton("음식점 추천");
+        btn41.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 35));
         JLabel txt1=new JLabel();
         JLabel txt2=new JLabel();
         JLabel txt3=new JLabel();
@@ -122,10 +122,6 @@ public class PrintFrame {
         btn36.setBackground(new Color(0,162,232));
         btn41.setBounds(40, 400, 250, 100);
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
-
-
-        b11 = false;
-        b12 = true;
 
         ActionListener btn11_action = new ActionListener() {
             @Override
@@ -607,9 +603,8 @@ public class PrintFrame {
                 txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
                 txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
                 txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
-                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+//                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
 
-                outputs.clear();
 
             }
         };
