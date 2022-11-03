@@ -41,21 +41,20 @@ public class PrintFrame {
         datasource.open();
         ArrayList<Output> outputs= datasource.Output();
 
-        String[] n = new String[20];
-        String[] c = new String[20];
-        Float[] a = new Float[20];
-        Double[] d = new Double[20];
+        String[] name = new String[20];
+        String[] category = new String[20];
+        Float[] grade = new Float[20];
+        Double[] distance = new Double[20];
         int i =0;
 
         for (Output output : outputs) {
-            n[i] = output.getRestaurantName();
-            c[i] = output.getRestaurantCategory();
-            a[i] = output.getAgvGrade();
-            d[i] = output.getDistance();
+            name[i] = output.getRestaurantName();
+            category[i] = output.getRestaurantCategory();
+            grade[i] = output.getAgvGrade();
+            distance[i] = output.getDistance();
             i++;
         }
-
-
+        
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
         frm.setSize(340, 555);
@@ -591,26 +590,26 @@ public class PrintFrame {
         };
         btn36.addActionListener(btn36_action);
 
-
-
+//############################################################
 
         ActionListener btn41_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
-                if (button.getText().equals("음식점 추천"))
-//                    button.setText("다시 하기");
-                button.setBackground(new Color(0, 81, 116));
-                txt1.setText(n[0] + c[0] + a[0] +d[0]);
-                txt2.setText(n[1] + c[1] + a[1] +d[1]);
-                txt3.setText(n[2] + c[2] + a[2] +d[2]);
-                txt4.setText(n[3] + c[3] + a[3] +d[3]);
-                txt5.setText(n[4] + c[4] + a[4] +d[4]);
+//                if (button.getText().equals("음식점 추천"))
+                    button.setText("다시 하기");
+                button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
+                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
+                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
+                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
+                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
+                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+
+                outputs.clear();
+
             }
         };
         btn41.addActionListener(btn41_action);
-
-
 
         //부모 프레임에다가 자식 컴포넌트 추가
         frm.getContentPane().add(txt1);
