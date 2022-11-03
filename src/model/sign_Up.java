@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
@@ -33,8 +34,7 @@ public class sign_Up {
                 .append(",").append(data.COLUMN_LATITUDE_USER)
                 .append(",").append(data.COLUMN_HARDNESS_USER).append(") VALUES ('");
         System.out.println("일반회원가입입니다.");
-        System.out.print("이름을 입력하세요. : ");
-        INSERT.append(scan.next()).append("',");
+        INSERT.append(LOGIN_FILTER(con)).append("',");
         System.out.print("위도를 입력하세요. : ");
         INSERT.append(scan.nextDouble()).append(",");
         System.out.print("경도를 입력하세요. : ");
@@ -68,13 +68,12 @@ public class sign_Up {
                 .append(",").append(data.COLUMN_SIGNATURE_FOOD)
                 .append(") VALUES ('");
         System.out.println("음식점 주인 회원가입입니다.");
-        System.out.print("이름을 입력하세요. : ");
-        String name = scan.next();
+
+        String name = LOGIN_FILTER(con);
         INSERT_USER.append(name).append("',");
         INSERT_RESTAURANT.append(name).append("',");
 
-        System.out.print("음식점 이름을 입력하세요. : ");
-        INSERT_RESTAURANT.append("'").append(scan.next()).append("',");
+        INSERT_RESTAURANT.append("'").append(RESTAURANT_NAME_CHECK(con)).append("',");
 
         System.out.print("위도를 입력하세요. : ");
         double latitude = scan.nextDouble();
@@ -101,5 +100,45 @@ public class sign_Up {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
         }
+    }
+    public static String LOGIN_FILTER(Connection con){
+        do{
+            System.out.print("아이디를 입력하세요. : ");
+            String name = scan.next();
+
+            StringBuilder NAME_CHECK = new StringBuilder("SELECT ")
+                    .append(data.COLUMN_LOGIN_ID)
+                    .append(" from ").append(data.TABLE_USER)
+                    .append(" where ").append(data.COLUMN_LOGIN_ID)
+                    .append(" = '").append(name).append("'");
+            try (Statement st = con.createStatement();
+                 ResultSet results = st.executeQuery(String.valueOf(NAME_CHECK))){
+                results.getString(data.COLUMN_LOGIN_ID);
+            }catch (SQLException e){
+                return name;
+            }
+            System.out.print("이미 존재하는 아이디입니다. \n다시 ");
+        }while (true);
+    }
+
+    public static String RESTAURANT_NAME_CHECK(Connection con){
+        do{
+            System.out.print("음식점 이름을 입력하세요. : ");
+            String restrunt_name = scan.next();
+
+            StringBuilder RESTRUNT_NAME_CHECK = new StringBuilder("SELECT ")
+                    .append(data.COLUMN_RESTAURANT_NAME)
+                    .append(" from ").append(data.TABLE_RESTAURANT)
+                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME)
+                    .append(" = '").append(restrunt_name).append("'");
+            try (Statement st = con.createStatement();
+                 ResultSet results = st.executeQuery(String.valueOf(RESTRUNT_NAME_CHECK))){
+                results.getString(data.COLUMN_RESTAURANT_NAME);
+            }catch (SQLException e){
+                return restrunt_name;
+            }
+            System.out.print("이미 존재하는 식당입니다. \n다시 ");
+        }while (true);
+
     }
 }

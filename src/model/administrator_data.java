@@ -349,6 +349,60 @@ public class administrator_data {
 
     }
 
+
+    //선택한 음식"테이블"에서 수정
+    public static void food_Update(Connection con) {
+        System.out.print("수정할 음식의 이름 혹은 번호를 입력하세요. :");
+        String change_food = scan.next();
+        try {
+            Integer.parseInt(change_food);
+            StringBuilder SELECT = new StringBuilder("SELECT ").append(data.COLUMN_FOOD_NAME)
+                    .append(" from ").append(data.TABLE_MENU)
+                    .append(" where ").append(data.COLUMN_MENU_ID)
+                    .append(" = ").append(change_food);
+            try {
+                Statement st = con.createStatement();
+                ResultSet results = st.executeQuery(String.valueOf(SELECT));
+                change_food = results.getString(data.COLUMN_FOOD_NAME);
+
+            }catch (SQLException e) {
+                System.out.println(data.ERROR + e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+        }
+
+        String change_column = null;
+        System.out.println(change_food + "의 어떤 항목을 수정하시겠습니까?");
+        System.out.println("1.음식 이름 2.음식 종류");
+        System.out.print("입력 : ");
+        switch (scan.nextInt()){
+            case 1:
+                change_column = data.COLUMN_FOOD_NAME;
+                break;
+            case 2:
+                change_column = data.COLUMN_FOOD_CATEGORY;
+                break;
+        }
+
+        System.out.print(change_food + "의 " + change_column + "을/를 적어주세요. : ");
+        String food_update = scan.next();
+
+        StringBuilder UPDATE = new StringBuilder("UPDATE ").append(data.TABLE_MENU)
+                .append(" SET ").append(change_column)
+                .append(" = '").append(food_update)
+                .append("' where '").append(change_food).append("' = ").append(data.COLUMN_FOOD_NAME);
+        try {
+            Statement st = con.createStatement();
+            st.execute(String.valueOf(UPDATE));
+
+        } catch (SQLException e) {
+            System.out.println(data.ERROR + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+
     //선택한 음식"테이블"에서 메뉴 제거
     public static void food_Delete(Connection con) {
         System.out.flush();
@@ -366,17 +420,11 @@ public class administrator_data {
 
         try {
             Statement st = con.createStatement();
-            if (st.executeQuery(String.valueOf(DELETE)).next()) {
-                System.out.println("해당음식은 존재하지 않습니다.");
-                Thread.sleep(3000);
-            }
             st.execute(String.valueOf(DELETE));
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }

@@ -2,7 +2,6 @@ package model;
 
 import model.ArrayList_Collect.OMMG_MENU;
 
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,7 +31,8 @@ public class owner {
                 System.out.println("1.메뉴 보기");
                 System.out.println("2.음식 추가");
                 System.out.println("3.음식 제거");
-                System.out.println("4.로그아웃");
+                System.out.println("4.음식점 이름 바꾸기");
+                System.out.println("5.로그아웃");
                 System.out.print("사용할 기능을 선택하시오. : ");
                 int select = scan.nextInt();
                 switch (select){
@@ -46,6 +46,9 @@ public class owner {
                         adt.menu_Delete(restaurant_id,con);
                         break;
                     case 4:
+                        restaurant_name = restaurant_name_change(restaurant_id,con);
+                        break;
+                    case 5:
                         return;
                 }
             }
@@ -94,4 +97,20 @@ public class owner {
 
         }
     }
+     public static String restaurant_name_change(int restaurant_id, Connection con){
+        String chname =sign_Up.RESTAURANT_NAME_CHECK(con);
+        StringBuilder Change_Name = new StringBuilder("UPDATE ").append(data.TABLE_RESTAURANT)
+                .append(" SET ").append(data.COLUMN_RESTAURANT_NAME)
+                .append(" = '").append(chname)
+                .append("' where ").append(data.COLUMN_RESTAURANT_ID)
+                .append(" = ").append(restaurant_id);
+        try {Statement st = con.createStatement();
+            st.execute(String.valueOf(Change_Name));
+            return chname;
+        }catch (SQLException e){
+            System.out.println(data.ERROR + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+     }
 }
