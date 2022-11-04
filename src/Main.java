@@ -58,7 +58,7 @@ public class Main {
 //##############################################################
 
         QueryStatement querystatement = new QueryStatement();
-        ArrayList<Output> qs = querystatement.Output(datasource.getConn());
+        ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query());
 
         if (qs == null) {
             System.out.println("Can't find an output");
@@ -68,7 +68,6 @@ public class Main {
             for (Output output : qs) {
                 System.out.println(output.getRestaurantID() + " " + output.getRestaurantName() +" "+ output.getRestaurantCategory() +" "+ output.getAgvGrade() +" "+ output.getDistance());
             }
-
 
 
 //##############################################################

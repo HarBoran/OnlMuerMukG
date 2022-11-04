@@ -11,20 +11,20 @@ import java.util.ArrayList;
 
 public class QueryStatement extends Datasource {
 
-    public ArrayList<Output> Output(Connection conn){
+    public String Query() {
 
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
 
 //      6400 * 2 * 3.14 / 360 = 111.64444444...
-        sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME+", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
+        sb.append("SELECT " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + ", " + COLUMN_RESTAURANT_NAME + ", " + COLUMN_RESTAURANT_CATEGORY + ", " + "AVG(" + COLUMN_GRADE + ")" + ", " + "111.64*ABS((" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ")-(" + COLUMN_LATITUDE + "-" + COLUMN_LATITUDE_USER + ") + (" + COLUMN_HARDNESS + "-" + COLUMN_HARDNESS_USER + "))" + " AS DistanceSquared");
         sb.append(" FROM " + TABLE_RESTAURANT + " LEFT JOIN " + TABLE_RESTAURANT_MENU);
         sb.append(" ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_RESTAURANT_MENU + "." + COLUMN_RESTAURANT_ID);
-        sb.append(" LEFT JOIN " + TABLE_MENU+" ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
-        sb.append(" LEFT JOIN " + TABLE_USER_RAP + " ON " + TABLE_RESTAURANT+"."+COLUMN_RESTAURANT_ID+" = "+TABLE_USER_RAP+"."+COLUMN_RESTAURANT_ID);
-        sb.append(" LEFT JOIN " + TABLE_USER + " ON " + TABLE_USER_RAP+"."+COLUMN_USER_ID+" = "+TABLE_USER+"."+COLUMN_USER_ID);
+        sb.append(" LEFT JOIN " + TABLE_MENU + " ON " + TABLE_RESTAURANT_MENU + "." + COLUMN_MENU_ID + " = " + TABLE_MENU + "." + COLUMN_MENU_ID);
+        sb.append(" LEFT JOIN " + TABLE_USER_RAP + " ON " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID + " = " + TABLE_USER_RAP + "." + COLUMN_RESTAURANT_ID);
+        sb.append(" LEFT JOIN " + TABLE_USER + " ON " + TABLE_USER_RAP + "." + COLUMN_USER_ID + " = " + TABLE_USER + "." + COLUMN_USER_ID);
 
-        if(!pf.b11) {
+        if (!pf.b11) {
             if (pf.b12) {
                 sb.append(" WHERE ");
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"한식\"");
@@ -65,7 +65,7 @@ public class QueryStatement extends Datasource {
                 }
                 sb.append(COLUMN_RESTAURANT_CATEGORY + " = " + "\"기타\"");
             }
-        }else {
+        } else {
             sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
 
@@ -185,28 +185,31 @@ public class QueryStatement extends Datasource {
             sb.append(" AND " + COLUMN_FOOD_CATEGORY + " IN (\"쌀/밥\" , \"면요리\" , \"국/탕\" , \"고기\" , \"채식\", \"디저트\", \"기타\")");
         }
 
-        if(pf.b31) {
+        if (pf.b31) {
             sb.append(" AND " + "DistanceSquared" + " < " + 0.09); //300M
-        }else if(pf.b32) {
+        } else if (pf.b32) {
             sb.append(" AND " + "DistanceSquared" + " < " + 0.25); //500M
-        }else if(pf.b33) {
+        } else if (pf.b33) {
             sb.append(" AND " + "DistanceSquared" + " < " + 1); // 1KM
-        }else if(pf.b34) {
+        } else if (pf.b34) {
             sb.append(" AND " + "DistanceSquared" + " < " + 25); //5KM
-        }else if(pf.b35){
-            sb.append(" AND " + "DistanceSquared"+  " < " + 100); //100KM
-        }else{
+        } else if (pf.b35) {
+            sb.append(" AND " + "DistanceSquared" + " < " + 100); //100KM
+        } else {
             sb.append(" ");
         }
 
-        sb.append(" GROUP BY "+TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID);
+        sb.append(" GROUP BY " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID);
+
+        return sb.toString();
 
 //        System.out.println(sb.toString());
+    }
 
         //쿼리끝
 //#####################################################
 
-
+    public ArrayList<Output> Output(Connection conn, String sb){
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
