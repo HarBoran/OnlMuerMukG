@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.sql.Connection;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적
@@ -21,6 +22,9 @@ public class PrintFrame {
 //   > 부모 프레임에 자식 컴포넌트 추가
 
     public void OutputFrame(Connection conn) {
+
+        Datasource datasource = new Datasource();
+        QueryStatement querystatement = new QueryStatement();
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -560,7 +564,7 @@ public class PrintFrame {
         };
         btn36.addActionListener(btn36_action);
 
-//############################################################
+
         //인터페이스 구현
         ActionListener btn41_action = new ActionListener() {
             @Override // 어노테이션(Annotation)
@@ -569,13 +573,32 @@ public class PrintFrame {
                 //형변환을 통하여 다양하게 사용할수 있음
                 JButton button = (JButton) e.getSource();
 //                if (button.getText().equals("음식점 추천"))
-                    button.setText("다시 하기");
-                button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
+
+//                ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query());
+//
+//                String[] name = new String[20];
+//                String[] category = new String[20];
+//                Float[] grade = new Float[20];
+//                Double[] distance = new Double[20];
+//
+//                int i =0;
+//                for (Output output : qs) {
+//                    name[i] = output.getRestaurantName();
+//                    category[i] = output.getRestaurantCategory();
+//                    grade[i] = output.getAgvGrade();
+//                    distance[i] = output.getDistance();
+//                    i++;
+//                }
+//
 //                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
 //                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
 //                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
 //                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
 //                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+
+                button.setText("다시 하기");
+                button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
+
 
             }
         };

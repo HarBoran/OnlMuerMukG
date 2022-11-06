@@ -205,11 +205,13 @@ public class QueryStatement extends Datasource {
 
 //        System.out.println(sb.toString());
     }
+    //쿼리끝
 
-        //쿼리끝
+
 //#####################################################
 
     public ArrayList<Output> Output(Connection conn, String sb){
+//        System.out.println(sb);
         try (Statement statement = conn.createStatement();
              ResultSet results = statement.executeQuery(sb.toString())) {
 
