@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,6 +27,7 @@ public class User {
             System.out.print("입력 : ");
             switch (scan.nextInt()) {
                 case 1:
+                    User_Select_restaurant(1,user_Name,con);
                     break;
                 case 2:
                     User_Rap_Check(user_Name, con);
@@ -30,6 +35,45 @@ public class User {
                 case 3:
                     return;
             }
+        }
+    }
+
+    //음식점 사용
+    public static void User_Select_restaurant(int restaurnt_Id, String user_Name, Connection con){
+        System.out.print("정말 이 음식점에서 식사하시겠습니까? (yes/no) : ");
+        if(scan.next().equals("yes")){
+
+            System.out.println("이용해주셔서 감사합니다.");
+
+            StringBuilder User_Id = new StringBuilder("SELECT ").append(data.COLUMN_USER_ID)
+                    .append(" from ").append(data.TABLE_USER)
+                    .append(" Where ").append(data.COLUMN_LOGIN_ID)
+                    .append(" = '").append(user_Name).append("'");
+
+            try (Statement st = con.createStatement();
+            ResultSet results = st.executeQuery(String.valueOf(User_Id))){
+                LocalTime use_Time = LocalTime.now();
+                DateTimeFormatter eat_Time = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+                StringBuilder RAP = new StringBuilder("INSERT INTO ").append(data.TABLE_USER_RAP)
+                        .append(" ( ").append(data.COLUMN_USER_ID)
+                        .append(" , ").append(data.COLUMN_RESTAURANT_ID)
+                        .append(" , ").append(data.COLUMN_EAT_DATE)
+                        .append(" , ").append(data.COLUMN_EAT_TIME)
+                        .append(" ) Values (").append(results.getInt(data.COLUMN_USER_ID))
+                        .append(" , ").append(restaurnt_Id)
+                        .append(" , '").append(LocalDate.now())
+                        .append("' , '").append(use_Time.format(eat_Time)).append("')");
+                System.out.println(RAP);
+
+                st.execute(String.valueOf(RAP));
+
+            }catch (SQLException e){
+                System.out.println(data.ERROR+e.getMessage());
+                e.printStackTrace();
+            }
+
+
         }
     }
 
@@ -137,4 +181,6 @@ public class User {
                     + " \t|" + data.COLUMN_EAT_TIME + " : " + a.getEAT_TIME()
                     + " \t|" + data.COLUMN_GRADE + " : " + a.getGRADE());
     }
+
+
 }
