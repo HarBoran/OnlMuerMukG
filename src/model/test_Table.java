@@ -16,7 +16,7 @@ public class test_Table {
         while (true) {
             System.out.flush();
             System.out.println("테이블 상태확인");
-            System.out.println("1.유저,2.유저기록,3.음식점,4.음식점메뉴,5.메뉴,6.나가기");
+            System.out.println("1.유저, 2.유저기록, 3.음식점, 4.음식점메뉴, 5.메뉴, 6.나가기");
             System.out.print("선택 : ");
             int sel = scan.nextInt();
             switch (sel){

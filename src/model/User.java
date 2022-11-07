@@ -1,13 +1,11 @@
 package model;
 
 import model.ArrayList_Collect.OMMG_RAP_CHECK;
-import model.ArrayList_Collect.OMMG_USER_RAP;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -181,6 +179,4 @@ public class User {
                     + " \t|" + data.COLUMN_EAT_TIME + " : " + a.getEAT_TIME()
                     + " \t|" + data.COLUMN_GRADE + " : " + a.getGRADE());
     }
-
-
 }
