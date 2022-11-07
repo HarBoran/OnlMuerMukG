@@ -207,7 +207,7 @@ public class PrintFrame {
                 }else {
                     button.setBackground(color);
                     b14 = true;
-                    booleans[1][2] = true;
+                    booleans[1][4] = true;
                 }
             }
         };
@@ -270,6 +270,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }else {
                     button.setBackground(color);
                     b21 = true;
@@ -280,6 +281,14 @@ public class PrintFrame {
                     b26 = false;
                     b27 = false;
                     b28 = false;
+                    booleans[2][1] = true;
+                    booleans[2][2] = false;
+                    booleans[2][3] = false;
+                    booleans[2][4] = false;
+                    booleans[2][5] = false;
+                    booleans[2][6] = false;
+                    booleans[2][7] = false;
+                    booleans[2][8] = false;
                     btn22.setBackground(null);
                     btn23.setBackground(null);
                     btn24.setBackground(null);
@@ -299,15 +308,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b22 = false;
+                    booleans[2][2] = false;
                 }else {
                     button.setBackground(color);
                     b22 = true;
+                    booleans[2][2] = true;
                 }
             }
         };
@@ -320,15 +332,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b23 = false;
+                    booleans[2][3] = false;
                 }else {
                     button.setBackground(color);
                     b23 = true;
+                    booleans[2][3] = true;
                 }
             }
         };
@@ -341,15 +356,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b24 = false;
+                    booleans[2][4] = false;
                 }else {
                     button.setBackground(color);
                     b24 = true;
+                    booleans[2][4] = true;
                 }
             }
         };
@@ -362,15 +380,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b25 = false;
+                    booleans[2][5] = false;
                 }else {
                     button.setBackground(color);
                     b25 = true;
+                    booleans[2][5] = true;
                 }
             }
         };
@@ -383,15 +404,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b26 = false;
+                    booleans[2][6] = false;
                 }else {
                     button.setBackground(color);
                     b26 = true;
+                    booleans[2][6] = true;
                 }
             }
         };
@@ -404,15 +428,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
                         return;
                     button.setBackground(null);
                     b27 = false;
+                    booleans[2][1] = false;
                 }else {
                     button.setBackground(color);
                     b27 = true;
+                    booleans[2][1] = true;
                 }
             }
         };
@@ -425,15 +452,18 @@ public class PrintFrame {
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
+                    booleans[2][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
                         return;
                     button.setBackground(null);
                     b28 = false;
+                    booleans[2][8] = false;
                 }else {
                     button.setBackground(color);
                     b28 = true;
+                    booleans[2][8] = true;
                 }
             }
         };
@@ -448,6 +478,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b31 = false;
+                    booleans[3][1] = false;
                 }else {
                     b31 = true;
                     b32 = false;
@@ -455,6 +486,12 @@ public class PrintFrame {
                     b34 = false;
                     b35 = false;
                     b36 = false;
+                    booleans[3][1] = true;
+                    booleans[3][2] = false;
+                    booleans[3][3] = false;
+                    booleans[3][4] = false;
+                    booleans[3][5] = false;
+                    booleans[3][6] = false;
                     button.setBackground(color);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
@@ -474,6 +511,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b32 = false;
+                    booleans[3][2] = false;
                 }else {
                     b31 = false;
                     b32 = true;
@@ -481,6 +519,12 @@ public class PrintFrame {
                     b34 = false;
                     b35 = false;
                     b36 = false;
+                    booleans[3][1] = false;
+                    booleans[3][2] = true;
+                    booleans[3][3] = false;
+                    booleans[3][4] = false;
+                    booleans[3][5] = false;
+                    booleans[3][6] = false;
                     btn31.setBackground(null);
                     button.setBackground(color);
                     btn33.setBackground(null);
@@ -500,6 +544,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b33 = false;
+                    booleans[3][3] = false;
                 }else {
                     b31 = false;
                     b32 = false;
@@ -507,6 +552,12 @@ public class PrintFrame {
                     b34 = false;
                     b35 = false;
                     b36 = false;
+                    booleans[3][1] = false;
+                    booleans[3][2] = false;
+                    booleans[3][3] = true;
+                    booleans[3][4] = false;
+                    booleans[3][5] = false;
+                    booleans[3][6] = false;
                     btn31.setBackground(null);
                     btn32.setBackground(null);
                     button.setBackground(color);
@@ -526,6 +577,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b34 = false;
+                    booleans[3][4] = false;
                 }else {
                     b31 = false;
                     b32 = false;
@@ -533,6 +585,12 @@ public class PrintFrame {
                     b34 = true;
                     b35 = false;
                     b36 = false;
+                    booleans[3][1] = false;
+                    booleans[3][2] = false;
+                    booleans[3][3] = false;
+                    booleans[3][4] = true;
+                    booleans[3][5] = false;
+                    booleans[3][6] = false;
                     btn31.setBackground(null);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
@@ -552,6 +610,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b35 = false;
+                    booleans[3][5] = false;
                 }else {
                     b31 = false;
                     b32 = false;
@@ -559,6 +618,12 @@ public class PrintFrame {
                     b34 = false;
                     b35 = true;
                     b36 = false;
+                    booleans[3][1] = false;
+                    booleans[3][2] = false;
+                    booleans[3][3] = false;
+                    booleans[3][4] = false;
+                    booleans[3][5] = true;
+                    booleans[3][6] = false;
                     btn31.setBackground(null);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
@@ -578,6 +643,7 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b36 = false;
+                    booleans[3][6] = false;
                 }else {
                     b31 = false;
                     b32 = false;
@@ -585,6 +651,12 @@ public class PrintFrame {
                     b34 = false;
                     b35 = false;
                     b36 = true;
+                    booleans[3][1] = false;
+                    booleans[3][2] = false;
+                    booleans[3][3] = false;
+                    booleans[3][4] = false;
+                    booleans[3][5] = false;
+                    booleans[3][6] = true;
                     btn31.setBackground(null);
                     btn32.setBackground(null);
                     btn33.setBackground(null);
@@ -613,7 +685,7 @@ public class PrintFrame {
 
 //                if (button.getText().equals("음식점 추천"))
 
-
+                Integer[] id = new Integer[20];
                 String[] name = new String[20];
                 String[] category = new String[20];
                 Float[] grade = new Float[20];
@@ -621,6 +693,7 @@ public class PrintFrame {
 
                 int i =0;
                 for (Output output : qs) {
+                    id[i] = output.getRestaurantID();
                     name[i] = output.getRestaurantName();
                     category[i] = output.getRestaurantCategory();
                     grade[i] = output.getAgvGrade();
@@ -633,11 +706,14 @@ public class PrintFrame {
                 txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
                 txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
                 txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
-                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+                if(id[4] ==null)
+                    txt5.setText("조건에 맞는 식당이 없습니다");
+                else
+                    txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+
 
                 button.setText("다시 하기");
                 button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
-
 
             }
         };
