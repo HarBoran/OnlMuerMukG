@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.event.TextEvent;
+import java.sql.Connection;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적
 
@@ -27,7 +28,7 @@ public class PrintFrame {
 //   > 부모 프레임을 보이게함
 
 
-    public void OutputFrame() {
+    public void OutputFrame(Connection con) {
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -684,21 +685,15 @@ public class PrintFrame {
                 //형변환을 통하여 다양하게 사용할수 있음
                 JButton button = (JButton)e.getSource();
 
-                Datasource datasource = new Datasource();
-                if(!datasource.open()) {
-                    System.out.println("Can't open datasource for PrintFrame");
-                    return;
-                }
-
                 QueryStatement querystatement = new QueryStatement();
-                ArrayList<Output> outputs = querystatement.Output(datasource.getConn(),
-                                            querystatement.Query(booleans));
+                ArrayList<Output> outputs = querystatement.Output(con,querystatement.Query(booleans));
 
-                Integer[] id = new Integer[40];
-                String[] name = new String[40];
-                String[] category = new String[40];
-                Float[] grade = new Float[40];
-                Double[] distance = new Double[40];
+
+                Integer[] id = new Integer[100];
+                String[] name = new String[100];
+                String[] category = new String[100];
+                Float[] grade = new Float[100];
+                Double[] distance = new Double[100];
                 int i =0;
 
                 for (Output output : outputs) {

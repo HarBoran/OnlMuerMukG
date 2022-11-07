@@ -20,7 +20,7 @@ public class Main {
 
         PrintFrame printframe = new PrintFrame();
 
-        printframe.OutputFrame();
+        printframe.OutputFrame(datasource.getConn());
 
 
         Datasource data = new Datasource();

@@ -14,7 +14,8 @@ public class login {
         System.out.print("사용할 ID를 입력하세요. : ");
         String user_id = scan.next();
         if (user_id.equals("Admin")) {
-            administrator.administrator_Main(con);
+            //로비의 뽑기시스템
+            administrator.administrator_Main(con);//어드민 메뉴버튼 추가
 
         } else {
             StringBuilder USER_CHECK = new StringBuilder("SELECT ").append(data.COLUMN_LOGIN_ID)
@@ -32,9 +33,10 @@ public class login {
                     try {
                         ResultSet results = st.executeQuery(String.valueOf(OWNER_CHECK));
                         if (results.next()) {
-                            owner.owner_main(user_id,con);
+                            //로비의 뽑기시스템
+                            owner.owner_main(user_id,con);//오너 메뉴버튼 추가
                         }else{
-                            //로비화면 불러오기
+                            //로비의 뽑기시스템
                             User.USER_MAIN(user_id,con);
                         }
 
