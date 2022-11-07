@@ -27,7 +27,6 @@ public class PrintFrame {
 //   > 부모 프레임에 자식 컴포넌트 추가
 //   > 부모 프레임을 보이게함
 
-
     public void OutputFrame(Connection con) {
 
         JFrame frm = new JFrame();
@@ -38,15 +37,7 @@ public class PrintFrame {
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //윈도우의 x를 누르면 종료
         frm.getContentPane().setLayout(null); //레이아웃 설정
 
-        //병합 시도중
-//        JFrame f= new JFrame();
-//        f.setSize(300,500);
-//        f.setLocationRelativeTo(null);
-//        TextField t= new TextField("아이디 입력", 12);
-//        t.setBounds(120, 120, 90, 30);;
-//        f.getContentPane().add(t);
-//        f.setVisible(true);
-
+        JButton btn00 = new JButton("#");
         JButton btn11 = new JButton("전체");
         JButton btn12 = new JButton("한식");
         JButton btn13 = new JButton("일식");
@@ -68,23 +59,24 @@ public class PrintFrame {
         JButton btn35 = new JButton("10KM");
         JButton btn36 = new JButton("최대");
         JButton btn41 = new JButton("음식점 추천");
-        JLabel txt1=new JLabel();
-        JLabel txt2=new JLabel();
-        JLabel txt3=new JLabel("결과 창");
-        JLabel txt4=new JLabel();
-        JLabel txt5=new JLabel();
-        JLabel txtnull=new JLabel();
+        JLabel txt1 = new JLabel();
+        JLabel txt2 = new JLabel();
+        JLabel txt3 = new JLabel("결과 창");
+        JLabel txt4 = new JLabel();
+        JLabel txt5 = new JLabel();
+        JLabel txtnull = new JLabel();
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
-        txt1.setBounds(20,10,400,20);
-        txt2.setBounds(20,30,400,20);
-        txt3.setBounds(20,50,400,20);
-        txt4.setBounds(20,70,400,20);
-        txt5.setBounds(20,90,400,20);
-        txtnull.setBounds(20,50,400,20);
+        txt1.setBounds(20, 10, 400, 20);
+        txt2.setBounds(20, 30, 400, 20);
+        txt3.setBounds(20, 50, 400, 20);
+        txt4.setBounds(20, 70, 400, 20);
+        txt5.setBounds(20, 90, 400, 20);
+        txtnull.setBounds(20, 50, 400, 20);
 
-        Color color = new Color(0,162,232);
+        Color color = new Color(0, 162, 232);
 
+        btn00.setBounds(280, 10, 50, 50);
         btn11.setBounds(30, 120, 90, 30);
         btn11.setBackground(color);
         btn12.setBounds(120, 120, 90, 30);
@@ -112,18 +104,28 @@ public class PrintFrame {
         btn41.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 35));
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
 
-        ActionListener btn11_action = new ActionListener() {
+        ActionListener btn00_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b12 && !b13 && !b14 && !b15 && !b16)
+                ServeFrame sf = new ServeFrame();
+                    sf.menu();
+            }
+        };
+        btn00.addActionListener(btn00_action);
+
+        ActionListener btn11_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b12 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
 
-                }else {
+                } else {
                     button.setBackground(color);
                     b11 = true;
                     b12 = false;
@@ -150,22 +152,22 @@ public class PrintFrame {
         ActionListener btn12_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
                 }
-                if(button.getBackground().equals(color)) {
-                    if(!b11 && !b13 && !b14 && !b15 && !b16)
+                if (button.getBackground().equals(color)) {
+                    if (!b11 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b12 = false;
                     booleans[1][2] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b12 = true;
-                    booleans[1][2] =  true;
+                    booleans[1][2] = true;
                 }
             }
         };
@@ -174,19 +176,19 @@ public class PrintFrame {
         ActionListener btn13_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b11 && !b12 && !b14 && !b15 && !b16)
+                if (button.getBackground().equals(color)) {
+                    if (!b11 && !b12 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b13 = false;
                     booleans[1][3] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b13 = true;
                     booleans[1][3] = true;
@@ -198,19 +200,19 @@ public class PrintFrame {
         ActionListener btn14_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b11 && !b12 && !b13 && !b15 && !b16)
+                if (button.getBackground().equals(color)) {
+                    if (!b11 && !b12 && !b13 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b14 = false;
                     booleans[1][4] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b14 = true;
                     booleans[1][4] = true;
@@ -222,19 +224,19 @@ public class PrintFrame {
         ActionListener btn15_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b11 && !b12 && !b13 && !b14 && !b16)
+                if (button.getBackground().equals(color)) {
+                    if (!b11 && !b12 && !b13 && !b14 && !b16)
                         return;
                     button.setBackground(null);
                     b15 = false;
                     booleans[1][5] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b15 = true;
                     booleans[1][5] = true;
@@ -246,19 +248,19 @@ public class PrintFrame {
         ActionListener btn16_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b11 && !b12 && !b13 && !b14 && !b15)
+                if (button.getBackground().equals(color)) {
+                    if (!b11 && !b12 && !b13 && !b14 && !b15)
                         return;
                     button.setBackground(null);
                     b16 = false;
                     booleans[1][6] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b16 = true;
                     booleans[1][6] = true;
@@ -270,14 +272,14 @@ public class PrintFrame {
         ActionListener btn21_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b22 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b22 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b21 = true;
                     b22 = false;
@@ -310,19 +312,19 @@ public class PrintFrame {
         ActionListener btn22_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b22 = false;
                     booleans[2][2] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b22 = true;
                     booleans[2][2] = true;
@@ -334,19 +336,19 @@ public class PrintFrame {
         ActionListener btn23_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b23 = false;
                     booleans[2][3] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b23 = true;
                     booleans[2][3] = true;
@@ -358,19 +360,19 @@ public class PrintFrame {
         ActionListener btn24_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b24 = false;
                     booleans[2][4] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b24 = true;
                     booleans[2][4] = true;
@@ -382,19 +384,19 @@ public class PrintFrame {
         ActionListener btn25_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b25 = false;
                     booleans[2][5] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b25 = true;
                     booleans[2][5] = true;
@@ -406,19 +408,19 @@ public class PrintFrame {
         ActionListener btn26_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
                         return;
                     button.setBackground(null);
                     b26 = false;
                     booleans[2][6] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b26 = true;
                     booleans[2][6] = true;
@@ -430,19 +432,19 @@ public class PrintFrame {
         ActionListener btn27_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
                         return;
                     button.setBackground(null);
                     b27 = false;
                     booleans[2][1] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b27 = true;
                     booleans[2][1] = true;
@@ -454,19 +456,19 @@ public class PrintFrame {
         ActionListener btn28_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
                 if (b21) {
                     btn21.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
                 }
-                if(button.getBackground().equals(color)){
-                    if(!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
+                if (button.getBackground().equals(color)) {
+                    if (!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
                         return;
                     button.setBackground(null);
                     b28 = false;
                     booleans[2][8] = false;
-                }else {
+                } else {
                     button.setBackground(color);
                     b28 = true;
                     booleans[2][8] = true;
@@ -478,14 +480,14 @@ public class PrintFrame {
         ActionListener btn31_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b32 && !b33 && !b34 && !b35 && !b36)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b32 && !b33 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
                     b31 = false;
                     booleans[3][1] = false;
-                }else {
+                } else {
                     b31 = true;
                     b32 = false;
                     b33 = false;
@@ -511,14 +513,14 @@ public class PrintFrame {
         ActionListener btn32_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b31 && !b33 && !b34 && !b35 && !b36)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b31 && !b33 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
                     b32 = false;
                     booleans[3][2] = false;
-                }else {
+                } else {
                     b31 = false;
                     b32 = true;
                     b33 = false;
@@ -544,14 +546,14 @@ public class PrintFrame {
         ActionListener btn33_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b31 && !b32 && !b34 && !b35 && !b36)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b31 && !b32 && !b34 && !b35 && !b36)
                         return;
                     button.setBackground(null);
                     b33 = false;
                     booleans[3][3] = false;
-                }else {
+                } else {
                     b31 = false;
                     b32 = false;
                     b33 = true;
@@ -577,14 +579,14 @@ public class PrintFrame {
         ActionListener btn34_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b31 && !b32 && !b33 && !b35 && !b36)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b31 && !b32 && !b33 && !b35 && !b36)
                         return;
                     button.setBackground(null);
                     b34 = false;
                     booleans[3][4] = false;
-                }else {
+                } else {
                     b31 = false;
                     b32 = false;
                     b33 = false;
@@ -610,14 +612,14 @@ public class PrintFrame {
         ActionListener btn35_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b31 && !b32 && !b33 && !b34 && !b36)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b31 && !b32 && !b33 && !b34 && !b36)
                         return;
                     button.setBackground(null);
                     b35 = false;
                     booleans[3][5] = false;
-                }else {
+                } else {
                     b31 = false;
                     b32 = false;
                     b33 = false;
@@ -643,14 +645,14 @@ public class PrintFrame {
         ActionListener btn36_action = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JButton button = (JButton)e.getSource();
-                if(button.getBackground().equals(color)){
-                    if(!b31 && !b32 && !b33 && !b34 && !b35)
+                JButton button = (JButton) e.getSource();
+                if (button.getBackground().equals(color)) {
+                    if (!b31 && !b32 && !b33 && !b34 && !b35)
                         return;
                     button.setBackground(null);
                     b36 = false;
                     booleans[3][6] = false;
-                }else {
+                } else {
                     b31 = false;
                     b32 = false;
                     b33 = false;
@@ -683,18 +685,17 @@ public class PrintFrame {
                 //어떤 컴포넌트에 이벤트가 발생하였는지 이벤트 소스를 알려줌
                 //get.Source는 오브젝트 타입을 반환함
                 //형변환을 통하여 다양하게 사용할수 있음
-                JButton button = (JButton)e.getSource();
+                JButton button = (JButton) e.getSource();
 
                 QueryStatement querystatement = new QueryStatement();
-                ArrayList<Output> outputs = querystatement.Output(con,querystatement.Query(booleans));
-
+                ArrayList<Output> outputs = querystatement.Output(con, querystatement.Query(booleans));
 
                 Integer[] id = new Integer[100];
                 String[] name = new String[100];
                 String[] category = new String[100];
                 Float[] grade = new Float[100];
                 Double[] distance = new Double[100];
-                int i =0;
+                int i = 0;
 
                 for (Output output : outputs) {
                     id[i] = output.getRestaurantID();
@@ -706,16 +707,16 @@ public class PrintFrame {
                 }
 
                 txtnull.setText("");
-                if(id[0] == null){
+                if (id[0] == null) {
                     txtnull.setText("조건에 맞는 식당이 없습니다.");
-                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD , 20));
+                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 20));
                     txt1.setText("");
                     txt2.setText("");
                     txt3.setText("");
                     txt4.setText("");
                     txt5.setText("");
-                }else {
-                        txt1.setText(name[0] + " " + category[0] + " 평점" + grade[0] + " 거리" + distance[0] + "km");
+                } else {
+                    txt1.setText(name[0] + " " + category[0] + " 평점" + grade[0] + " 거리" + distance[0] + "km");
                     if (id[1] == null)
                         txt2.setText("");
                     else
@@ -735,7 +736,7 @@ public class PrintFrame {
                 }
 
                 button.setText("다시 하기");
-             // button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
+                // button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
 
             }
         };
@@ -751,6 +752,7 @@ public class PrintFrame {
         frm.getContentPane().add(txt5);
         frm.getContentPane().add(txtnull);
 
+        frm.getContentPane().add(btn00);
         frm.getContentPane().add(btn11);
         frm.getContentPane().add(btn12);
         frm.getContentPane().add(btn13);
@@ -765,13 +767,15 @@ public class PrintFrame {
         frm.getContentPane().add(btn26);
         frm.getContentPane().add(btn27);
         frm.getContentPane().add(btn28);
-        frm.getContentPane().add(btn31);
-        frm.getContentPane().add(btn32);
-        frm.getContentPane().add(btn33);
-        frm.getContentPane().add(btn34);
-        frm.getContentPane().add(btn35);
-        frm.getContentPane().add(btn36);
+        frm.add(btn31);
+        frm.add(btn32);
+        frm.add(btn33);
+        frm.add(btn34);
+        frm.add(btn35);
+        frm.add(btn36);
         frm.getContentPane().add(btn41);
+
+
 
         frm.setVisible(true); //부모 프레임이 보임
     }
