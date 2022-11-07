@@ -26,7 +26,7 @@ public class Main {
 
         QueryStatement querystatement = new QueryStatement();
 
-        ArrayList<Output> output = querystatement.Output(datasource.getConn(), querystatement.Query());
+        ArrayList<Output> output = querystatement.Output(datasource.getConn(), querystatement.Query(printframe.getBooleans()));
 
         if (output == null) {
             System.out.println("Can't find an output");

@@ -16,9 +16,13 @@ public class PrintFrame {
     boolean b21 = true, b22, b23, b24, b25, b26, b27, b28;
     boolean b31, b32, b33, b34, b35, b36= true;
 
-    Boolean[][] booleans = {{b11, b12, b13, b14, b15, b16},
-            {b21, b22, b23, b24, b25, b26, b27, b28},
-            {b31, b32 ,b33 , b34, b35, b36}};
+    Boolean[][] booleans = {{false},
+            {false, b11, b12, b13, b14, b15, b16},
+            {false, b21, b22, b23, b24, b25, b26, b27, b28},
+            {false, b31, b32 ,b33 , b34, b35, b36}};
+    public Boolean[][] getBooleans() {
+        return booleans;
+    }
 
 //    부모 프레임 생성 및 설정
 //   > 자식 컴포넌트 생성 및 설정
@@ -26,6 +30,10 @@ public class PrintFrame {
 //   > 부모 프레임에 자식 컴포넌트 추가
 
     public void OutputFrame(Connection conn) {
+
+        Datasource datasource = new Datasource();
+        QueryStatement querystatement = new QueryStatement();
+        datasource.open();
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -107,6 +115,8 @@ public class PrintFrame {
                         return;
                     button.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
+
                 }else {
                     button.setBackground(color);
                     b11 = true;
@@ -115,6 +125,12 @@ public class PrintFrame {
                     b14 = false;
                     b15 = false;
                     b16 = false;
+                    booleans[1][1] = true;
+                    booleans[1][2] = false;
+                    booleans[1][3] = false;
+                    booleans[1][4] = false;
+                    booleans[1][5] = false;
+                    booleans[1][6] = false;
                     btn12.setBackground(null);
                     btn13.setBackground(null);
                     btn14.setBackground(null);
@@ -132,15 +148,18 @@ public class PrintFrame {
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
                 }
                 if(button.getBackground().equals(color)) {
                     if(!b11 && !b13 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b12 = false;
+                    booleans[1][2] = false;
                 }else {
                     button.setBackground(color);
                     b12 = true;
+                    booleans[1][2] =  true;
                 }
             }
         };
@@ -153,15 +172,18 @@ public class PrintFrame {
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b14 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b13 = false;
+                    booleans[1][3] = false;
                 }else {
                     button.setBackground(color);
                     b13 = true;
+                    booleans[1][3] = true;
                 }
             }
         };
@@ -174,15 +196,18 @@ public class PrintFrame {
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b15 && !b16)
                         return;
                     button.setBackground(null);
                     b14 = false;
+                    booleans[1][4] = false;
                 }else {
                     button.setBackground(color);
                     b14 = true;
+                    booleans[1][2] = true;
                 }
             }
         };
@@ -195,15 +220,18 @@ public class PrintFrame {
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b14 && !b16)
                         return;
                     button.setBackground(null);
                     b15 = false;
+                    booleans[1][5] = false;
                 }else {
                     button.setBackground(color);
                     b15 = true;
+                    booleans[1][5] = true;
                 }
             }
         };
@@ -216,15 +244,18 @@ public class PrintFrame {
                 if (b11) {
                     btn11.setBackground(null);
                     b11 = false;
+                    booleans[1][1] = false;
                 }
                 if(button.getBackground().equals(color)){
                     if(!b11 && !b12 && !b13 && !b14 && !b15)
                         return;
                     button.setBackground(null);
                     b16 = false;
+                    booleans[1][6] = false;
                 }else {
                     button.setBackground(color);
                     b16 = true;
+                    booleans[1][6] = true;
                 }
             }
         };
@@ -574,37 +605,35 @@ public class PrintFrame {
                 //형변환을 통하여 다양하게 사용할수 있음
                 JButton button = (JButton) e.getSource();
 
-                System.out.println("b11 = " + b11 + " b12 =" + b12  + " b13 =" + b13  + " b14 =" + b14  + " b15 =" + b15  + " b16 =" + b16);
-
-
-                Datasource datasource = new Datasource();
-                QueryStatement querystatement = new QueryStatement();
-                System.out.println(querystatement.Query());
-
-//                ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query());
+                System.out.println("b11 = " + b11 + " b12 =" + b12  + " b13 =" + b13);
+                System.out.println("b11 = " + booleans[1][1] + " b12 = " + booleans[1][2] + " b13 = " + booleans[1][3]);
+                System.out.println(querystatement.Query(booleans));
+//                System.out.println(datasource.getConn());
+                ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query(booleans));
 
 //                if (button.getText().equals("음식점 추천"))
 
-////
-//                String[] name = new String[20];
-//                String[] category = new String[20];
-//                Float[] grade = new Float[20];
-//                Double[] distance = new Double[20];
-//
-//                int i =0;
-//                for (Output output : qs) {
-//                    name[i] = output.getRestaurantName();
-//                    category[i] = output.getRestaurantCategory();
-//                    grade[i] = output.getAgvGrade();
-//                    distance[i] = output.getDistance();
-//                    i++;
-//                }
-//
-//                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
-//                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
-//                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
-//                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
-//                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
+
+                String[] name = new String[20];
+                String[] category = new String[20];
+                Float[] grade = new Float[20];
+                Double[] distance = new Double[20];
+
+                int i =0;
+                for (Output output : qs) {
+                    name[i] = output.getRestaurantName();
+                    category[i] = output.getRestaurantCategory();
+                    grade[i] = output.getAgvGrade();
+                    distance[i] = output.getDistance();
+                    i++;
+                }
+
+
+                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
+                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
+                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
+                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
+                txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
 
                 button.setText("다시 하기");
                 button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));

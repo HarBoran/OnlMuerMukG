@@ -66,9 +66,10 @@ public class Datasource {
     }
 
     //쿼리시작
+    //move QueryStatement
 //#################################################
 
-    public ArrayList<Output> Output(){
+    /*public ArrayList<Output> Output(){
 
         StringBuilder sb = new StringBuilder();
         PrintFrame pf = new PrintFrame();
@@ -128,7 +129,7 @@ public class Datasource {
             sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
 
-        /*
+        *//*
         boolean b = true;
 
         if(!pf.b11) {
@@ -179,7 +180,7 @@ public class Datasource {
         }else {
             sb.append(" WHERE " + COLUMN_RESTAURANT_CATEGORY + " IN (\"한식\" , \"일식\" , \"양식\" , \"중식\" , \"기타\")");
         }
-        */
+        *//*
 
         if (!pf.b21) {
             if (pf.b22) {
@@ -292,5 +293,5 @@ public class Datasource {
             return null;
         }
 
-    }
+    }*/
 }
