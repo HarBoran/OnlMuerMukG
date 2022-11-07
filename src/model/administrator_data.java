@@ -17,7 +17,6 @@ public class administrator_data {
     //선택한 음식점 관리
     public static void restaurant_Setting(String restaurant_Name,int restaurant_ID, Connection con) {
         while (true) {
-            System.out.flush();
             System.out.println(restaurant_Name + " 음식점 관리 모드입니다");
             System.out.println("사용할 기능을 선택해주세요.");
             System.out.println("1. 메뉴 보기");

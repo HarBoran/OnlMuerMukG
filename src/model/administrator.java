@@ -10,7 +10,6 @@ public class administrator {
     static test_Table test = new test_Table();
     public static void administrator_Main(Connection con){
         while (true){
-            System.out.flush();
             System.out.println("관리자 모드입니다.");
             System.out.println("사용할 기능을 선택해주세요.");
             System.out.println("1.음식점 관리");
@@ -41,7 +40,6 @@ public class administrator {
 
     //관리할 음식점 선택
     public static void set_Restaurant_Select(Connection con) {
-            System.out.flush();
             String st;
             System.out.println("음식점 관리 모드입니다.");
             System.out.print("관리할 음식점을 선택해주세요. : ");
@@ -59,7 +57,6 @@ public class administrator {
     //유저 관리 선택지
     public static void set_user_Select(Connection con) {
         while (true) {
-            System.out.flush();
             System.out.println("유저 관리 모드입니다.");
             System.out.println("1.유저 삭제");
             System.out.println("2.기록 삭제");

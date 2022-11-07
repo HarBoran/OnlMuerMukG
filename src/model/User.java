@@ -62,7 +62,6 @@ public class User {
                         .append(" , ").append(restaurnt_Id)
                         .append(" , '").append(LocalDate.now())
                         .append("' , '").append(use_Time.format(eat_Time)).append("')");
-                System.out.println(RAP);
 
                 st.execute(String.valueOf(RAP));
 
