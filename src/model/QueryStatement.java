@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class QueryStatement extends Datasource {
 
@@ -424,9 +425,10 @@ public class QueryStatement extends Datasource {
                 ommg.setRestaurantName(results.getString(COLUMN_RESTAURANT_NAME));
                 ommg.setRestaurantCategory(results.getString(COLUMN_RESTAURANT_CATEGORY));
                 ommg.setAgvGrade(results.getFloat(4));
-                ommg.setDistance(Math.sqrt(results.getFloat(5))); // 거리 제곱에 루트 처리
+                // 거리 제곱에 루트 처리
+                ommg.setDistance(Math.round(Math.sqrt(results.getFloat(5))*1000)/1000.0);
                 ommgs.add(ommg);
-//                Collections.shuffle(ommgs);
+                Collections.shuffle(ommgs);
 //                if (ommgs.size() > 5){
 //                    ommgs.remove(1);
 //                }

@@ -6,8 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
-import java.sql.Connection;
+import java.awt.event.TextEvent;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적
 
@@ -20,20 +19,15 @@ public class PrintFrame {
             {false, b11, b12, b13, b14, b15, b16},
             {false, b21, b22, b23, b24, b25, b26, b27, b28},
             {false, b31, b32 ,b33 , b34, b35, b36}};
-    public Boolean[][] getBooleans() {
-        return booleans;
-    }
 
 //    부모 프레임 생성 및 설정
 //   > 자식 컴포넌트 생성 및 설정
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
+//   > 부모 프레임을 보이게함
 
-    public void OutputFrame(Connection conn) {
 
-        Datasource datasource = new Datasource();
-        QueryStatement querystatement = new QueryStatement();
-        datasource.open();
+    public void OutputFrame() {
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -42,6 +36,13 @@ public class PrintFrame {
         frm.setResizable(false); //크기 변경 불가능
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //윈도우의 x를 누르면 종료
         frm.getContentPane().setLayout(null); //레이아웃 설정
+
+        JFrame f= new JFrame();
+        f.setSize(300,500);
+        f.setLocationRelativeTo(null);
+        TextField t= new TextField("아이디 입력", 12);
+        t.setBounds(120, 120, 90, 30);;
+        f.getContentPane().add(t);
 
         JButton btn11 = new JButton("전체");
         JButton btn12 = new JButton("한식");
@@ -69,6 +70,7 @@ public class PrintFrame {
         JLabel txt3=new JLabel("결과 창");
         JLabel txt4=new JLabel();
         JLabel txt5=new JLabel();
+        JLabel txtnull=new JLabel();
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
         txt1.setBounds(20,10,400,20);
@@ -76,6 +78,7 @@ public class PrintFrame {
         txt3.setBounds(20,50,400,20);
         txt4.setBounds(20,70,400,20);
         txt5.setBounds(20,90,400,20);
+        txtnull.setBounds(20,50,400,20);
 
         Color color = new Color(0,162,232);
 
@@ -638,6 +641,7 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
+                f.setVisible(true);
                 if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b33 && !b34 && !b35)
                         return;
@@ -673,26 +677,30 @@ public class PrintFrame {
         ActionListener btn41_action = new ActionListener() {
             @Override // 어노테이션(Annotation)
             public void actionPerformed(ActionEvent e) {
+
+                //어떤 컴포넌트에 이벤트가 발생하였는지 이벤트 소스를 알려줌
                 //get.Source는 오브젝트 타입을 반환함
                 //형변환을 통하여 다양하게 사용할수 있음
-                JButton button = (JButton) e.getSource();
+                JButton button = (JButton)e.getSource();
 
-                System.out.println("b11 = " + b11 + " b12 =" + b12  + " b13 =" + b13);
-                System.out.println("b11 = " + booleans[1][1] + " b12 = " + booleans[1][2] + " b13 = " + booleans[1][3]);
-                System.out.println(querystatement.Query(booleans));
-//                System.out.println(datasource.getConn());
-                ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query(booleans));
+                Datasource datasource = new Datasource();
+                if(!datasource.open()) {
+                    System.out.println("Can't open datasource for PrintFrame");
+                    return;
+                }
 
-//                if (button.getText().equals("음식점 추천"))
+                QueryStatement querystatement = new QueryStatement();
+                ArrayList<Output> outputs = querystatement.Output(datasource.getConn(),
+                                            querystatement.Query(booleans));
 
                 Integer[] id = new Integer[20];
                 String[] name = new String[20];
                 String[] category = new String[20];
                 Float[] grade = new Float[20];
                 Double[] distance = new Double[20];
-
                 int i =0;
-                for (Output output : qs) {
+
+                for (Output output : outputs) {
                     id[i] = output.getRestaurantID();
                     name[i] = output.getRestaurantName();
                     category[i] = output.getRestaurantCategory();
@@ -701,19 +709,37 @@ public class PrintFrame {
                     i++;
                 }
 
-
-                txt1.setText(name[0] +" "+ category[0] + " 평점"+ grade[0] +" 거리"+ distance[0]);
-                txt2.setText(name[1] +" "+ category[1] + " 평점"+ grade[1] +" 거리"+ distance[1]);
-                txt3.setText(name[2] +" "+ category[2] + " 평점"+ grade[2] +" 거리"+ distance[2]);
-                txt4.setText(name[3] +" "+ category[3] + " 평점"+ grade[3] +" 거리"+ distance[3]);
-                if(id[4] ==null)
-                    txt5.setText("조건에 맞는 식당이 없습니다");
-                else
-                    txt5.setText(name[4] +" "+ category[4] + " 평점"+ grade[4] +" 거리"+ distance[4]);
-
+                txtnull.setText("");
+                if(id[0] == null){
+                    txtnull.setText("조건에 맞는 식당이 없습니다.");
+                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD , 20));
+                    txt1.setText("");
+                    txt2.setText("");
+                    txt3.setText("");
+                    txt4.setText("");
+                    txt5.setText("");
+                }else {
+                        txt1.setText(name[0] + " " + category[0] + " 평점" + grade[0] + " 거리" + distance[0] + "km");
+                    if (id[1] == null)
+                        txt2.setText("");
+                    else
+                        txt2.setText(name[1] + " " + category[1] + " 평점" + grade[1] + " 거리" + distance[1] + "km");
+                    if (id[2] == null)
+                        txt3.setText("");
+                    else
+                        txt3.setText(name[2] + " " + category[2] + " 평점" + grade[2] + " 거리" + distance[2] + "km");
+                    if (id[3] == null)
+                        txt4.setText("");
+                    else
+                        txt4.setText(name[3] + " " + category[3] + " 평점" + grade[3] + " 거리" + distance[3] + "km");
+                    if (id[4] == null)
+                        txt5.setText("");
+                    else
+                        txt5.setText(name[4] + " " + category[4] + " 평점" + grade[4] + " 거리" + distance[4] + "m");
+                }
 
                 button.setText("다시 하기");
-                button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
+             // button.setBackground(new Color((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)));
 
             }
         };
@@ -727,6 +753,7 @@ public class PrintFrame {
         frm.getContentPane().add(txt3);
         frm.getContentPane().add(txt4);
         frm.getContentPane().add(txt5);
+        frm.getContentPane().add(txtnull);
 
         frm.getContentPane().add(btn11);
         frm.getContentPane().add(btn12);
