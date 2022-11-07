@@ -16,15 +16,16 @@ public class PrintFrame {
     boolean b21 = true, b22, b23, b24, b25, b26, b27, b28;
     boolean b31, b32, b33, b34, b35, b36= true;
 
+    Boolean[][] booleans = {{b11, b12, b13, b14, b15, b16},
+            {b21, b22, b23, b24, b25, b26, b27, b28},
+            {b31, b32 ,b33 , b34, b35, b36}};
+
 //    부모 프레임 생성 및 설정
 //   > 자식 컴포넌트 생성 및 설정
 //   > 자식 컴포넌트 이벤트 정의
 //   > 부모 프레임에 자식 컴포넌트 추가
 
     public void OutputFrame(Connection conn) {
-
-        Datasource datasource = new Datasource();
-        QueryStatement querystatement = new QueryStatement();
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
@@ -572,10 +573,19 @@ public class PrintFrame {
                 //get.Source는 오브젝트 타입을 반환함
                 //형변환을 통하여 다양하게 사용할수 있음
                 JButton button = (JButton) e.getSource();
-//                if (button.getText().equals("음식점 추천"))
+
+                System.out.println("b11 = " + b11 + " b12 =" + b12  + " b13 =" + b13  + " b14 =" + b14  + " b15 =" + b15  + " b16 =" + b16);
+
+
+                Datasource datasource = new Datasource();
+                QueryStatement querystatement = new QueryStatement();
+                System.out.println(querystatement.Query());
 
 //                ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query());
-//
+
+//                if (button.getText().equals("음식점 추천"))
+
+////
 //                String[] name = new String[20];
 //                String[] category = new String[20];
 //                Float[] grade = new Float[20];

@@ -17,25 +17,28 @@ public class Main {
 
 //##############################################################
 
+
+        PrintFrame printframe = new PrintFrame();
+
+        printframe.OutputFrame(datasource.getConn());
+
 //##############################################################
 
         QueryStatement querystatement = new QueryStatement();
-        ArrayList<Output> qs = querystatement.Output(datasource.getConn(), querystatement.Query());
 
-        if (qs == null) {
+        ArrayList<Output> output = querystatement.Output(datasource.getConn(), querystatement.Query());
+
+        if (output == null) {
             System.out.println("Can't find an output");
             return;
         }
 
-            for (Output output : qs) {
-                System.out.println(output.getRestaurantID() + " " + output.getRestaurantName() +" "+ output.getRestaurantCategory() +" "+ output.getAgvGrade() +" "+ output.getDistance());
+            for (Output op : output) {
+                System.out.println(op.getRestaurantID() + " " + op.getRestaurantName() +" "+ op.getRestaurantCategory() +" "+ op.getAgvGrade() +" "+ op.getDistance());
             }
 
 //##############################################################
 
-        PrintFrame pf = new PrintFrame();
-
-        pf.OutputFrame(datasource.getConn());
 
 
 //##############################################################

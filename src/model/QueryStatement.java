@@ -201,9 +201,10 @@ public class QueryStatement extends Datasource {
 
         sb.append(" GROUP BY " + TABLE_RESTAURANT + "." + COLUMN_RESTAURANT_ID);
 
+//        System.out.println(sb.toString());
+
         return sb.toString();
 
-//        System.out.println(sb.toString());
     }
     //쿼리끝
 
