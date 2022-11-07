@@ -37,12 +37,14 @@ public class PrintFrame {
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //윈도우의 x를 누르면 종료
         frm.getContentPane().setLayout(null); //레이아웃 설정
 
-        JFrame f= new JFrame();
-        f.setSize(300,500);
-        f.setLocationRelativeTo(null);
-        TextField t= new TextField("아이디 입력", 12);
-        t.setBounds(120, 120, 90, 30);;
-        f.getContentPane().add(t);
+        //병합 시도중
+//        JFrame f= new JFrame();
+//        f.setSize(300,500);
+//        f.setLocationRelativeTo(null);
+//        TextField t= new TextField("아이디 입력", 12);
+//        t.setBounds(120, 120, 90, 30);;
+//        f.getContentPane().add(t);
+//        f.setVisible(true);
 
         JButton btn11 = new JButton("전체");
         JButton btn12 = new JButton("한식");
@@ -641,7 +643,6 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                f.setVisible(true);
                 if(button.getBackground().equals(color)){
                     if(!b31 && !b32 && !b33 && !b34 && !b35)
                         return;
@@ -693,11 +694,11 @@ public class PrintFrame {
                 ArrayList<Output> outputs = querystatement.Output(datasource.getConn(),
                                             querystatement.Query(booleans));
 
-                Integer[] id = new Integer[20];
-                String[] name = new String[20];
-                String[] category = new String[20];
-                Float[] grade = new Float[20];
-                Double[] distance = new Double[20];
+                Integer[] id = new Integer[40];
+                String[] name = new String[40];
+                String[] category = new String[40];
+                Float[] grade = new Float[40];
+                Double[] distance = new Double[40];
                 int i =0;
 
                 for (Output output : outputs) {
