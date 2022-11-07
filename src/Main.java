@@ -23,25 +23,6 @@ public class Main {
         printframe.OutputFrame();
 
 
-//##############################################################
-
-
-//        QueryStatement querystatement = new QueryStatement();
-//
-//        ArrayList<Output> output = querystatement.Output(datasource.getConn(), querystatement.Query(printframe.getBooleans()));
-//
-//        if (output == null) {
-//            System.out.println("Can't find an output");
-//            return;
-//        }
-//
-//            for (Output op : output) {
-//                System.out.println(op.getRestaurantID() + " " + op.getRestaurantName() +" "+ op.getRestaurantCategory() +" "+ op.getAgvGrade() +" "+ op.getDistance());
-//            }
-
-
-//##############################################################
-
         Datasource data = new Datasource();
         Scanner scan = new Scanner(System.in);
         if(data.open()) {
