@@ -108,8 +108,9 @@ public class PrintFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
-                ServeFrame sf = new ServeFrame();
-                    sf.menu();
+//                ServeFrame sf = new ServeFrame();
+//                    sf.menu();
+                    new ServeFrame();
             }
         };
         btn00.addActionListener(btn00_action);
@@ -773,6 +774,12 @@ public class PrintFrame {
         frm.add(btn34);
         frm.add(btn35);
         frm.add(btn36);
+        frm.getContentPane().add(btn31);
+        frm.getContentPane().add(btn32);
+        frm.getContentPane().add(btn33);
+        frm.getContentPane().add(btn34);
+        frm.getContentPane().add(btn35);
+        frm.getContentPane().add(btn36);
         frm.getContentPane().add(btn41);
 
 
