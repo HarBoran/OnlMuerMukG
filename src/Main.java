@@ -18,9 +18,10 @@ public class Main {
 //##############################################################
 
 
-        PrintFrame printframe = new PrintFrame();
+        new LoginFrame((datasource.getConn()));
 
-        printframe.OutputFrame(datasource.getConn());
+//        PrintFrame printframe = new PrintFrame();
+//        printframe.OutputFrame(datasource.getConn());
 
 
         Datasource data = new Datasource();

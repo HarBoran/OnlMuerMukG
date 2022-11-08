@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적
 
-public class PrintFrame {
+public class PrintFrame implements FrameSize{
     boolean b11 = true, b12, b13, b14, b15, b16;
     boolean b21 = true, b22, b23, b24, b25, b26, b27, b28;
     boolean b31, b32, b33, b34, b35, b36= true;
@@ -27,15 +27,15 @@ public class PrintFrame {
 //   > 부모 프레임에 자식 컴포넌트 추가
 //   > 부모 프레임을 보이게함
 
-    public void OutputFrame(Connection con) {
+    public void OutputFrame(Connection con, String userid) {
 
         JFrame frm = new JFrame();
         frm.setTitle("오늘 뭐 먹지");
-        frm.setSize(340, 555);
+        frm.setSize(FrameWidth, FrameHeight);
         frm.setLocationRelativeTo(null); //화면 가운데 배치
         frm.setResizable(false); //크기 변경 불가능
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //윈도우의 x를 누르면 종료
-        frm.getContentPane().setLayout(null); //레이아웃 설정
+        frm.getContentPane().setLayout(null); //배치관리자 종료
 
         JButton btn00 = new JButton("#");
         JButton btn11 = new JButton("전체");
@@ -61,46 +61,53 @@ public class PrintFrame {
         JButton btn41 = new JButton("음식점 추천");
         JLabel txt1 = new JLabel();
         JLabel txt2 = new JLabel();
-        JLabel txt3 = new JLabel("결과 창");
+        JLabel txt3 = new JLabel();
         JLabel txt4 = new JLabel();
         JLabel txt5 = new JLabel();
-        JLabel txtnull = new JLabel();
+        JLabel txtnull = new JLabel("   결과 창");
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
-        txt1.setBounds(20, 10, 400, 20);
-        txt2.setBounds(20, 30, 400, 20);
-        txt3.setBounds(20, 50, 400, 20);
-        txt4.setBounds(20, 70, 400, 20);
-        txt5.setBounds(20, 90, 400, 20);
-        txtnull.setBounds(20, 50, 400, 20);
+        Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, FontSize);
+        txt1.setBounds(FontSize, BlankHeight*1, ButtonWidth*4, BlankHeight);
+        txt2.setBounds(FontSize, BlankHeight*2, ButtonWidth*4, BlankHeight);
+        txt3.setBounds(FontSize, BlankHeight*3, ButtonWidth*4, BlankHeight);
+        txt4.setBounds(FontSize, BlankHeight*4, ButtonWidth*4, BlankHeight);
+        txt5.setBounds(FontSize, BlankHeight*5, ButtonWidth*4, BlankHeight);
+        txt1.setFont(font);
+        txt2.setFont(font);
+        txt3.setFont(font);
+        txt4.setFont(font);
+        txt5.setFont(font);
+        txtnull.setBounds(BlankWidth, BlankHeight*3, ButtonWidth*4, BlankHeight);
+        txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 35));
 
         Color color = new Color(0, 162, 232);
 
-        btn00.setBounds(280, 10, 50, 50);
-        btn11.setBounds(30, 120, 90, 30);
+        btn00.setBounds(FrameWidth-ButtonWidth*1, BlankHeight, ButtonHeight, ButtonHeight);
+        btn11.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*6+(ButtonHeight*0), ButtonWidth, ButtonHeight);
         btn11.setBackground(color);
-        btn12.setBounds(120, 120, 90, 30);
-        btn13.setBounds(210, 120, 90, 30);
-        btn14.setBounds(30, 150, 90, 30);
-        btn15.setBounds(120, 150, 90, 30);
-        btn16.setBounds(210, 150, 90, 30);
-        btn21.setBounds(30, 200, 90, 30);
+        btn12.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*6+(ButtonHeight*0), ButtonWidth, ButtonHeight);
+        btn13.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*6+(ButtonHeight*0), ButtonWidth, ButtonHeight);
+        btn14.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*6+ButtonHeight, ButtonWidth, ButtonHeight);
+        btn15.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*6+ButtonHeight, ButtonWidth, ButtonHeight);
+        btn16.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*6+ButtonHeight, ButtonWidth, ButtonHeight);
+        btn21.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*7+ButtonHeight*2, ButtonWidth, ButtonHeight);
         btn21.setBackground(color);
-        btn22.setBounds(120, 200, 90, 30);
-        btn23.setBounds(210, 200, 90, 30);
-        btn24.setBounds(30, 230, 90, 30);
-        btn25.setBounds(120, 230, 90, 30);
-        btn26.setBounds(210, 230, 90, 30);
-        btn27.setBounds(30, 260, 90, 30);
-        btn28.setBounds(120, 260, 90, 30);
-        btn31.setBounds(30, 310, 90, 30);
-        btn32.setBounds(120, 310, 90, 30);
-        btn33.setBounds(210, 310, 90, 30);
-        btn34.setBounds(30, 340, 90, 30);
-        btn35.setBounds(120, 340, 90, 30);
-        btn36.setBounds(210, 340, 90, 30);
+        btn22.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*7+ButtonHeight*2, ButtonWidth, ButtonHeight);
+        btn23.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*7+ButtonHeight*2, ButtonWidth, ButtonHeight);
+        btn24.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*7+ButtonHeight*3, ButtonWidth, ButtonHeight);
+        btn25.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*7+ButtonHeight*3, ButtonWidth, ButtonHeight);
+        btn26.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*7+ButtonHeight*3, ButtonWidth, ButtonHeight);
+        btn27.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*7+ButtonHeight*4, ButtonWidth, ButtonHeight);
+        btn28.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*7+ButtonHeight*4, ButtonWidth, ButtonHeight);
+        btn31.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*8+ButtonHeight*5, ButtonWidth, ButtonHeight);
+        btn32.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*8+ButtonHeight*5, ButtonWidth, ButtonHeight);
+        btn33.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*8+ButtonHeight*5, ButtonWidth, ButtonHeight);
+        btn34.setBounds(BlankWidth+(ButtonWidth*0), BlankHeight*8+ButtonHeight*6, ButtonWidth, ButtonHeight);
+        btn35.setBounds(BlankWidth+ButtonWidth*1, BlankHeight*8+ButtonHeight*6, ButtonWidth, ButtonHeight);
+        btn36.setBounds(BlankWidth+ButtonWidth*2, BlankHeight*8+ButtonHeight*6, ButtonWidth, ButtonHeight);
         btn36.setBackground(color);
-        btn41.setBounds(40, 400, 250, 100);
+        btn41.setBounds(FrameWidth/2-ButtonWidth, BlankHeight*9+ButtonHeight*7, ButtonWidth*2, ButtonHeight*2);
         btn41.setFont(new Font("Serif", Font.BOLD | Font.ITALIC, 35));
         btn41.setHorizontalAlignment(JLabel.CENTER); //텍스트 센터 표시 설정
 
@@ -710,7 +717,7 @@ public class PrintFrame {
                 txtnull.setText("");
                 if (id[0] == null) {
                     txtnull.setText("조건에 맞는 식당이 없습니다.");
-                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 35));
                     txt1.setText("");
                     txt2.setText("");
                     txt3.setText("");
@@ -733,7 +740,7 @@ public class PrintFrame {
                     if (id[4] == null)
                         txt5.setText("");
                     else
-                        txt5.setText(name[4] + " " + category[4] + " 평점" + grade[4] + " 거리" + distance[4] + "m");
+                        txt5.setText(name[4] + " " + category[4] + " 평점" + grade[4] + " 거리" + distance[4] + "km");
                 }
 
                 button.setText("다시 하기");

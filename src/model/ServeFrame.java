@@ -10,26 +10,26 @@ import java.awt.event.ActionListener;
 //    public void menu(){
 
 //        JFrame sfrm = new JFrame();
-public class ServeFrame extends JFrame{
+public class ServeFrame extends JFrame implements FrameSize{
 
     public ServeFrame(){
 
-        setSize(300, 400);
+
+        setTitle("서브프레임");
+        setSize(FrameWidth, FrameHeight);
         setLocationRelativeTo(null); //화면 가운데 배치
         setResizable(false); //크기 변경 불가능
         getContentPane().setLayout(null); //레이아웃 설정
 
-        TextField tf = new TextField("아이디 입력", 12);
+
         JLabel jl = new JLabel("텍스트를 출력중입니다");
         JButton jb = new JButton("매뉴닫기");
 
-        tf.setBounds(120, 120, 90, 30);
-        jl.setBounds(120, 160,90, 30);
-        jb.setBounds(220,0,80,40);
+        jb.setBounds(220,400,80,40);
+        jl.setBounds(220,450,80,40);
 
-        add(tf);
-        add(jl);
         add(jb);
+        add(jl);
 
         ActionListener jb_action = new ActionListener() {
             @Override
