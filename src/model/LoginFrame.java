@@ -17,6 +17,7 @@ public class LoginFrame extends JFrame implements FrameSize {
     public LoginFrame(Connection con) {
 
         Datasource datasource = new Datasource();
+        Datasource data = new Datasource();
 
         if(!datasource.open()) {
             System.out.println("Can't open datasource");
@@ -47,13 +48,55 @@ public class LoginFrame extends JFrame implements FrameSize {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
 
-                String UserId = tf.getText();
-                if (UserId.equals("Admin")) {
-
+                String user_id = tf.getText();
+                if (user_id.equals("Admin")) {
+                    //로비의 뽑기시스템
                     PrintFrame printframe = new PrintFrame();
-                    printframe.OutputFrame(datasource.getConn(), UserId);
+                    printframe.OutputFrame(datasource.getConn(), user_id);
                     setVisible(false);
+                    //어드민 메뉴버튼 추가
+
+                }else {
+                StringBuilder USER_CHECK = new StringBuilder("SELECT ").append(data.COLUMN_LOGIN_ID)
+                        .append(" from ").append(data.TABLE_USER)
+                        .append(" where ").append(data.COLUMN_LOGIN_ID)
+                        .append(" = '").append(user_id).append("'");
+                try {
+                    Statement st = con.createStatement();
+                    if (st.executeQuery(String.valueOf(USER_CHECK)).next()) {
+                        StringBuilder OWNER_CHECK = new StringBuilder("SELECT ").append(data.COLUMN_OWNER_ID)
+                                .append(" from ").append(data.TABLE_RESTAURANT)
+                                .append(" where ").append(data.COLUMN_OWNER_ID)
+                                .append(" = '").append(user_id).append("'");
+
+                        try {
+                            ResultSet results = st.executeQuery(String.valueOf(OWNER_CHECK));
+                            if (results.next()) {
+                                //로비의 뽑기시스템
+                                PrintFrame printframe = new PrintFrame();
+                                printframe.OutputFrame(datasource.getConn(), user_id);
+                                setVisible(false);
+                                //owner.owner_main(user_id,con);//오너 메뉴버튼 추가
+
+                            }else{
+                                //로비의 뽑기시스템
+                                PrintFrame printframe = new PrintFrame();
+                                printframe.OutputFrame(datasource.getConn(), user_id);
+                                setVisible(false);
+                                //User.USER_MAIN(user_id,con);
+                            }
+
+                        }catch(SQLException ex){
+                            System.out.println(data.ERROR + ex.getMessage());
+                            ex.printStackTrace();
+                        }
+
+                    }
+                } catch (SQLException se) {
+                    System.out.println(data.ERROR + se.getMessage());
+                    se.printStackTrace();
                 }
+            }
             }
         };
 

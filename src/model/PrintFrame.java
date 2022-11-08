@@ -117,8 +117,16 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton)e.getSource();
 //                ServeFrame sf = new ServeFrame();
 //                    sf.menu();
-                    new ServeFrame();
+                if(userid.equals("Admin")) {
+                    new ServeFrame("Admin");
                     frm.setVisible(false);
+                    System.out.println("Admin");
+
+                }else if(userid.equals("호두")) {
+                    new ServeFrame("호두");
+                    frm.setVisible(false);
+                    System.out.println("호두");
+                }
             }
         };
         btn00.addActionListener(btn00_action);

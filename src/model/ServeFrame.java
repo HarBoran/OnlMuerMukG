@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 //        JFrame sfrm = new JFrame();
 public class ServeFrame extends JFrame implements FrameSize{
 
-    public ServeFrame(){
 
+    public ServeFrame(String user_id){
 
         setTitle("서브프레임");
         setSize(FrameWidth, FrameHeight);
@@ -21,7 +21,6 @@ public class ServeFrame extends JFrame implements FrameSize{
         setResizable(false); //크기 변경 불가능
         getContentPane().setLayout(null); //레이아웃 설정
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         JLabel jl = new JLabel("텍스트를 출력중입니다");
         JButton jb = new JButton("매뉴닫기");
@@ -40,7 +39,7 @@ public class ServeFrame extends JFrame implements FrameSize{
                 PrintFrame printframe = new PrintFrame();
                 Datasource datasource = new Datasource();
                 datasource.open();
-                printframe.OutputFrame(datasource.getConn(), "");
+                printframe.OutputFrame(datasource.getConn(), user_id);
             }
         };
         jb.addActionListener(jb_action);
