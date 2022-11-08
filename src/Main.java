@@ -1,5 +1,7 @@
 import model.*;
 import model.ArrayList_Collect.Output;
+import model.frame_Collect.ServeFrame;
+import model.frame_Collect.frame_Restaurant_Setting;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,21 +10,21 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Datasource datasource = new Datasource();
-
-        if(!datasource.open()) {
-            System.out.println("Can't open datasource");
-            return;
-        }
-
-//##############################################################
-
-
-        PrintFrame printframe = new PrintFrame();
-
-        printframe.OutputFrame(datasource.getConn());
-
-
+//        Datasource datasource = new Datasource();
+//
+//        if(!datasource.open()) {
+//            System.out.println("Can't open datasource");
+//            return;
+//        }
+//
+////##############################################################
+//
+//
+//        PrintFrame printframe = new PrintFrame();
+//
+//        printframe.OutputFrame(datasource.getConn());
+//
+//
         Datasource data = new Datasource();
         Scanner scan = new Scanner(System.in);
         if(data.open()) {
@@ -50,7 +52,13 @@ public class Main {
 //##############################################################
 
             data.close();
-            datasource.close();
+//            datasource.close();
+//        if(data.open()) {
+//            frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
+//            frs.frame_Restaurant_Setting_Method("restaurant_Name",1,data.getConn());
+//        }
+
+
 
     }
 }

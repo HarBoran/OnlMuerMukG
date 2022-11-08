@@ -1,4 +1,4 @@
-package model;
+package model.frame_Collect;
 
 import javax.swing.*;
 import java.awt.*;

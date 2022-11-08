@@ -1,12 +1,12 @@
 package model;
 
 import model.ArrayList_Collect.Output;
+import model.frame_Collect.ServeFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import java.awt.event.TextEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 //AWT(Abstract Window Toolkit) //OS종속적

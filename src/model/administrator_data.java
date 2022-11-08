@@ -2,7 +2,9 @@ package model;
 
 import model.ArrayList_Collect.OMMG_MENU;
 import model.ArrayList_Collect.OMMG_OWNER_MENU;
+import model.frame_Collect.frame_Restaurant_Setting;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,39 +17,38 @@ public class administrator_data {
     public static Datasource data = new Datasource();
 
     //선택한 음식점 관리
-    public static void restaurant_Setting(String restaurant_Name,int restaurant_ID, Connection con) {
-        while (true) {
-            System.out.println(restaurant_Name + " 음식점 관리 모드입니다");
-            System.out.println("사용할 기능을 선택해주세요.");
-            System.out.println("1. 메뉴 보기");
-            System.out.println("2. 메뉴 추가");
-            System.out.println("3. 메뉴 삭제");
-            System.out.println("4. 폐점 신청");
-            System.out.println("5. 이전으로 돌아가기");
-            System.out.print("입력 : ");
-            int num = scan.nextInt();
-
-            switch (num) {
-                case 1:
-                    select_this_restaurant_menu(restaurant_ID,con);
-                    break;
-                case 2:
-                    menu_Add(restaurant_ID, con);
-                    break;
-                case 3:
-                    menu_Delete(restaurant_ID, con);
-                    break;
-                case 4:
-                    restaurant_Delete(restaurant_Name, con);
-                    return;
-                case 5:
-                    return;
-            }
-        }
-    }
+//    public static void restaurant_Setting(String restaurant_Name,int restaurant_ID, Connection con) {
+////        while (true) {
+////            System.out.println(restaurant_Name + " 음식점 관리 모드입니다");
+////            System.out.println("사용할 기능을 선택해주세요.");
+////            System.out.println("1. 메뉴 보기");
+////            System.out.println("2. 메뉴 추가");
+////            System.out.println("3. 메뉴 삭제");
+////            System.out.println("4. 폐점 신청");
+////            System.out.println("5. 이전으로 돌아가기");
+////            switch (num) {
+////                case 0:
+////                    select_this_restaurant_menu(restaurant_ID,con);
+////                    break;
+////                case 1:
+////                    menu_Add(restaurant_ID, con);
+////                    break;
+////                case 2:
+////                    menu_Delete(restaurant_ID, con);
+////                    break;
+////                case 3:
+////                    restaurant_Delete(restaurant_Name, con);
+////                    return;
+////                case 4:
+////                    return;
+////        }
+////        }
+////        frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
+////        frs.frame_Restaurant_Setting_Method(restaurant_Name,restaurant_ID,con);
+//    }
 
     public static void select_this_restaurant_menu
-            (int restaurant_ID, Connection con){
+            (int restaurant_ID, Connection con,JFrame JF){
         StringBuilder SELECT = new StringBuilder("SELECT ")
                 .append(data.TABLE_MENU).append(".").append(data.COLUMN_MENU_ID)
                 .append(",").append(data.COLUMN_FOOD_NAME)
@@ -71,9 +72,16 @@ public class administrator_data {
                 System.out.println("Can't find an artist");
                 return;
             }
-            for (OMMG_OWNER_MENU a : ouAr)
-                System.out.println(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
-                        + "  \t| "+ data.COLUMN_FOOD_NAME + " : " + a.getFood_name());
+            int count = 0 ;
+            for (OMMG_OWNER_MENU a : ouAr) {{
+                JLabel txt = new JLabel(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
+                        + "  \t| " + data.COLUMN_FOOD_NAME + " : " + a.getFood_name());
+                txt.setBounds(10, count += 20,500, 40);
+                JF.add(txt);
+            }
+//                System.out.println(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
+//                        + "  \t| " + data.COLUMN_FOOD_NAME + " : " + a.getFood_name());
+            }
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
@@ -88,7 +96,10 @@ public class administrator_data {
 
         try (Statement st = con.createStatement();
              ResultSet results = st.executeQuery(String.valueOf(SELECT))) {
-            restaurant_Setting(restaurant_Name,results.getInt(data.COLUMN_RESTAURANT_ID),con);
+            //restaurant_Setting(restaurant_Name,results.getInt(data.COLUMN_RESTAURANT_ID),con);
+
+            frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
+            frs.frame_Restaurant_Setting_Method(restaurant_Name,results.getInt(data.COLUMN_RESTAURANT_ID),con);
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
@@ -110,17 +121,13 @@ public class administrator_data {
 
         try (Statement st = con.createStatement();
              ResultSet results = st.executeQuery(String.valueOf(SELECT))) {
-            restaurant_Setting(results.getString(1),num ,con);
+            //restaurant_Setting(results.getString(1),num ,con);
+            frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
+            frs.frame_Restaurant_Setting_Method(results.getString(data.COLUMN_RESTAURANT_NAME),num,con);
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
-            try {
-                Thread.sleep(5000);
-
-            } catch (InterruptedException ex) {
-                throw new RuntimeException(ex);
-            }
         }
     }
 
