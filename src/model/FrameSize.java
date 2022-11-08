@@ -8,5 +8,7 @@ public interface FrameSize {
     int BlankHeight = 45;
     int ButtonWidth = 150;
     int ButtonHeight = 60;
-    int FontSize= 25;
+    int TxtWidth= 25;
+    int TxtHeight=40;
+
 }

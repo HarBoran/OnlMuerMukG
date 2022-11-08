@@ -20,6 +20,7 @@ public class ServeFrame extends JFrame implements FrameSize{
         setLocationRelativeTo(null); //화면 가운데 배치
         setResizable(false); //크기 변경 불가능
         getContentPane().setLayout(null); //레이아웃 설정
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         JLabel jl = new JLabel("텍스트를 출력중입니다");
@@ -36,6 +37,10 @@ public class ServeFrame extends JFrame implements FrameSize{
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton)e.getSource();
                 setVisible(false);
+                PrintFrame printframe = new PrintFrame();
+                Datasource datasource = new Datasource();
+                datasource.open();
+                printframe.OutputFrame(datasource.getConn(), "");
             }
         };
         jb.addActionListener(jb_action);

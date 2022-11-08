@@ -67,19 +67,19 @@ public class PrintFrame implements FrameSize{
         JLabel txtnull = new JLabel("   결과 창");
 
         //setBounds(가로위치, 세로위치, 가로길이, 세로길이);
-        Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, FontSize);
-        txt1.setBounds(FontSize, BlankHeight*1, ButtonWidth*4, BlankHeight);
-        txt2.setBounds(FontSize, BlankHeight*2, ButtonWidth*4, BlankHeight);
-        txt3.setBounds(FontSize, BlankHeight*3, ButtonWidth*4, BlankHeight);
-        txt4.setBounds(FontSize, BlankHeight*4, ButtonWidth*4, BlankHeight);
-        txt5.setBounds(FontSize, BlankHeight*5, ButtonWidth*4, BlankHeight);
+        Font font = new Font("맑은 고딕", Font.BOLD | Font.ITALIC, TxtWidth);
+        txt1.setBounds(TxtWidth, TxtHeight*1, TxtWidth*24, TxtHeight);
+        txt2.setBounds(TxtWidth, TxtHeight*2, TxtWidth*24, TxtHeight);
+        txt3.setBounds(TxtWidth, TxtHeight*3, TxtWidth*24, TxtHeight);
+        txt4.setBounds(TxtWidth, TxtHeight*4, TxtWidth*24, TxtHeight);
+        txt5.setBounds(TxtWidth, TxtHeight*5, TxtWidth*24, TxtHeight);
         txt1.setFont(font);
         txt2.setFont(font);
         txt3.setFont(font);
         txt4.setFont(font);
         txt5.setFont(font);
-        txtnull.setBounds(BlankWidth, BlankHeight*3, ButtonWidth*4, BlankHeight);
-        txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 35));
+        txtnull.setBounds(TxtWidth*3, TxtHeight*3, TxtWidth*24, TxtHeight);
+        txtnull.setFont(new Font("맑은 고딕", Font.BOLD, TxtWidth+10));
 
         Color color = new Color(0, 162, 232);
 
@@ -118,6 +118,7 @@ public class PrintFrame implements FrameSize{
 //                ServeFrame sf = new ServeFrame();
 //                    sf.menu();
                     new ServeFrame();
+                    frm.setVisible(false);
             }
         };
         btn00.addActionListener(btn00_action);
@@ -717,7 +718,6 @@ public class PrintFrame implements FrameSize{
                 txtnull.setText("");
                 if (id[0] == null) {
                     txtnull.setText("조건에 맞는 식당이 없습니다.");
-                    txtnull.setFont(new Font("맑은 고딕", Font.BOLD, 35));
                     txt1.setText("");
                     txt2.setText("");
                     txt3.setText("");
