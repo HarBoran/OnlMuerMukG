@@ -1,4 +1,4 @@
-package model.frame_Collect;
+package model.frame_Administrator_Data_Collect;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,29 +1,18 @@
-package model.frame_Collect;
+package model.frame_Administrator_Data_Collect;
 
-import model.Datasource;
 import model.administrator;
 import model.administrator_data;
 
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
-public class frame_Restaurant_Setting extends JFrame implements ActionListener {
+public class frame_Restaurant_Setting extends JFrame {
 
     //    JButton[] button = new JButton[5];
-    JButton button1 = new JButton();
-    JButton button2 = new JButton();
-    JButton button3 = new JButton();
-    JButton button4 = new JButton();
-    JButton button5 = new JButton();
-    int num;
-    JPanel p;
 
-    public void frame_Restaurant_Setting_Method(String restaurant_Name,int restaurant_Id, Connection con) {
-        p = new JPanel();
+    public void frame_Restaurant_Setting_Method(String restaurant_Name,int restaurant_Id, Connection con,String type) {
         setSize(300, 400);
         setTitle("Administrator_Restaurant_Setting");
         setLocationRelativeTo(null);
@@ -35,9 +24,13 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         JLabel setting_mod = new JLabel(restaurant_Name + " 음식점 관리 모드입니다");
         JLabel select = new JLabel("사용할 기능을 선택하세요.");
 
+        JButton button1 = new JButton("1. 메뉴 보기");
+        JButton button2 = new JButton("2. 메뉴 추가");
+        JButton button3 = new JButton("3. 메뉴 삭제");
+        JButton button4 = new JButton("4. 음식점 폐점");
+        JButton button5 = new JButton("5. 이전으로 돌아가기");
         setting_mod.setBounds(10, 00, 500, 40);
         select.setBounds(10, 20, 500, 40);
-
 //        TextField tf = new TextField("아이디 입력", 12);
 //        JLabel jl = new JLabel("텍스트를 출력중입니다");
 //        JButton jb = new JButton("매뉴닫기");
@@ -61,12 +54,6 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
 //            p.add(button[i]);
 //        }
 
-        button1.setText("1. 메뉴 보기");
-        button2.setText("2. 메뉴 추가");
-        button3.setText("3. 메뉴 삭제");
-        button4.setText("4. 음식점 폐점");
-        button5.setText("5. 이전으로 돌아가기");
-
         button1.setBounds(10, 50, 150, 30);
         button2.setBounds(10, 90, 150, 30);
         button3.setBounds(10, 130, 150, 30);
@@ -80,7 +67,6 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         add(button3);
         add(button4);
         add(button5);
-        add(p);
         setVisible(true);
         ActionListener action1 = new ActionListener(){
             @Override
@@ -88,7 +74,7 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
                 dispose();
                 //ad_data.select_this_restaurant_menu(restaurant_Id, con);
                 frame_Select_This_Restaurant_menu fstrm = new frame_Select_This_Restaurant_menu();
-                fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name, restaurant_Id, con);
+                fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name, restaurant_Id, con, type);
             }
         };
         button1.addActionListener(action1);
@@ -123,7 +109,7 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
                 dispose();
 //                        ad_data.menu_Add(restaurant_Id, con);
                 frame_Menu_Add fma = new frame_Menu_Add();
-                fma.frame_Menu_Add_Method(restaurant_Name, restaurant_Id, con);
+                fma.frame_Menu_Add_Method(restaurant_Name, restaurant_Id, con, type);
             }
         };
         button2.addActionListener(action2);
@@ -133,8 +119,7 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 frame_Menu_Delete fmd= new frame_Menu_Delete();
-                fmd.frame_Menu_Delete_Method(restaurant_Name, restaurant_Id, con);
-
+                fmd.frame_Menu_Delete_Method(restaurant_Name, restaurant_Id, con, type);
             }
         };
         button3.addActionListener(action3);
@@ -152,17 +137,11 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                administrator.administrator_Main(con);
+                administrator.administrator_Main(con, type);
             }
         };
         button5.addActionListener(action5);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    }
-
-
 //    @Override
 //    public void actionPerformed(ActionEvent e) {
 //            administrator_data ad_data = new administrator_data();

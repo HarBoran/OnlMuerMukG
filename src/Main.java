@@ -1,9 +1,5 @@
 import model.*;
-import model.ArrayList_Collect.Output;
-import model.frame_Collect.ServeFrame;
-import model.frame_Collect.frame_Restaurant_Setting;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {

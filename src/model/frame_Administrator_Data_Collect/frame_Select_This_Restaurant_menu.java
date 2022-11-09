@@ -1,6 +1,5 @@
-package model.frame_Collect;
+package model.frame_Administrator_Data_Collect;
 
-import model.Datasource;
 import model.administrator_data;
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ import java.sql.Connection;
 
 public class frame_Select_This_Restaurant_menu{
 
-    public void frame_Select_This_Restaurant_menu_method(String restaurant_Name,int restaurant_Id, Connection con){
+    public void frame_Select_This_Restaurant_menu_method(String restaurant_Name,int restaurant_Id, Connection con, String type){
         JFrame JF = new JFrame();
         administrator_data ad = new administrator_data();
         JF.setSize(300, 400);
@@ -32,7 +31,7 @@ public class frame_Select_This_Restaurant_menu{
 
                 JF.dispose();
                 frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
-                frs.frame_Restaurant_Setting_Method(restaurant_Name, restaurant_Id, con);
+                frs.frame_Restaurant_Setting_Method(restaurant_Name, restaurant_Id, con, type);
             }
         };
         button.addActionListener(ancestor);
