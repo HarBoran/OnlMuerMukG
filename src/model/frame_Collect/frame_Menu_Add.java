@@ -1,7 +1,13 @@
 package model.frame_Collect;
 
+import model.Datasource;
+import model.administrator;
+import model.administrator_data;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class frame_Menu_Add extends JFrame {
     public void frame_Menu_Add_Method() {
@@ -21,5 +27,15 @@ public class frame_Menu_Add extends JFrame {
         add(input);
 
 
+        ActionListener action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String food_Name = text.getText();
+
+                dispose();
+            }
+        };
+        input.addActionListener(action);
     }
 }

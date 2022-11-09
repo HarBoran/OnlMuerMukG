@@ -29,6 +29,7 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
         getContentPane().setLayout(null);
+        administrator_data ad_data = new administrator_data();
 
 
         JLabel setting_mod = new JLabel(restaurant_Name + " 음식점 관리 모드입니다");
@@ -81,22 +82,19 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         add(button5);
         add(p);
         setVisible(true);
-        ActionListener ancestor1 = new ActionListener(){
+        ActionListener action1 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button1) {
-                        dispose();
-                        //ad_data.select_this_restaurant_menu(restaurant_Id, con);
-                        frame_Select_This_Restaurant_menu fstrm = new frame_Select_This_Restaurant_menu();
-                        fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name,restaurant_Id,con);
-                    }
+                if (e.getSource() == button1) {
+                    dispose();
+                    //ad_data.select_this_restaurant_menu(restaurant_Id, con);
+                    frame_Select_This_Restaurant_menu fstrm = new frame_Select_This_Restaurant_menu();
+                    fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name, restaurant_Id, con);
                 }
+
             }
         };
-        button1.addActionListener(ancestor1);
+        button1.addActionListener(action1);
 //        ActionListener jb_action = new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
@@ -122,66 +120,53 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
 //            case 4:
 //
 //        }
-        ActionListener ancestor2 = new ActionListener(){
+        ActionListener action2 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button2) {
-                        {
-                            dispose();
-                            ad_data.menu_Add(restaurant_Id, con);
-                        }
+                if (e.getSource() == button2) {
+                    {
+                        dispose();
+                        ad_data.menu_Add(restaurant_Id, con);
                     }
                 }
+
             }
         };
-        button2.addActionListener(ancestor2);
+        button2.addActionListener(action2);
 
-        ActionListener ancestor3 = new ActionListener(){
+        ActionListener action3 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button3)
-                        dispose();
-                        ad_data.menu_Delete(restaurant_Id, con);
+                if (e.getSource() == button3)
+                    dispose();
+                ad_data.menu_Delete(restaurant_Id, con);
+
+            }
+        };
+        button3.addActionListener(action3);
+
+        ActionListener action4 = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == button4) {
+                    dispose();
+                    ad_data.restaurant_Delete(restaurant_Name, con);
+                }
+
+            }
+        };
+        button4.addActionListener(action4);
+
+        ActionListener action5 = new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == button5) {
+                    dispose();
+                    administrator.administrator_Main(con);
                 }
             }
         };
-        button3.addActionListener(ancestor3);
-
-        ActionListener ancestor4 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button4) {
-                        dispose();
-                        ad_data.restaurant_Delete(restaurant_Name, con);
-                    }
-                }
-            }
-        };
-        button4.addActionListener(ancestor4);
-
-        ActionListener ancestor5 = new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button5) {
-                        dispose();
-                        administrator.administrator_Main(con);
-                    }
-                }
-            }
-        };
-        button5.addActionListener(ancestor5);
+        button5.addActionListener(action5);
     }
 
     @Override
