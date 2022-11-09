@@ -1,6 +1,8 @@
 package model;
 
 import model.ArrayList_Collect.OMMG_MENU;
+import model.frame_Collect.frame_Menu_Add;
+import model.frame_Collect.frame_Menu_Delete;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,10 +42,12 @@ public class owner {
                         owner_MENU_table(restaurant_id,con);
                         break;
                     case 2:
-                        adt.menu_Add(restaurant_id,con);
+                        frame_Menu_Add fma = new frame_Menu_Add();
+                        fma.frame_Menu_Add_Method(restaurant_name,restaurant_id, con);
                         break;
                     case 3:
-                        adt.menu_Delete(restaurant_id,con);
+                        frame_Menu_Delete fmd= new frame_Menu_Delete();
+                        fmd.frame_Menu_Delete_Method(restaurant_name, restaurant_id, con);
                         break;
                     case 4:
                         restaurant_name = restaurant_name_change(restaurant_id,con);

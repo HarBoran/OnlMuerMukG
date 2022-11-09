@@ -1,7 +1,6 @@
 package model.frame_Collect;
 
 import model.Datasource;
-import model.administrator;
 import model.administrator_data;
 
 import javax.swing.*;
@@ -10,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
-public class frame_Menu_Add extends JFrame {
-    public void frame_Menu_Add_Method(String restaurant_Name,int restaurant_Id , Connection con) {
+public class frame_Menu_Delete extends JFrame {
+    public void frame_Menu_Delete_Method(String restaurant_Name,int restaurant_Id , Connection con) {
         administrator_data ad = new administrator_data();
         setSize(300, 400);
         setTitle("Administrator_Restaurant_Setting");
@@ -19,9 +18,9 @@ public class frame_Menu_Add extends JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        JLabel text = new JLabel("추가할 메뉴의 번호 혹은이름을 입력하세요.");
+        JLabel text = new JLabel("제거할 메뉴의 이름혹은 번호를 입력하세요. :");
         TextField input = new TextField();
-        JButton button = new JButton("음식 추가");
+        JButton button = new JButton("음식 제거");
 
         text.setBounds(20, 80, 500, 30);
         input.setBounds(20, 110, 90, 30);
@@ -41,18 +40,16 @@ public class frame_Menu_Add extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String food_Name = input.getText();
-                ad.menu_Add(restaurant_Id,food_Name,con);
+                ad.menu_Delete(restaurant_Id,food_Name,con);
                 dispose();
                 frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
                 frs.frame_Restaurant_Setting_Method(restaurant_Name,restaurant_Id,con);
-
             }
         };
+
         ActionListener action2 = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
                 dispose();
                 frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
                 frs.frame_Restaurant_Setting_Method(restaurant_Name, restaurant_Id, con);

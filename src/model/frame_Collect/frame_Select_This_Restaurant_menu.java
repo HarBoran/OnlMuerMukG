@@ -29,15 +29,10 @@ public class frame_Select_This_Restaurant_menu{
         ActionListener ancestor = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                administrator_data ad_data = new administrator_data();
-                Datasource data = new Datasource();
-                if (data.open()) {
-                    if (e.getSource() == button) {
-                        JF.dispose();
-                        frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
-                        frs.frame_Restaurant_Setting_Method(restaurant_Name, restaurant_Id, con);
-                    }
-                }
+
+                JF.dispose();
+                frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
+                frs.frame_Restaurant_Setting_Method(restaurant_Name, restaurant_Id, con);
             }
         };
         button.addActionListener(ancestor);

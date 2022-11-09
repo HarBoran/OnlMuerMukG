@@ -85,13 +85,10 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         ActionListener action1 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == button1) {
-                    dispose();
-                    //ad_data.select_this_restaurant_menu(restaurant_Id, con);
-                    frame_Select_This_Restaurant_menu fstrm = new frame_Select_This_Restaurant_menu();
-                    fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name, restaurant_Id, con);
-                }
-
+                dispose();
+                //ad_data.select_this_restaurant_menu(restaurant_Id, con);
+                frame_Select_This_Restaurant_menu fstrm = new frame_Select_This_Restaurant_menu();
+                fstrm.frame_Select_This_Restaurant_menu_method(restaurant_Name, restaurant_Id, con);
             }
         };
         button1.addActionListener(action1);
@@ -123,13 +120,10 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         ActionListener action2 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == button2) {
-                    {
-                        dispose();
-                        ad_data.menu_Add(restaurant_Id, con);
-                    }
-                }
-
+                dispose();
+//                        ad_data.menu_Add(restaurant_Id, con);
+                frame_Menu_Add fma = new frame_Menu_Add();
+                fma.frame_Menu_Add_Method(restaurant_Name, restaurant_Id, con);
             }
         };
         button2.addActionListener(action2);
@@ -137,9 +131,9 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         ActionListener action3 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == button3)
-                    dispose();
-                ad_data.menu_Delete(restaurant_Id, con);
+                dispose();
+                frame_Menu_Delete fmd= new frame_Menu_Delete();
+                fmd.frame_Menu_Delete_Method(restaurant_Name, restaurant_Id, con);
 
             }
         };
@@ -148,11 +142,8 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         ActionListener action4 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == button4) {
-                    dispose();
-                    ad_data.restaurant_Delete(restaurant_Name, con);
-                }
-
+                dispose();
+                ad_data.restaurant_Delete(restaurant_Name, con);
             }
         };
         button4.addActionListener(action4);
@@ -160,10 +151,8 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
         ActionListener action5 = new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == button5) {
-                    dispose();
-                    administrator.administrator_Main(con);
-                }
+                dispose();
+                administrator.administrator_Main(con);
             }
         };
         button5.addActionListener(action5);
@@ -171,7 +160,6 @@ public class frame_Restaurant_Setting extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
 

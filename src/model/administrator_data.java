@@ -134,13 +134,13 @@ public class administrator_data {
     //선택한 음식점의 메뉴 테이블 관리
 
     //선택한 음식점의 메뉴 추가
-    public static void menu_Add(int restaurant_ID , Connection con) {
+    public static void menu_Add(int restaurant_ID , String food_Name, Connection con) {
         StringBuilder food_Name_Select = new StringBuilder("Select ");
         ResultSet results;
         int num = 0;
-        test_Table.select_MENU_table(con);
-        System.out.print("추가할 메뉴의 번호 혹은이름을 입력하세요. : ");
-        String food_Name = scan.next();
+//        test_Table.select_MENU_table(con);
+//        System.out.print("추가할 메뉴의 번호 혹은이름을 입력하세요. : ");
+//        String food_Name = scan.next();
 
         try {
             Integer.parseInt(food_Name);
@@ -176,13 +176,12 @@ public class administrator_data {
     }
 
     //선택한 음식점의 메뉴 제거
-    public static void menu_Delete(int restaurant_ID , Connection con) {
+    public static void menu_Delete(int restaurant_ID ,String food_Name, Connection con) {
         StringBuilder food_Name_Select = new StringBuilder("Select ");
         int num = 0;
         ResultSet results;
-
-        System.out.print("제거할 메뉴의 이름을 입력하세요. : ");
-        String food_Name = scan.next();
+//        System.out.print("제거할 메뉴의 이름을 입력하세요. : ");
+//        String food_Name = scan.next();
 
 
         try {
