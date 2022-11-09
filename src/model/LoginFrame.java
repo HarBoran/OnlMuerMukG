@@ -16,13 +16,7 @@ public class LoginFrame extends JFrame implements FrameSize {
 
     public LoginFrame(Connection con) {
 
-        Datasource datasource = new Datasource();
         Datasource data = new Datasource();
-
-        if(!datasource.open()) {
-            System.out.println("Can't open datasource");
-            return;
-        }
 
         setTitle("오늘 뭐 먹지");
         setSize(FrameWidth, FrameHeight);
@@ -52,7 +46,7 @@ public class LoginFrame extends JFrame implements FrameSize {
                 if (user_id.equals("Admin")) {
                     //로비의 뽑기시스템
                     PrintFrame printframe = new PrintFrame();
-                    printframe.OutputFrame(datasource.getConn(), user_id);
+                    printframe.OutputFrame("Admin",con, "Admin");
                     setVisible(false);
                     //어드민 메뉴버튼 추가
 
@@ -74,14 +68,14 @@ public class LoginFrame extends JFrame implements FrameSize {
                             if (results.next()) {
                                 //로비의 뽑기시스템
                                 PrintFrame printframe = new PrintFrame();
-                                printframe.OutputFrame(datasource.getConn(), user_id);
+                                printframe.OutputFrame(user_id,con, "Owner");
                                 setVisible(false);
                                 //owner.owner_main(user_id,con);//오너 메뉴버튼 추가
 
                             }else{
                                 //로비의 뽑기시스템
                                 PrintFrame printframe = new PrintFrame();
-                                printframe.OutputFrame(datasource.getConn(), user_id);
+                                printframe.OutputFrame(user_id,con, "User");
                                 setVisible(false);
                                 //User.USER_MAIN(user_id,con);
                             }
