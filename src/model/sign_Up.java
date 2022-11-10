@@ -71,13 +71,14 @@ public class sign_Up {
                 .append(",").append(data.COLUMN_RESTAURANT_CATEGORY)
                 .append(",").append(data.COLUMN_SIGNATURE_FOOD)
                 .append(") VALUES ('");
+
         System.out.println("음식점 주인 회원가입입니다.");
 
         String name = LOGIN_FILTER(con);
         INSERT_USER.append(name).append("',");
         INSERT_RESTAURANT.append(name).append("',");
 
-        INSERT_RESTAURANT.append("'").append(RESTAURANT_NAME_CHECK2(con)).append("',");
+        INSERT_RESTAURANT.append("'").append(RESTAURANT_NAME_CHECK(con)).append("',");
 
         System.out.print("위도를 입력하세요. : ");
         double latitude = scan.nextDouble();
@@ -107,67 +108,66 @@ public class sign_Up {
     }
 
     public static String LOGIN_FILTER(Connection con) {
+        while (true) {
+            System.out.print("아이디를 입력하세요. : ");
+            String name = scan.next();
 
-        System.out.print("아이디를 입력하세요. : ");
-        String name = scan.next();
-
-        StringBuilder NAME_CHECK = new StringBuilder("SELECT ")
-                .append(data.COLUMN_LOGIN_ID)
-                .append(" from ").append(data.TABLE_USER)
-                .append(" where ").append(data.COLUMN_LOGIN_ID)
-                .append(" = '").append(name).append("'");
-        try (Statement st = con.createStatement();
-             ResultSet results = st.executeQuery(String.valueOf(NAME_CHECK))) {
-            results.getString(data.COLUMN_LOGIN_ID);
-            return null;
-        } catch (SQLException e) {
-            return name;
+            StringBuilder NAME_CHECK = new StringBuilder("SELECT ")
+                    .append(data.COLUMN_LOGIN_ID)
+                    .append(" from ").append(data.TABLE_USER)
+                    .append(" where ").append(data.COLUMN_LOGIN_ID)
+                    .append(" = '").append(name).append("'");
+            try (Statement st = con.createStatement();
+                 ResultSet results = st.executeQuery(String.valueOf(NAME_CHECK))) {
+                results.getString(data.COLUMN_LOGIN_ID);
+            } catch (SQLException e) {
+                return name;
+            }
         }
     }
-
+//
+//    public static String RESTAURANT_NAME_CHECK(Connection con){
+//        do {
+//            JFrame JF = new JFrame();
+//            JF.setSize(300, 400);
+//            JF.setTitle("Owner_Main");
+//            JF.setLocationRelativeTo(null);
+//            JF.setResizable(false);
+//            JF.getContentPane().setLayout(null);
+////            System.out.print("음식점 이름을 입력하세요. : ");
+////            String restrunt_name = scan.next();
+//
+//            JLabel text = new JLabel("음식점 이름을 입력하세요. ");
+//            TextField restrunt_name = new TextField();
+//            JButton button = new JButton("이름 확인");
+//            JButton go_back = new JButton("돌아가기");
+//
+//            text.setBounds(20, 80, 500, 30);
+//            restrunt_name.setBounds(20, 110, 90, 30);
+//            button.setBounds(20, 140, 100, 30);
+//            go_back.setBounds(150, 300, 100, 30);
+//
+//            JF.add(text);
+//            JF.add(restrunt_name);
+//            JF.add(button);
+//            JF.add(go_back);
+//            JF.setVisible(true);
+//
+//            StringBuilder RESTRUNT_NAME_CHECK = new StringBuilder("SELECT ")
+//                    .append(data.COLUMN_RESTAURANT_NAME)
+//                    .append(" from ").append(data.TABLE_RESTAURANT)
+//                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME)
+//                    .append(" = '").append(restrunt_name).append("'");
+//            try (Statement st = con.createStatement();
+//                 ResultSet results = st.executeQuery(String.valueOf(RESTRUNT_NAME_CHECK))) {
+//                results.getString(data.COLUMN_RESTAURANT_NAME);
+//            } catch (SQLException e) {
+//                return String.valueOf(restrunt_name);
+//            }
+//
+//        }while (true);
+//    }
     public static String RESTAURANT_NAME_CHECK(Connection con){
-        do {
-            JFrame JF = new JFrame();
-            JF.setSize(300, 400);
-            JF.setTitle("Owner_Main");
-            JF.setLocationRelativeTo(null);
-            JF.setResizable(false);
-            JF.getContentPane().setLayout(null);
-//            System.out.print("음식점 이름을 입력하세요. : ");
-//            String restrunt_name = scan.next();
-
-            JLabel text = new JLabel("음식점 이름을 입력하세요. ");
-            TextField restrunt_name = new TextField();
-            JButton button = new JButton("이름 확인");
-            JButton go_back = new JButton("돌아가기");
-
-            text.setBounds(20, 80, 500, 30);
-            restrunt_name.setBounds(20, 110, 90, 30);
-            button.setBounds(20, 140, 100, 30);
-            go_back.setBounds(150, 300, 100, 30);
-
-            JF.add(text);
-            JF.add(restrunt_name);
-            JF.add(button);
-            JF.add(go_back);
-            JF.setVisible(true);
-
-            StringBuilder RESTRUNT_NAME_CHECK = new StringBuilder("SELECT ")
-                    .append(data.COLUMN_RESTAURANT_NAME)
-                    .append(" from ").append(data.TABLE_RESTAURANT)
-                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME)
-                    .append(" = '").append(restrunt_name).append("'");
-            try (Statement st = con.createStatement();
-                 ResultSet results = st.executeQuery(String.valueOf(RESTRUNT_NAME_CHECK))) {
-                results.getString(data.COLUMN_RESTAURANT_NAME);
-            } catch (SQLException e) {
-                return String.valueOf(restrunt_name);
-            }
-
-        }while (true);
-    }
-
-    public static String RESTAURANT_NAME_CHECK2(Connection con){
         do {
             System.out.print("음식점 이름을 입력하세요. : ");
             String restrunt_name = scan.next();

@@ -110,9 +110,9 @@ public class owner {
 //                System.out.println(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
 //                        + "  \t| "+ data.COLUMN_FOOD_NAME + " : " + a.getFood_name()
 //                        + "  \t| "+ data.COLUMN_FOOD_CATEGORY + " : " + a.getFood_category());
-            JLabel text = new JLabel(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
-                    + "  \t| "+ data.COLUMN_FOOD_NAME + " : " + a.getFood_name()
-                    + "  \t| "+ data.COLUMN_FOOD_CATEGORY + " : " + a.getFood_category());
+            JLabel text = new JLabel("메뉴 번호 : " + a.getMenu_id()
+                    + "  \t| "+ "음식 이름 : " + a.getFood_name()
+                    + "  \t| "+ "음식 종류 : " + a.getFood_category());
                 text.setBounds(10, count += 20, 800, 40);
                 JF.add(text);
             }

@@ -44,8 +44,6 @@ public class frame_Food_Update extends JFrame{
                     String food_Name = food_Name_Select.getText();
                     dispose();
                     ad.food_Update(food_Name, con, type);
-                    dispose();
-                    fsft.frame_Set_Food_Table_Mathod(con, type);
             }
         };
 

@@ -78,8 +78,8 @@ public class administrator_data {
             }
             int count = 0 ;
             for (OMMG_OWNER_MENU a : ouAr) {{
-                JLabel txt = new JLabel(data.COLUMN_MENU_ID + " : " + a.getMenu_id()
-                        + "  \t| " + data.COLUMN_FOOD_NAME + " : " + a.getFood_name());
+                JLabel txt = new JLabel("메뉴 번호 : " + a.getMenu_id()
+                        + "  \t| " + "음식 이름 : " + a.getFood_name());
                 txt.setBounds(10, count += 20,500, 40);
                 JF.add(txt);
             }
@@ -222,18 +222,15 @@ public class administrator_data {
 
 
     //음식점 폐점
-    public static void restaurant_Delete(String name, Connection con) {
-//        System.out.print("정말 이 음식점을 삭제하시겠습니까? (yes/no) : ");
-//        String select = scan.next();
-        //if (select.equals("yes")) {
+    public static void restaurant_Delete(String restaurant_name, Connection con) {
         StringBuilder DELETE_RESTAURANT_MENU = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT_MENU)
                 .append(" Where ").append(data.COLUMN_RESTAURANT_ID).append(" = ")
                 .append(" ( select ").append(data.COLUMN_RESTAURANT_ID)
                 .append(" from ").append(data.TABLE_RESTAURANT)
-                .append(" where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(name).append("')");
+                .append(" where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(restaurant_name).append("')");
 
         StringBuilder DELETE_RESTAURANT = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT)
-                .append(" Where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(name).append("'");
+                .append(" Where ").append(data.COLUMN_RESTAURANT_NAME).append(" = '").append(restaurant_name).append("'");
 
         try {
             Statement st = con.createStatement();
@@ -244,7 +241,6 @@ public class administrator_data {
             System.out.println(data.ERROR + e.getMessage());
             e.printStackTrace();
         }
-        //}
     }
 
     //삭제할 유저 선택
@@ -266,8 +262,6 @@ public class administrator_data {
                 ex.printStackTrace();
             }
         } catch (Exception ex2) {
-//            System.out.println(user_name + " 유저를 정말 삭제하시겠습니까? yes/no :");
-//            str = scan.next();
         }
         user_Delete(user_name,con);
     }
@@ -396,7 +390,7 @@ public class administrator_data {
 
         text.setBounds(20, 80, 500, 30);
         button.setBounds(20,140,100,30);
-        button2.setBounds(120,140,100,30);
+        button2.setBounds(130,140,150,30);
         go_back.setBounds(150,300,100,30);
 
 
@@ -500,18 +494,25 @@ public class administrator_data {
 //        System.out.print("음식 혹은 번호를 적어주세요. : ");
 //        String foodName = scan.next();
         StringBuilder DELETE = new StringBuilder("Delete from ").append(data.TABLE_MENU).append(" Where ");
+        StringBuilder DELETE_restaurant_menu = new StringBuilder("Delete from ").append(data.TABLE_RESTAURANT_MENU).append(" Where ");
         try {
             Integer.parseInt(foodName);
-            DELETE.append(data.COLUMN_MENU_ID).append(" = '").append(foodName).append("'");
+            DELETE.append(data.COLUMN_MENU_ID).append(" = ").append(foodName);
+            DELETE_restaurant_menu.append(data.COLUMN_MENU_ID).append(" = ").append(foodName);
 
 
         } catch (Exception e) {
             DELETE.append(data.COLUMN_FOOD_NAME).append(" = '").append(foodName).append("'");
+            DELETE_restaurant_menu.append(data.COLUMN_MENU_ID)
+                    .append(" = (Select ").append(data.COLUMN_MENU_ID)
+                    .append(" from ").append(data.TABLE_RESTAURANT_MENU).append(" where ")
+                    .append(data.COLUMN_FOOD_NAME).append(" = '").append(foodName).append("')");
         }
 
         try {
             Statement st = con.createStatement();
             st.execute(String.valueOf(DELETE));
+            st.execute(String.valueOf(DELETE_restaurant_menu));
 
         } catch (SQLException e) {
             System.out.println(data.ERROR + e.getMessage());
