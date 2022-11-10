@@ -706,11 +706,11 @@ public class PrintFrame implements FrameSize{
                 ArrayList<Output> outputs = querystatement.Output(con, querystatement.Query(booleans));
 
 
-                Integer[] id = new Integer[4];
-                String[] name = new String[4];
-                String[] category = new String[4];
-                Float[] grade = new Float[4];
-                Double[] distance = new Double[4];
+                Integer[] id = new Integer[5];
+                String[] name = new String[5];
+                String[] category = new String[5];
+                Float[] grade = new Float[5];
+                Double[] distance = new Double[5];
 
                 int i = 0;
                 for (Output output : outputs) {
