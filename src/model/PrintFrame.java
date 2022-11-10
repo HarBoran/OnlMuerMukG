@@ -135,6 +135,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b12 && !b13 && !b14 && !b15 && !b16)
+                        return;
                     button.setBackground(null);
                     b11 = false;
                     booleans[1][1] = false;
@@ -174,6 +175,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b11 && !b13 && !b14 && !b15 && !b16)
+                        return;
                     button.setBackground(null);
                     b12 = false;
                     booleans[1][2] = false;
@@ -197,6 +199,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b11 && !b12 && !b14 && !b15 && !b16)
+                        return;
                     button.setBackground(null);
                     b13 = false;
                     booleans[1][3] = false;
@@ -220,6 +223,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b11 && !b12 && !b13 && !b15 && !b16)
+                        return;
                     button.setBackground(null);
                     b14 = false;
                     booleans[1][4] = false;
@@ -243,6 +247,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b11 && !b12 && !b13 && !b14 && !b16)
+                        return;
                     button.setBackground(null);
                     b15 = false;
                     booleans[1][5] = false;
@@ -266,6 +271,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b11 && !b12 && !b13 && !b14 && !b15)
+                        return;
                     button.setBackground(null);
                     b16 = false;
                     booleans[1][6] = false;
@@ -284,6 +290,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b22 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b21 = false;
                     booleans[2][1] = false;
@@ -328,6 +335,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b23 && !b24 && !b25 && !b26 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b22 = false;
                     booleans[2][2] = false;
@@ -351,6 +359,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b24 && !b25 && !b26 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b23 = false;
                     booleans[2][3] = false;
@@ -374,6 +383,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b23 && !b25 && !b26 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b24 = false;
                     booleans[2][4] = false;
@@ -397,6 +407,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b23 && !b24 && !b26 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b25 = false;
                     booleans[2][5] = false;
@@ -420,6 +431,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b23 && !b24 && !b25 && !b27 && !b28)
+                        return;
                     button.setBackground(null);
                     b26 = false;
                     booleans[2][6] = false;
@@ -443,13 +455,14 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b28)
+                        return;
                     button.setBackground(null);
                     b27 = false;
-                    booleans[2][1] = false;
+                    booleans[2][7] = false;
                 } else {
                     button.setBackground(color);
                     b27 = true;
-                    booleans[2][1] = true;
+                    booleans[2][7] = true;
                 }
             }
         };
@@ -466,6 +479,7 @@ public class PrintFrame implements FrameSize{
                 }
                 if (button.getBackground().equals(color)) {
                     if (!b21 && !b22 && !b23 && !b24 && !b25 && !b26 && !b27)
+                        return;
                     button.setBackground(null);
                     b28 = false;
                     booleans[2][8] = false;
@@ -484,6 +498,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b32 && !b33 && !b34 && !b35 && !b36)
+                        return;
                     button.setBackground(null);
                     b31 = false;
                     booleans[3][1] = false;
@@ -516,6 +531,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b31 && !b33 && !b34 && !b35 && !b36)
+                        return;
                     button.setBackground(null);
                     b32 = false;
                     booleans[3][2] = false;
@@ -548,6 +564,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b31 && !b32 && !b34 && !b35 && !b36)
+                        return;
                     button.setBackground(null);
                     b33 = false;
                     booleans[3][3] = false;
@@ -580,6 +597,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b31 && !b32 && !b33 && !b35 && !b36)
+                        return;
                     button.setBackground(null);
                     b34 = false;
                     booleans[3][4] = false;
@@ -612,6 +630,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b31 && !b32 && !b33 && !b34 && !b36)
+                        return;
                     button.setBackground(null);
                     b35 = false;
                     booleans[3][5] = false;
@@ -644,6 +663,7 @@ public class PrintFrame implements FrameSize{
                 JButton button = (JButton) e.getSource();
                 if (button.getBackground().equals(color)) {
                     if (!b31 && !b32 && !b33 && !b34 && !b35)
+                        return;
                     button.setBackground(null);
                     b36 = false;
                     booleans[3][6] = false;
@@ -685,12 +705,12 @@ public class PrintFrame implements FrameSize{
                 QueryStatement querystatement = new QueryStatement();
                 ArrayList<Output> outputs = querystatement.Output(con, querystatement.Query(booleans));
 
-                int size = outputs.size();
-                Integer[] id = new Integer[size];
-                String[] name = new String[size];
-                String[] category = new String[size];
-                Float[] grade = new Float[size];
-                Double[] distance = new Double[size];
+
+                Integer[] id = new Integer[4];
+                String[] name = new String[4];
+                String[] category = new String[4];
+                Float[] grade = new Float[4];
+                Double[] distance = new Double[4];
 
                 int i = 0;
                 for (Output output : outputs) {

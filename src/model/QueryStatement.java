@@ -429,9 +429,9 @@ public class QueryStatement extends Datasource {
                 ommg.setDistance(Math.round(Math.sqrt(results.getFloat(5))*1000)/1000.0);
                 ommgs.add(ommg);
                 Collections.shuffle(ommgs);
-//                if (ommgs.size() > 5){
-//                    ommgs.remove(1);
-//                }
+                if (ommgs.size() > 5){
+                    ommgs.remove(1);
+                }
             }
 
             return ommgs;

@@ -173,11 +173,11 @@ public class User {
 
         int count = 0;
         for (OMMG_RAP_CHECK a : URCT){
-            JLabel text = new JLabel(data.COLUMN_GRADE_ID + " : " + a.getGRADE_ID()
-                    + "  \t| " + data.COLUMN_RESTAURANT_ID + " : " + a.getRESTAURANT_NAME()
-                    + "   \t|" + data.COLUMN_EAT_DATE + " : " + a.getEAT_DATE()
-                    + " \t|" + data.COLUMN_EAT_TIME + " : " + a.getEAT_TIME()
-                    + " \t|" + data.COLUMN_GRADE + " : " + a.getGRADE());
+            JLabel text = new JLabel("리뷰 번호 : " + a.getGRADE_ID()
+                    + "  \t| " + "음식점 이름 : " + a.getRESTAURANT_NAME()
+                    + "   \t|" + "먹은 날 : " + a.getEAT_DATE()
+                    + " \t|" + "먹은 시간 : " + a.getEAT_TIME()
+                    + " \t|" + "평점 : " + a.getGRADE());
             text.setBounds(10, count += 20, 800, 40);
             JF.add(text);
         }

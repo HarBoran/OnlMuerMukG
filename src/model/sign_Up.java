@@ -1,11 +1,7 @@
 package model;
 
-import model.frame_Owner_Collect.frame_Owner_Main;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,7 +77,7 @@ public class sign_Up {
         INSERT_USER.append(name).append("',");
         INSERT_RESTAURANT.append(name).append("',");
 
-        INSERT_RESTAURANT.append("'").append(RESTAURANT_NAME_CHECK(con)).append("',");
+        INSERT_RESTAURANT.append("'").append(RESTAURANT_NAME_CHECK2(con)).append("',");
 
         System.out.print("위도를 입력하세요. : ");
         double latitude = scan.nextDouble();
@@ -168,6 +164,27 @@ public class sign_Up {
                 return String.valueOf(restrunt_name);
             }
 
+        }while (true);
+    }
+
+    public static String RESTAURANT_NAME_CHECK2(Connection con){
+        do {
+            System.out.print("음식점 이름을 입력하세요. : ");
+            String restrunt_name = scan.next();
+
+
+            StringBuilder RESTRUNT_NAME_CHECK = new StringBuilder("SELECT ")
+                    .append(data.COLUMN_RESTAURANT_NAME)
+                    .append(" from ").append(data.TABLE_RESTAURANT)
+                    .append(" where ").append(data.COLUMN_RESTAURANT_NAME)
+                    .append(" = '").append(restrunt_name).append("'");
+            try (Statement st = con.createStatement();
+                 ResultSet results = st.executeQuery(String.valueOf(RESTRUNT_NAME_CHECK))) {
+                results.getString(data.COLUMN_RESTAURANT_NAME);
+            } catch (SQLException e) {
+                return String.valueOf(restrunt_name);
+            }
+            System.out.print("중복된 음식점이 있습니다. \n다시 ");
         }while (true);
     }
 }

@@ -28,14 +28,17 @@ public class LoginFrame extends JFrame implements FrameSize {
         JLabel jl = new JLabel("아이디를 입력하세요");
         TextField tf = new TextField(12);
         JButton jb = new JButton("Login");
+        JButton jb2 = new JButton("회원가입");
 
         jl.setBounds(120, 350,400, 30);
         tf.setBounds(120, 400, 400, 30);
         jb.setBounds(220,500,200,40);
+        jb2.setBounds(220,550,200,40);
 
         add(tf);
         add(jl);
         add(jb);
+        add(jb2);
 
         ActionListener jb_action = new ActionListener() {
             @Override
@@ -95,6 +98,14 @@ public class LoginFrame extends JFrame implements FrameSize {
         };
 
         jb.addActionListener(jb_action);
+
+        ActionListener jb2_action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sign_Up.SIGN_UP_SELECT(con);
+            }
+        };
+        jb2.addActionListener(jb2_action);
 
         setVisible(true);
     }
