@@ -20,7 +20,7 @@ public class frame_Administrator_Main extends JFrame {
         JButton button2 = new JButton("2. 유저 및 평점 관리");
         JButton button3 = new JButton("3. 음식테이블 관리");
         JButton button4 = new JButton("4. 데이터베이스 확인");
-        JButton button5 = new JButton("5. 로그아웃");
+        JButton button5 = new JButton("5. 닫기");
 
         setting_mod.setBounds(10, 00, 500, 40);
         select.setBounds(10, 20, 500, 40);

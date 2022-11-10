@@ -42,7 +42,7 @@ public class frame_Owner_Main extends JFrame {
         JButton button2 = new JButton("2. 음식 추가");
         JButton button3 = new JButton("3. 음식 제거");
         JButton button4 = new JButton("4. 음식점 이름 바꾸기");
-        JButton button5 = new JButton("5. 로그아웃");
+        JButton button5 = new JButton("5. 닫기");
 
         setting_mod.setBounds(10, 00, 500, 40);
         button1.setBounds(10, 50, 150, 30);

@@ -2,6 +2,7 @@ package model;
 
 import model.ArrayList_Collect.Output;
 import model.frame_Owner_Collect.frame_Owner_Main;
+import model.frame_User_Collect.frame_User_Rap_Check;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -120,6 +121,9 @@ public class PrintFrame implements FrameSize{
                 }else if(type.equals("Owner")) {
                     frame_Owner_Main fom = new  frame_Owner_Main();
                     fom.frame_Owner_Main_Mathod(user_name,con,type);
+                }else if (type.equals("User")){
+                    frame_User_Rap_Check furc = new frame_User_Rap_Check();
+                    furc.frame_User_Rap_Check_Mathod(user_name, con, type);
                 }
             }
         };
@@ -681,13 +685,14 @@ public class PrintFrame implements FrameSize{
                 QueryStatement querystatement = new QueryStatement();
                 ArrayList<Output> outputs = querystatement.Output(con, querystatement.Query(booleans));
 
-                Integer[] id = new Integer[100];
-                String[] name = new String[100];
-                String[] category = new String[100];
-                Float[] grade = new Float[100];
-                Double[] distance = new Double[100];
-                int i = 0;
+                int size = outputs.size();
+                Integer[] id = new Integer[size];
+                String[] name = new String[size];
+                String[] category = new String[size];
+                Float[] grade = new Float[size];
+                Double[] distance = new Double[size];
 
+                int i = 0;
                 for (Output output : outputs) {
                     id[i] = output.getRestaurantID();
                     name[i] = output.getRestaurantName();
