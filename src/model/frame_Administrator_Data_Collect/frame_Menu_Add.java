@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class frame_Menu_Add extends JFrame {
-    public void frame_Menu_Add_Method(String restaurant_Name,int restaurant_Id , Connection con,String type) {
+    public void frame_Menu_Add_Method(String restaurant_Name, int restaurant_Id, Connection con, String type) {
         administrator_data ad = new administrator_data();
         frame_Restaurant_Setting frs = new frame_Restaurant_Setting();
         frame_Owner_Main fom = new frame_Owner_Main();

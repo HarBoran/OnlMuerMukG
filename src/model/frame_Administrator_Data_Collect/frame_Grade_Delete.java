@@ -3,6 +3,7 @@ package model.frame_Administrator_Data_Collect;
 import model.administrator;
 import model.administrator_data;
 import model.frame_Administrator_Collect.frame_Set_Food_Table;
+import model.frame_Administrator_Collect.frame_Set_User_Select;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ import java.sql.Connection;
 
 public class frame_Grade_Delete extends JFrame{
     public void frame_Grade_Delete_Method(Connection con, String type) {
-        frame_Set_Food_Table fsft = new frame_Set_Food_Table();
+        frame_Set_User_Select fsus = new frame_Set_User_Select();
         administrator_data ad = new administrator_data();
 
         setSize(300, 400);
@@ -45,7 +46,7 @@ public class frame_Grade_Delete extends JFrame{
                 int grade_Num = Integer.parseInt(input.getText());
                 ad.grade_Delete(grade_Num, con);
                 dispose();
-                fsft.frame_Set_Food_Table_Mathod(con, type);
+                fsus.fram_Set_User_Select_Mathod(con, type);
             }
         };
 
@@ -53,7 +54,7 @@ public class frame_Grade_Delete extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                fsft.frame_Set_Food_Table_Mathod(con, type);
+                fsus.fram_Set_User_Select_Mathod(con, type);
             }
         };
         button.addActionListener(action);
